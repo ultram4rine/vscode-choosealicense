@@ -26,11 +26,55 @@
   "contributes": {
     "commands": [
       {
+        "category": "Choose a License",
         "command": "license.choose",
         "title": "License: Choose license",
         "description": "Choose a license to create."
+      },
+      {
+        "category": "Choose a License",
+        "command": "license.setAuthor",
+        "title": "License: Set author for licenses",
+        "description": "Set author for licenses."
+      },
+      {
+        "category": "Choose a License",
+        "command": "license.setYead",
+        "title": "License: Set year for licenses",
+        "description": "Set year for licenses."
+      },
+      {
+        "category": "Choose a License",
+        "command": "license.setExtension",
+        "title": "License: Set extension for license file",
+        "description": "extension for license file."
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Choose a License",
+      "properties": {
+        "license.author": {
+          "type": "string",
+          "default": "",
+          "description": "Set author for licenses."
+        },
+        "license.year": {
+          "type": "string",
+          "default": "",
+          "description": "Set year for licenses."
+        },
+        "license.extension": {
+          "type": "string",
+          "default": "",
+          "description": "Set license file extension",
+          "enum": [
+            "",
+            "txt",
+            "md"
+          ]
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
