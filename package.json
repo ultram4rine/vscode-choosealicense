@@ -21,7 +21,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:license.choose"
+    "*"
   ],
   "main": "./out/extension.js",
   "contributes": {
