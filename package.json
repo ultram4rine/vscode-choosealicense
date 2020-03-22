@@ -27,28 +27,28 @@
   "contributes": {
     "commands": [
       {
-        "category": "Choose a License",
+        "category": "License",
         "command": "license.choose",
-        "title": "License: Choose license",
+        "title": "Choose license",
         "description": "Choose a license to create."
       },
       {
-        "category": "Choose a License",
+        "category": "License",
         "command": "license.setAuthor",
-        "title": "License: Set author for licenses",
+        "title": "Set author for licenses",
         "description": "Set author for licenses."
       },
       {
-        "category": "Choose a License",
+        "category": "License",
         "command": "license.setYear",
-        "title": "License: Set year for licenses",
+        "title": "Set year for licenses",
         "description": "Set year for licenses."
       },
       {
-        "category": "Choose a License",
+        "category": "License",
         "command": "license.setExtension",
-        "title": "License: Set extension for license file",
-        "description": "extension for license file."
+        "title": "Set extension for license files",
+        "description": "extension for license files."
       }
     ],
     "configuration": {
