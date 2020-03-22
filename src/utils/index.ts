@@ -1,3 +1,4 @@
+import { window, workspace, ConfigurationTarget } from "vscode";
 import { json } from "web-request";
 
 interface License {
@@ -26,5 +27,39 @@ export class Utils {
     });
 
     return data;
+  }
+
+  public static async setConfProperty(property: string): Promise<void> {
+    const value = await window.showInputBox({
+      prompt: `Set ${property} for licenses`
+    });
+
+    if (workspace.workspaceFolders) {
+      const target = await window.showQuickPick(
+        [
+          {
+            label: "User",
+            description: "User Settings",
+            target: ConfigurationTarget.Global
+          },
+          {
+            label: "Workspace",
+            description: "Workspace Settings",
+            target: ConfigurationTarget.Workspace
+          }
+        ],
+        { placeHolder: "Select the configuration target." }
+      );
+
+      if (value && target) {
+        await workspace
+          .getConfiguration()
+          .update(`license.${property}`, value, target.target);
+      }
+    } else {
+      await workspace
+        .getConfiguration()
+        .update(`license.${property}`, value, ConfigurationTarget.Global);
+    }
   }
 }
