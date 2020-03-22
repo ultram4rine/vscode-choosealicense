@@ -39,9 +39,15 @@ export async function activate(
   });
 
   vscode.commands.registerCommand("license.setAuthor", async () => {
-    const value = await vscode.window.showInputBox({
-      prompt: "Set author for licenses"
-    });
+    Utils.setConfProperty("author");
+  });
+
+  vscode.commands.registerCommand("license.setYear", async () => {
+    Utils.setConfProperty("year");
+  });
+
+  vscode.commands.registerCommand("license.setExtension", async () => {
+    Utils.setConfProperty("extension");
   });
 }
 
