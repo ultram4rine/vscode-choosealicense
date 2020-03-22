@@ -40,7 +40,7 @@
       },
       {
         "category": "Choose a License",
-        "command": "license.setYead",
+        "command": "license.setYear",
         "title": "License: Set year for licenses",
         "description": "Set year for licenses."
       },
