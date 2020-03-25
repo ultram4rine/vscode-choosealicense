@@ -14,6 +14,10 @@ addons:
 node_js:
   - node
 
+before_install:
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then apt-get update          ; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then apt-get install libxss1 ; fi
+
 install:
   - npm install
   - npm run vscode:prepublish
