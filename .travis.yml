@@ -6,6 +6,11 @@ os:
 
 dist: xenial
 
+addons:
+  apt:
+    packages:
+      - libxss1
+
 node_js:
   - node
 
