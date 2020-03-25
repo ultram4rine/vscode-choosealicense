@@ -29,8 +29,15 @@ export async function activate(
       if (currentFolder === undefined) {
         vscode.window.showErrorMessage("No open folder");
       } else {
-        vscode.window.showInformationMessage(currentFolder);
-        let licensePath = path.join(currentFolder, "LICENSE");
+        let extension: any = vscode.workspace
+          .getConfiguration("")
+          .get("license.extension");
+
+        if (extension !== "") {
+          extension = `.${extension}`;
+        }
+
+        let licensePath = path.join(currentFolder, `LICENSE${extension}`);
         fs.writeFileSync(licensePath, licenseText.body, "utf8");
       }
     });
