@@ -24,10 +24,10 @@ export async function activate(
       let selectedLicense = selection[0].label;
       let licenseText = await Utils.getLicenseText(selectedLicense);
 
-      // TODO: rootPath is deprecated.
-      let currentFolder = vscode.workspace.rootPath;
-      if (currentFolder === undefined) {
-        vscode.window.showErrorMessage("No open folder");
+      // TODO: get current folder or choose one from list.
+      let folders = vscode.workspace.workspaceFolders;
+      if (folders === undefined) {
+        vscode.window.showErrorMessage("No folder to create a license");
       } else {
         let extension: any = vscode.workspace
           .getConfiguration("")
@@ -61,7 +61,10 @@ export async function activate(
           );
         }
 
-        let licensePath = path.join(currentFolder, `LICENSE${extension}`);
+        let licensePath = path.join(
+          folders[0].uri.fsPath,
+          `LICENSE${extension}`
+        );
         fs.writeFileSync(licensePath, licenseText.body, "utf8");
       }
     });
