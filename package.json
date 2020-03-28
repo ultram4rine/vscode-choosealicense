@@ -70,8 +70,8 @@
           "description": "Set license file extension",
           "enum": [
             "",
-            "txt",
-            "md"
+            "md",
+            "txt"
           ]
         }
       }
