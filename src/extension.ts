@@ -32,9 +32,33 @@ export async function activate(
         let extension: any = vscode.workspace
           .getConfiguration("")
           .get("license.extension");
+        let year: any = vscode.workspace
+          .getConfiguration("")
+          .get("license.year");
+        let author: any = vscode.workspace
+          .getConfiguration("")
+          .get("license.author");
+
+        vscode.window.showInformationMessage(`${extension} ${year} ${author}`);
 
         if (extension !== "") {
           extension = `.${extension}`;
+        }
+
+        if (year !== "") {
+          licenseText.body = Utils.replaceYear(
+            year,
+            selectedLicense,
+            licenseText.body
+          );
+        }
+
+        if (author !== "") {
+          licenseText.body = Utils.replaceAuthor(
+            author,
+            selectedLicense,
+            licenseText.body
+          );
         }
 
         let licensePath = path.join(currentFolder, `LICENSE${extension}`);
