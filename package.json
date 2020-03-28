@@ -2,7 +2,7 @@
   "name": "vscode-choosealicense",
   "displayName": "Choose A License",
   "description": "Choose a license for your project in VS Code",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "ultram4rine",
   "license": "MIT",
   "icon": "images/icon.png",
