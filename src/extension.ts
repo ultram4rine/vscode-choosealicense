@@ -39,8 +39,6 @@ export async function activate(
           .getConfiguration("")
           .get("license.author");
 
-        vscode.window.showInformationMessage(`${extension} ${year} ${author}`);
-
         if (extension !== "") {
           extension = `.${extension}`;
         }
