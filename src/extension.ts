@@ -79,7 +79,7 @@ export async function activate(
   });
 
   vscode.commands.registerCommand("license.setExtension", async () => {
-    Utils.setConfProperty("extension");
+    Utils.setExtensionProperty();
   });
 }
 

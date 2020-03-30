@@ -133,4 +133,55 @@ export class Utils {
         .update(`license.${property}`, value, ConfigurationTarget.Global);
     }
   }
+
+  public static async setExtensionProperty(): Promise<void> {
+    const value = await window.showQuickPick(
+      [
+        {
+          label: "Empty",
+          description: "Create license file without extension",
+          value: ""
+        },
+        {
+          label: "Markdown",
+          description: "Create license file with md extension",
+          value: "md"
+        },
+        {
+          label: "Text",
+          description: "Create license file with txt extension",
+          value: "txt"
+        }
+      ],
+      { placeHolder: "Select license file extension." }
+    );
+
+    if (workspace.workspaceFolders) {
+      const target = await window.showQuickPick(
+        [
+          {
+            label: "User",
+            description: "User Settings",
+            target: ConfigurationTarget.Global
+          },
+          {
+            label: "Workspace",
+            description: "Workspace Settings",
+            target: ConfigurationTarget.Workspace
+          }
+        ],
+        { placeHolder: "Select the configuration target." }
+      );
+
+      if (value && target) {
+        await workspace
+          .getConfiguration()
+          .update("license.extension", value.value, target.target);
+      }
+    } else {
+      await workspace
+        .getConfiguration()
+        .update("license.extension", value?.value, ConfigurationTarget.Global);
+    }
+  }
 }
