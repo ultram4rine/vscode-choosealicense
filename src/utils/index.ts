@@ -68,7 +68,7 @@ export class Utils {
     lText: string
   ): string {
     switch (lKey) {
-      // TODO: apgl-3.0 not working.
+      // FIXME: author name not replacing for apgl-3.0.
       case "apgl-3.0":
       case "gpl-2.0":
       case "gpl-3.0":
