@@ -24,6 +24,9 @@
   "categories": [
     "Other"
   ],
+  "keywords": [
+    "license"
+  ],
   "activationEvents": [
     "*"
   ],
