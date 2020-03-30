@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.2.0]
+
+- New icon for extension.
+- Choose folder to create license if you working in workspace.
+- Choose license file extension via VSCode quick pick windows.
+
 ## [0.1.1]
 
 - Deleted info message when choose license.
