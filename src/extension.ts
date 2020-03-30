@@ -69,7 +69,21 @@ export async function activate(
           vscode.window.showErrorMessage("No folder to create a license");
         } else {
           let licensePath = path.join(folder.uri.fsPath, `LICENSE${extension}`);
-          fs.writeFileSync(licensePath, licenseText.body, "utf8");
+          if (fs.existsSync(licensePath)) {
+            vscode.window
+              .showInformationMessage(
+                "License file already exists in this folder. Override it?",
+                "Yes",
+                "No"
+              )
+              .then(ans => {
+                if (ans === "Yes") {
+                  fs.writeFileSync(licensePath, licenseText.body, "utf8");
+                }
+              });
+          } else {
+            fs.writeFileSync(licensePath, licenseText.body, "utf8");
+          }
         }
       }
     });
