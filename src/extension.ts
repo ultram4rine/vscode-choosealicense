@@ -2,8 +2,9 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 
-import { Utils } from "./utils";
+import { Config } from "./config";
 import { GraphQL } from "./graphql";
+import { Utils } from "./utils";
 
 export async function activate(
   context: vscode.ExtensionContext
@@ -90,15 +91,15 @@ export async function activate(
   });
 
   vscode.commands.registerCommand("license.setAuthor", async () => {
-    Utils.setConfProperty("author");
+    Config.setConfProperty("author");
   });
 
   vscode.commands.registerCommand("license.setYear", async () => {
-    Utils.setConfProperty("year");
+    Config.setConfProperty("year");
   });
 
   vscode.commands.registerCommand("license.setExtension", async () => {
-    Utils.setExtensionProperty();
+    Config.setExtensionProperty();
   });
 }
 
