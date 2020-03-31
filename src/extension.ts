@@ -1,14 +1,15 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
+
 import { Utils } from "./utils";
-import { getLicenses, getLicense } from "./graphql";
+import { GraphQL } from "./graphql";
 
 export async function activate(
   context: vscode.ExtensionContext
 ): Promise<void> {
   vscode.commands.registerCommand("license.choose", async () => {
-    let licenses = await getLicenses();
+    let licenses = await GraphQL.getLicenses();
 
     let quickPick = vscode.window.createQuickPick();
 
@@ -25,7 +26,7 @@ export async function activate(
       quickPick.dispose();
 
       let lKey = selection[0].label;
-      let license = await getLicense(lKey);
+      let license = await GraphQL.getLicense(lKey);
 
       let lText = license.license.body;
 

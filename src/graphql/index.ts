@@ -29,11 +29,13 @@ interface License {
   license: { body: string };
 }
 
-export async function getLicenses(): Promise<Licenses> {
-  return graphQLClient.request<Licenses>(LICENSES_QUERY);
-}
+export class GraphQL {
+  public static async getLicenses(): Promise<Licenses> {
+    return graphQLClient.request<Licenses>(LICENSES_QUERY);
+  }
 
-export async function getLicense(key: string): Promise<License> {
-  let keyVar = { key: key };
-  return graphQLClient.request<License>(LICENSE_QUERY, keyVar);
+  public static async getLicense(key: string): Promise<License> {
+    let keyVar = { key: key };
+    return graphQLClient.request<License>(LICENSE_QUERY, keyVar);
+  }
 }
