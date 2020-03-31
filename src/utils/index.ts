@@ -40,8 +40,7 @@ export class Utils {
     lText: string
   ): string {
     switch (lKey) {
-      // FIXME: author name not replacing for apgl-3.0.
-      case "apgl-3.0":
+      case "agpl-3.0":
       case "gpl-2.0":
       case "gpl-3.0":
       case "lgpl-2.1":
