@@ -9,11 +9,13 @@ const LICENSES_QUERY = `
   }
 `;
 
-const LICENSE_QUERY = `{
-    license($key: String!) {
+const LICENSE_QUERY = `
+  query getLicense($key: String!) {
+    license(key: $key) {
         body
     }
-}`;
+  }
+`;
 
 const graphQLClient = new GraphQLClient("https://api.github.com/graphql", {
   headers: { Authorization: "token 5c81fc122369cb33cdd7e34070e4ffded3c8ba72" }
@@ -32,6 +34,6 @@ export async function getLicenses(): Promise<Licenses> {
 }
 
 export async function getLicense(key: string): Promise<License> {
-  let keyVar = { title: "key" };
+  let keyVar = { key: key };
   return graphQLClient.request<License>(LICENSE_QUERY, keyVar);
 }
