@@ -1,28 +1,35 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
+
+import { Config } from "./config";
+import { GraphQL } from "./graphql";
 import { Utils } from "./utils";
 
 export async function activate(
-  context: vscode.ExtensionContext
+  _context: vscode.ExtensionContext
 ): Promise<void> {
   vscode.commands.registerCommand("license.choose", async () => {
-    let licenses = await Utils.getLicenses();
+    let licenses = await GraphQL.getLicenses();
 
     let quickPick = vscode.window.createQuickPick();
 
-    quickPick.items = licenses.map(license => {
+    quickPick.items = licenses.licenses.map(({ key, name }) => {
       return {
-        label: license.key,
-        detail: license.name
+        label: key,
+        detail: name
       };
     });
+
     quickPick.placeholder = "Choose a license from list.";
+
     quickPick.onDidChangeSelection(async selection => {
       quickPick.dispose();
 
-      let selectedLicense = selection[0].label;
-      let licenseText = await Utils.getLicenseText(selectedLicense);
+      let lKey = selection[0].label;
+      let license = await GraphQL.getLicense(lKey);
+
+      let lText = license.license.body;
 
       let folders = vscode.workspace.workspaceFolders;
       if (folders === undefined) {
@@ -43,19 +50,11 @@ export async function activate(
         }
 
         if (year !== "") {
-          licenseText.body = Utils.replaceYear(
-            year,
-            selectedLicense,
-            licenseText.body
-          );
+          lText = Utils.replaceYear(year, lKey, lText);
         }
 
         if (author !== "") {
-          licenseText.body = Utils.replaceAuthor(
-            author,
-            selectedLicense,
-            licenseText.body
-          );
+          lText = Utils.replaceAuthor(author, lKey, lText);
         }
 
         let folder: vscode.WorkspaceFolder | undefined;
@@ -78,11 +77,11 @@ export async function activate(
               )
               .then(ans => {
                 if (ans === "Yes") {
-                  fs.writeFileSync(licensePath, licenseText.body, "utf8");
+                  fs.writeFileSync(licensePath, lText, "utf8");
                 }
               });
           } else {
-            fs.writeFileSync(licensePath, licenseText.body, "utf8");
+            fs.writeFileSync(licensePath, lText, "utf8");
           }
         }
       }
@@ -92,15 +91,15 @@ export async function activate(
   });
 
   vscode.commands.registerCommand("license.setAuthor", async () => {
-    Utils.setConfProperty("author");
+    Config.setConfProperty("author");
   });
 
   vscode.commands.registerCommand("license.setYear", async () => {
-    Utils.setConfProperty("year");
+    Config.setConfProperty("year");
   });
 
   vscode.commands.registerCommand("license.setExtension", async () => {
-    Utils.setExtensionProperty();
+    Config.setExtensionProperty();
   });
 }
 
