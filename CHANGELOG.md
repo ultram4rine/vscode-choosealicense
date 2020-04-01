@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.3.0]
+
+- Get licenses via GitHub GraphQL api.
+- Fixed bug when author name not replacing for `agpl-3.0`.
+
 ## [0.2.0]
 
 - New icon for extension.
