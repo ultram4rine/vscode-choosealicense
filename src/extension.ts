@@ -7,7 +7,7 @@ import { GraphQL } from "./graphql";
 import { Utils } from "./utils";
 
 export async function activate(
-  context: vscode.ExtensionContext
+  _context: vscode.ExtensionContext
 ): Promise<void> {
   vscode.commands.registerCommand("license.choose", async () => {
     let licenses = await GraphQL.getLicenses();
