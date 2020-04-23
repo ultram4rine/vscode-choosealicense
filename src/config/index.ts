@@ -3,7 +3,7 @@ import { window, workspace, ConfigurationTarget } from "vscode";
 export class Config {
   public static async setConfProperty(property: string): Promise<void> {
     const value = await window.showInputBox({
-      prompt: `Set ${property} for licenses`
+      prompt: `Set ${property} for licenses`,
     });
 
     if (value) {
@@ -17,18 +17,18 @@ export class Config {
         {
           label: "Empty",
           description: "Create licenses without extension",
-          value: "empty"
+          value: "empty",
         },
         {
           label: "Markdown",
           description: "Create licenses with md extension",
-          value: "md"
+          value: "md",
         },
         {
           label: "Text",
           description: "Create licenses with txt extension",
-          value: "txt"
-        }
+          value: "txt",
+        },
       ],
       { placeHolder: "Select license file extension." }
     );
@@ -38,20 +38,42 @@ export class Config {
     }
   }
 
-  private static async setProp(property: string, value: string): Promise<void> {
+  public static async setScanProperty(): Promise<void> {
+    const value = await window.showQuickPick(
+      [
+        {
+          label: "Yes",
+          description: "Create licenses without extension",
+          value: true,
+        },
+        {
+          label: "No",
+          description: "Create licenses with md extension",
+          value: false,
+        },
+      ],
+      { placeHolder: "Select license file extension." }
+    );
+
+    if (value) {
+      this.setProp("scan", value.value);
+    }
+  }
+
+  private static async setProp(property: string, value: any): Promise<void> {
     if (workspace.workspaceFolders) {
       const target = await window.showQuickPick(
         [
           {
             label: "User",
             description: "User Settings",
-            target: ConfigurationTarget.Global
+            target: ConfigurationTarget.Global,
           },
           {
             label: "Workspace",
             description: "Workspace Settings",
-            target: ConfigurationTarget.Workspace
-          }
+            target: ConfigurationTarget.Workspace,
+          },
         ],
         { placeHolder: "Select the configuration target." }
       );

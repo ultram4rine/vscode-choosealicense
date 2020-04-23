@@ -17,13 +17,13 @@ export async function activate(
     quickPick.items = licenses.licenses.map(({ key, name }) => {
       return {
         label: key,
-        detail: name
+        detail: name,
       };
     });
 
-    quickPick.placeholder = "Choose a license from list.";
+    quickPick.placeholder = "Choose a license from the list.";
 
-    quickPick.onDidChangeSelection(async selection => {
+    quickPick.onDidChangeSelection(async (selection) => {
       quickPick.dispose();
 
       let lKey = selection[0].label;
@@ -75,7 +75,7 @@ export async function activate(
                 "Yes",
                 "No"
               )
-              .then(ans => {
+              .then((ans) => {
                 if (ans === "Yes") {
                   fs.writeFileSync(licensePath, lText, "utf8");
                 }
@@ -100,6 +100,10 @@ export async function activate(
 
   vscode.commands.registerCommand("license.setExtension", async () => {
     Config.setExtensionProperty();
+  });
+
+  vscode.commands.registerCommand("license.setScan", async () => {
+    Config.setScanProperty();
   });
 }
 
