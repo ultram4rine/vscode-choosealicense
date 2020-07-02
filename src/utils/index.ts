@@ -18,9 +18,9 @@ export class Utils {
         lText = lText.replace(/\[year\]/g, year);
         break;
 
+      case "bsl-1.0":
       case "cc0-1.0":
       case "epl-2.0":
-      case "lgpl-3.0":
       case "mpl-2.0":
       case "unlicense":
         break;
