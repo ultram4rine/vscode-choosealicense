@@ -104,18 +104,18 @@
     "test": "node ./out/test/runTest.js"
   },
   "dependencies": {
-    "graphql-request": "^2.0.0"
+    "graphql-request": "^3.0.0"
   },
   "devDependencies": {
     "@types/glob": "^7.1.3",
-    "@types/mocha": "^8.0.0",
-    "@types/node": "^14.0.23",
+    "@types/mocha": "^8.0.1",
+    "@types/node": "^14.0.27",
     "@types/vscode": "^1.47.0",
-    "@typescript-eslint/eslint-plugin": "^3.7.0",
-    "@typescript-eslint/parser": "^3.7.0",
-    "eslint": "^7.5.0",
+    "@typescript-eslint/eslint-plugin": "^3.9.0",
+    "@typescript-eslint/parser": "^3.9.0",
+    "eslint": "^7.6.0",
     "glob": "^7.1.6",
-    "mocha": "^8.0.1",
+    "mocha": "^8.1.1",
     "typescript": "^3.9.7",
     "vscode-test": "^1.4.0"
   }
