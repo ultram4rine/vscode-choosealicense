@@ -1,6 +1,6 @@
-import { GraphQLClient } from "graphql-request";
+import { GraphQLClient, gql } from "graphql-request";
 
-const LICENSES_QUERY = `
+const LICENSES_QUERY = gql`
   {
     licenses {
       key
@@ -9,17 +9,19 @@ const LICENSES_QUERY = `
   }
 `;
 
-const LICENSE_QUERY = `
+const LICENSE_QUERY = gql`
   query getLicense($key: String!) {
     license(key: $key) {
-        body
+      body
     }
   }
 `;
 
-const graphQLClient = new GraphQLClient("https://api.github.com/graphql", {
-  headers: { Authorization: "token 5c81fc122369cb33cdd7e34070e4ffded3c8ba72" }
-});
+const graphQLClient = new GraphQLClient("https://api.github.com/graphql");
+graphQLClient.setHeader(
+  "Authorization",
+  "bearer 5c81fc122369cb33cdd7e34070e4ffded3c8ba72"
+);
 
 interface Licenses {
   licenses: Array<{ key: string; name: string }>;
