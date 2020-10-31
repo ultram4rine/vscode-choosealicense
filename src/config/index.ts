@@ -11,6 +11,54 @@ export class Config {
     }
   }
 
+  public static async setYearProperty(): Promise<void> {
+    const value = await window.showQuickPick(
+      [
+        {
+          label: "Auto",
+          description: "Automatic year detection",
+          value: "auto",
+        },
+        {
+          label: "Current",
+          description: "Set current year",
+          value: "current",
+        },
+        {
+          label: "Certain",
+          description: "Set certain year",
+          value: "certain",
+        },
+      ],
+      { placeHolder: "Select year for licenses." }
+    );
+
+    if (value) {
+      switch (value.value) {
+        case "auto":
+          this.setProp("year", value.value);
+          break;
+        case "current":
+          this.setProp("year", new Date().getFullYear().toString());
+          break;
+        case "certain":
+          {
+            const year = await window.showInputBox({
+              prompt: "Set year for licenses",
+            });
+
+            if (year) {
+              this.setProp("year", year);
+            }
+          }
+          break;
+        default:
+          window.showErrorMessage("Invalid year selection");
+          break;
+      }
+    }
+  }
+
   public static async setExtensionProperty(): Promise<void> {
     const value = await window.showQuickPick(
       [
@@ -21,13 +69,13 @@ export class Config {
         },
         {
           label: "Markdown",
-          description: "Create licenses with md extension",
-          value: "md",
+          description: "Create licenses with .md extension",
+          value: ".md",
         },
         {
           label: "Text",
-          description: "Create licenses with txt extension",
-          value: "txt",
+          description: "Create licenses with .txt extension",
+          value: ".txt",
         },
       ],
       { placeHolder: "Select license file extension." }

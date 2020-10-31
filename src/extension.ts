@@ -45,11 +45,10 @@ export async function activate(
           .getConfiguration("")
           .get("license.author");
 
-        if (extension !== "") {
-          extension = `.${extension}`;
-        }
-
         if (year !== "") {
+          if (year === "auto") {
+            year = new Date().getFullYear().toString();
+          }
           lText = Utils.replaceYear(year, lKey, lText);
         }
 
@@ -95,7 +94,7 @@ export async function activate(
   });
 
   vscode.commands.registerCommand("license.setYear", async () => {
-    Config.setConfProperty("year");
+    Config.setYearProperty();
   });
 
   vscode.commands.registerCommand("license.setExtension", async () => {

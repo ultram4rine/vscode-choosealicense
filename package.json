@@ -74,8 +74,8 @@
         },
         "license.year": {
           "type": "string",
-          "default": "",
-          "description": "Set year for licenses."
+          "default": "auto",
+          "description": "Set year for licenses. Set 'auto' for automatic year detection."
         },
         "license.extension": {
           "type": "string",
@@ -83,8 +83,13 @@
           "description": "Set license file extension",
           "enum": [
             "",
-            "md",
-            "txt"
+            ".md",
+            ".txt"
+          ],
+          "enumDescriptions": [
+            "Create licenses without extension",
+            "Create licenses with .md extension",
+            "Create licenses with .txt extension"
           ]
         },
         "license.scan": {
