@@ -101,9 +101,9 @@ export async function activate(
     Config.setExtensionProperty();
   });
 
-  vscode.commands.registerCommand("license.setScan", async () => {
+  /*vscode.commands.registerCommand("license.setScan", async () => {
     Config.setScanProperty();
-  });
+  });*/
 }
 
 export function deactivate() {}

@@ -86,7 +86,7 @@ export class Config {
     }
   }
 
-  public static async setScanProperty(): Promise<void> {
+  /*public static async setScanProperty(): Promise<void> {
     const value = await window.showQuickPick(
       [
         {
@@ -106,7 +106,7 @@ export class Config {
     if (value) {
       this.setProp("scan", value.value);
     }
-  }
+  }*/
 
   private static async setProp(property: string, value: any): Promise<void> {
     if (workspace.workspaceFolders) {

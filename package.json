@@ -56,12 +56,6 @@
         "command": "license.setExtension",
         "title": "Set extension for license files",
         "description": "extension for license files."
-      },
-      {
-        "category": "License",
-        "command": "license.setScan",
-        "title": "scan",
-        "description": "scan."
       }
     ],
     "configuration": {
@@ -91,11 +85,6 @@
             "Create licenses with .md extension",
             "Create licenses with .txt extension"
           ]
-        },
-        "license.scan": {
-          "type": "boolean",
-          "default": true,
-          "description": ""
         }
       }
     }
