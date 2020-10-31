@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.3.2]
+
+- Downgraded @types/vscode to package extension.
+
 ## [0.3.1]
 
 - Automatic year detection feature.
