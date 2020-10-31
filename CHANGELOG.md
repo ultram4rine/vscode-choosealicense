@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.3.1]
+
+- Automatic year detection feature.
+- License file extension in settings now have dot. Update it if use extensions for licenses.
+- Removed lgpl-3.0, added bsl-1.0 API change.
+
 ## [0.3.0]
 
 - Get licenses via GitHub GraphQL api.
