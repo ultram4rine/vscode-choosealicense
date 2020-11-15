@@ -2,8 +2,15 @@
 .vscode-test/**
 out/test/**
 src/**
+node_modules/**
 .gitignore
 **/tsconfig.json
 **/.eslintrc.json
 **/*.map
 **/*.ts
+
+.github/**
+images/screenshot*
+
+.travis.yml
+rollup.config.js
