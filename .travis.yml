@@ -7,7 +7,7 @@ os:
 dist: xenial
 
 node_js:
-  - node
+  - 14
 
 services:
   - xvfb
