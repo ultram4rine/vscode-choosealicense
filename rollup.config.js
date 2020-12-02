@@ -2,11 +2,10 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import json from "@rollup/plugin-json";
 import typescript from "@rollup/plugin-typescript";
 import commonjs from "@rollup/plugin-commonjs";
-import multiInput from "rollup-plugin-multi-input";
 import { terser } from "rollup-plugin-terser";
 
 export default {
-  input: ["src/extension.ts", "src/test/runTest.ts"],
+  input: "src/extension.ts",
   output: [
     {
       dir: "./out",
@@ -17,10 +16,9 @@ export default {
   ],
   external: ["vscode"],
   plugins: [
-    multiInput({ relative: "src/" }),
     nodeResolve({ preferBuiltins: true }),
     json(),
-    typescript(),
+    typescript({ module: "ES2015" }),
     commonjs(),
     terser(),
   ],
