@@ -1,6 +1,12 @@
-import { GraphQLClient, gql } from "graphql-request";
+import { graphql } from "@octokit/graphql";
 
-const LICENSES_QUERY = gql`
+const graphqlWithAuth = graphql.defaults({
+  headers: {
+    authorization: "bearer 5c81fc122369cb33cdd7e34070e4ffded3c8ba72",
+  },
+});
+
+const LICENSES_QUERY = `
   {
     licenses {
       key
@@ -9,19 +15,13 @@ const LICENSES_QUERY = gql`
   }
 `;
 
-const LICENSE_QUERY = gql`
+const LICENSE_QUERY = `
   query getLicense($key: String!) {
     license(key: $key) {
       body
     }
   }
 `;
-
-const graphQLClient = new GraphQLClient("https://api.github.com/graphql");
-graphQLClient.setHeader(
-  "Authorization",
-  "bearer 5c81fc122369cb33cdd7e34070e4ffded3c8ba72"
-);
 
 interface Licenses {
   licenses: Array<{ key: string; name: string }>;
@@ -33,11 +33,11 @@ interface License {
 
 export class GraphQL {
   public static async getLicenses(): Promise<Licenses> {
-    return graphQLClient.request<Licenses>(LICENSES_QUERY);
+    return await graphqlWithAuth(LICENSES_QUERY);
   }
 
   public static async getLicense(key: string): Promise<License> {
     let keyVar = { key: key };
-    return graphQLClient.request<License>(LICENSE_QUERY, keyVar);
+    return await graphqlWithAuth(LICENSE_QUERY, keyVar);
   }
 }

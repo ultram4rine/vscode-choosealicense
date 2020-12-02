@@ -100,9 +100,7 @@
     }
   },
   "dependencies": {
-    "@octokit/graphql": "^4.5.8",
-    "graphql": "^15.4.0",
-    "graphql-request": "^3.3.0"
+    "@octokit/graphql": "^4.5.8"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
