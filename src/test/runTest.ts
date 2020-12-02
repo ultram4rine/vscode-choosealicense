@@ -17,13 +17,6 @@ async function main() {
       extensionDevelopmentPath,
       extensionTestsPath,
     });
-
-    // Run test on VS Code 1.43.0
-    await runTests({
-      version: "1.43.0",
-      extensionDevelopmentPath,
-      extensionTestsPath,
-    });
   } catch (err) {
     console.error(err);
     console.error("Failed to run tests");
