@@ -39,7 +39,8 @@
     "test-compile": "rimraf ./out && tsc -p ./",
     "test-watch": "rimraf ./out && tsc -watch -p ./",
     "pretest": "yarn run lint && yarn run test-compile",
-    "test": "node ./out/test/runTest.js"
+    "test": "nyc --reporter=lcov node ./out/test/runTest.js",
+    "coverage": "codecov"
   },
   "contributes": {
     "commands": [
@@ -113,9 +114,11 @@
     "@types/vscode": "^1.43.0",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",
+    "codecov": "^3.8.1",
     "eslint": "^7.14.0",
     "glob": "^7.1.6",
     "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.34.0",
     "rollup-plugin-terser": "^7.0.2",
