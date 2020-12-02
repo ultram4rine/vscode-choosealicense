@@ -14,6 +14,6 @@ install:
     fi
 
 script:
-  - yarn && yarn compile && yarn test
+  - yarn && yarn test
 
 cache: yarn
