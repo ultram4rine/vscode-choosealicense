@@ -13,4 +13,5 @@ node_modules/**
 images/screenshot*
 
 .travis.yml
+.codecov.yml
 rollup.config.js
