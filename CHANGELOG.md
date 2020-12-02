@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.4.0]
+
+- Extension now bundled with rollup.
+- @octokit/graphql is now used to access the Github API.
+
 ## [0.3.2]
 
 - Downgraded @types/vscode to package extension.
