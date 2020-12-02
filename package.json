@@ -18,6 +18,28 @@
   "bugs": {
     "url": "https://github.com/ultram4rine/vscode-choosealicense/issues"
   },
+  "badges": [
+    {
+      "url": "https://img.shields.io/visual-studio-marketplace/v/ultram4rine.vscode-choosealicense?style=flat-square",
+      "href": "https://marketplace.visualstudio.com/items/ultram4rine.vscode-choosealicense/changelog",
+      "description": "Visual Studio Marketplace Version"
+    },
+    {
+      "url": "https://img.shields.io/github/license/ultram4rine/vscode-choosealicense?style=flat-square",
+      "href": "https://github.com/ultram4rine/vscode-choosealicense/blob/master/LICENSE",
+      "description": "License"
+    },
+    {
+      "url": "https://img.shields.io/travis/ultram4rine/vscode-choosealicense?style=flat-square",
+      "href": "https://travis-ci.org/ultram4rine/vscode-choosealicense",
+      "description": "Build Status"
+    },
+    {
+      "url": "https://img.shields.io/codecov/c/github/ultram4rine/vscode-choosealicense?style=flat-square",
+      "href": "https://codecov.io/gh/ultram4rine/vscode-choosealicense",
+      "description": "Codecov"
+    }
+  ],
   "engines": {
     "vscode": "^1.43.0"
   },
