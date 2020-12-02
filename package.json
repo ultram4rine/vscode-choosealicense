@@ -33,10 +33,12 @@
   "main": "./out/extension.js",
   "scripts": {
     "vscode:prepublish": "yarn run compile",
-    "compile": "rollup -c",
+    "compile": "rimraf ./out && rollup -c",
     "lint": "eslint src --ext ts",
-    "watch": "rollup -c -w",
-    "pretest": "yarn run lint && yarn run compile",
+    "watch": "rimraf ./out && rollup -c -w",
+    "test-compile": "rimraf ./out && tsc -p ./",
+    "test-watch": "rimraf ./out && tsc -watch -p ./",
+    "pretest": "yarn run lint && yarn run test-compile",
     "test": "node ./out/test/runTest.js"
   },
   "contributes": {
@@ -116,9 +118,8 @@
     "eslint": "^7.14.0",
     "glob": "^7.1.6",
     "mocha": "^8.2.1",
+    "rimraf": "^3.0.2",
     "rollup": "^2.34.0",
-    "rollup-plugin-auto-external": "^2.0.0",
-    "rollup-plugin-multi-input": "^1.1.1",
     "rollup-plugin-terser": "^7.0.2",
     "typescript": "^4.1.2",
     "vsce": "^1.81.1",
