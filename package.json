@@ -36,7 +36,7 @@
     "compile": "rollup -c",
     "lint": "eslint src --ext ts",
     "watch": "rollup -c -w",
-    "pretest": "yarn run compile && yarn run lint",
+    "pretest": "yarn run lint && yarn run compile",
     "test": "node ./out/test/runTest.js"
   },
   "contributes": {
