@@ -23,12 +23,14 @@ const LICENSE_QUERY = `
   }
 `;
 
-interface Licenses {
-  licenses: Array<{ key: string; name: string }>;
+interface License {
+  key: string;
+  name: string;
+  body: string;
 }
 
-interface License {
-  license: { body: string };
+interface Licenses {
+  licenses: Array<License>;
 }
 
 export default class GraphQL {

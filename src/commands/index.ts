@@ -13,10 +13,10 @@ export const choose = vscode.commands.registerCommand(
 
     let quickPick = vscode.window.createQuickPick();
 
-    quickPick.items = licenses.licenses.map(({ key, name }) => {
+    quickPick.items = licenses.licenses.map((l) => {
       return {
-        label: key,
-        detail: name,
+        label: l.key,
+        detail: l.name,
       };
     });
 
@@ -28,7 +28,7 @@ export const choose = vscode.commands.registerCommand(
       let lKey = selection[0].label;
       let license = await GraphQL.getLicense(lKey);
 
-      let lText = license.license.body;
+      let lText = license.body;
 
       let folders = vscode.workspace.workspaceFolders;
       if (folders === undefined) {
