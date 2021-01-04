@@ -1,4 +1,4 @@
-export class Utils {
+export default class Utils {
   public static replaceYear(year: string, lKey: string, lText: string): string {
     switch (lKey) {
       case "agpl-3.0":

@@ -2,9 +2,9 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 
-import { Config } from "../config";
-import { GraphQL } from "../graphql";
-import { Utils } from "../utils";
+import Config from "../config";
+import GraphQL from "../graphql";
+import Utils from "../utils";
 
 export const choose = vscode.commands.registerCommand(
   "license.choose",

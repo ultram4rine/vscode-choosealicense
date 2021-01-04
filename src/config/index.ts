@@ -1,6 +1,6 @@
 import { window, workspace, ConfigurationTarget } from "vscode";
 
-export class Config {
+export default class Config {
   public static async setConfProperty(property: string): Promise<void> {
     const value = await window.showInputBox({
       prompt: `Set ${property} for licenses`,

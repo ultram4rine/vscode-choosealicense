@@ -31,7 +31,7 @@ interface License {
   license: { body: string };
 }
 
-export class GraphQL {
+export default class GraphQL {
   public static async getLicenses(): Promise<Licenses> {
     return await graphqlWithAuth(LICENSES_QUERY);
   }
