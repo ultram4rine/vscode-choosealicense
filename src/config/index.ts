@@ -109,7 +109,7 @@ export default class Config {
     }
   }*/
 
-  private static async setProp(property: string, value: any): Promise<void> {
+  private static async setProp(property: string, value: string): Promise<void> {
     if (workspace.workspaceFolders) {
       const selected = await window.showQuickPick(
         [
