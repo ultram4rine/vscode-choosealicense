@@ -1,3 +1,4 @@
+import { window } from "vscode";
 import { graphql } from "@octokit/graphql";
 
 const graphqlWithAuth = graphql.defaults({
@@ -29,17 +30,29 @@ interface License {
   body: string;
 }
 
-interface Licenses {
-  licenses: Array<License>;
-}
-
 export default class GraphQL {
-  public static async getLicenses(): Promise<Licenses> {
-    return await graphqlWithAuth(LICENSES_QUERY);
+  public static async getLicenses(): Promise<License[]> {
+    try {
+      const { licenses } = await graphqlWithAuth<{ licenses: License[] }>(
+        LICENSES_QUERY
+      );
+      return licenses;
+    } catch (error) {
+      window.showErrorMessage(error.message);
+      return [];
+    }
   }
 
   public static async getLicense(key: string): Promise<License> {
-    let keyVar = { key: key };
-    return await graphqlWithAuth(LICENSE_QUERY, keyVar);
+    try {
+      const { license } = await graphqlWithAuth<{ license: License }>(
+        LICENSE_QUERY,
+        { key: key }
+      );
+      return license;
+    } catch (error) {
+      window.showErrorMessage(error.message);
+      return {} as License;
+    }
   }
 }
