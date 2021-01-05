@@ -12,6 +12,7 @@ const LICENSES_QUERY = `
     licenses {
       key
       name
+      spdxId
     }
   }
 `;
@@ -27,6 +28,7 @@ const LICENSE_QUERY = `
 interface License {
   key: string;
   name: string;
+  spdxId: string;
   body: string;
 }
 
