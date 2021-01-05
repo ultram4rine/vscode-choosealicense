@@ -11,19 +11,15 @@ export const choose = vscode.commands.registerCommand(
   async () => {
     const licenses = await GraphQL.getLicenses();
 
-    let quickPick = vscode.window.createQuickPick();
-    quickPick.items = licenses.map((l) => {
-      return {
-        label: l.key,
-        detail: l.name,
-      };
-    });
-    quickPick.placeholder = "Choose a license from the list.";
+    const selected = await vscode.window.showQuickPick(
+      licenses.map((l) => {
+        return { label: l.spdxId, detail: l.name, key: l.key };
+      }),
+      { placeHolder: "Choose a license from the list." }
+    );
 
-    quickPick.onDidChangeSelection(async (selection) => {
-      quickPick.dispose();
-
-      const key = selection[0].label;
+    if (selected) {
+      const key = selected.key;
       const license = await GraphQL.getLicense(key);
       let text = license.body;
 
@@ -78,10 +74,7 @@ export const choose = vscode.commands.registerCommand(
           }
         }
       }
-    });
-
-    quickPick.onDidHide(() => quickPick.dispose());
-    quickPick.show();
+    }
   }
 );
 
