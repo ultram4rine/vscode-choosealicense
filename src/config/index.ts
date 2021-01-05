@@ -12,7 +12,7 @@ export default class Config {
   }
 
   public static async setYearProperty(): Promise<void> {
-    const value = await window.showQuickPick(
+    const selected = await window.showQuickPick(
       [
         {
           label: "Auto",
@@ -33,10 +33,11 @@ export default class Config {
       { placeHolder: "Select year for licenses." }
     );
 
-    if (value) {
-      switch (value.value) {
+    if (selected) {
+      const value = selected.value;
+      switch (value) {
         case "auto":
-          this.setProp("year", value.value);
+          this.setProp("year", value);
           break;
         case "current":
           this.setProp("year", new Date().getFullYear().toString());
@@ -60,7 +61,7 @@ export default class Config {
   }
 
   public static async setExtensionProperty(): Promise<void> {
-    const value = await window.showQuickPick(
+    const selected = await window.showQuickPick(
       [
         {
           label: "Empty",
@@ -81,8 +82,8 @@ export default class Config {
       { placeHolder: "Select license file extension." }
     );
 
-    if (value) {
-      this.setProp("extension", value.value);
+    if (selected) {
+      this.setProp("extension", selected.value);
     }
   }
 
@@ -110,7 +111,7 @@ export default class Config {
 
   private static async setProp(property: string, value: any): Promise<void> {
     if (workspace.workspaceFolders) {
-      const target = await window.showQuickPick(
+      const selected = await window.showQuickPick(
         [
           {
             label: "User",
@@ -126,14 +127,14 @@ export default class Config {
         { placeHolder: "Select the configuration target." }
       );
 
-      if (value && target) {
+      if (value && selected) {
         if (property === "extension" && value === "empty") {
           value = "";
         }
 
         await workspace
           .getConfiguration()
-          .update(`license.${property}`, value, target.target);
+          .update(`license.${property}`, value, selected.target);
       }
     } else {
       await workspace
