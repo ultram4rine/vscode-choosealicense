@@ -12,7 +12,7 @@ export const choose = vscode.commands.registerCommand(
     const licenses = await GraphQL.getLicenses();
 
     let quickPick = vscode.window.createQuickPick();
-    quickPick.items = licenses.licenses.map((l) => {
+    quickPick.items = licenses.map((l) => {
       return {
         label: l.key,
         detail: l.name,
