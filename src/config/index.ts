@@ -87,28 +87,6 @@ export default class Config {
     }
   }
 
-  /*public static async setScanProperty(): Promise<void> {
-    const value = await window.showQuickPick(
-      [
-        {
-          label: "Yes",
-          description: "Create licenses without extension",
-          value: true,
-        },
-        {
-          label: "No",
-          description: "Create licenses with md extension",
-          value: false,
-        },
-      ],
-      { placeHolder: "Select license file extension." }
-    );
-
-    if (value) {
-      this.setProp("scan", value.value);
-    }
-  }*/
-
   private static async setProp(property: string, value: string): Promise<void> {
     if (workspace.workspaceFolders) {
       const selected = await window.showQuickPick(
