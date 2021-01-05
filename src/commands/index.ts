@@ -9,26 +9,23 @@ import Utils from "../utils";
 export const choose = vscode.commands.registerCommand(
   "license.choose",
   async () => {
-    let licenses = await GraphQL.getLicenses();
+    const licenses = await GraphQL.getLicenses();
 
     let quickPick = vscode.window.createQuickPick();
-
     quickPick.items = licenses.licenses.map((l) => {
       return {
         label: l.key,
         detail: l.name,
       };
     });
-
     quickPick.placeholder = "Choose a license from the list.";
 
     quickPick.onDidChangeSelection(async (selection) => {
       quickPick.dispose();
 
-      let lKey = selection[0].label;
-      let license = await GraphQL.getLicense(lKey);
-
-      let lText = license.body;
+      const key = selection[0].label;
+      const license = await GraphQL.getLicense(key);
+      let text = license.body;
 
       let folders = vscode.workspace.workspaceFolders;
       if (folders === undefined) {
@@ -48,11 +45,11 @@ export const choose = vscode.commands.registerCommand(
           if (year === "auto") {
             year = new Date().getFullYear().toString();
           }
-          lText = Utils.replaceYear(year, lKey, lText);
+          text = Utils.replaceYear(year, key, text);
         }
 
         if (author !== "") {
-          lText = Utils.replaceAuthor(author, lKey, lText);
+          text = Utils.replaceAuthor(author, key, text);
         }
 
         let folder: vscode.WorkspaceFolder | undefined;
@@ -67,23 +64,22 @@ export const choose = vscode.commands.registerCommand(
         } else {
           let licensePath = path.join(folder.uri.fsPath, `LICENSE${extension}`);
           if (fs.existsSync(licensePath)) {
-            vscode.window
-              .showInformationMessage(
-                "License file already exists in this folder. Override it?",
-                "Yes",
-                "No"
-              )
-              .then((ans) => {
-                if (ans === "Yes") {
-                  fs.writeFileSync(licensePath, lText, "utf8");
-                }
-              });
+            const answer = await vscode.window.showInformationMessage(
+              "License file already exists in this folder. Override it?",
+              "Yes",
+              "No"
+            );
+
+            if (answer === "Yes") {
+              fs.writeFileSync(licensePath, text, "utf8");
+            }
           } else {
-            fs.writeFileSync(licensePath, lText, "utf8");
+            fs.writeFileSync(licensePath, text, "utf8");
           }
         }
       }
     });
+
     quickPick.onDidHide(() => quickPick.dispose());
     quickPick.show();
   }
