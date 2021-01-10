@@ -30,9 +30,9 @@
       "description": "License"
     },
     {
-      "url": "https://img.shields.io/travis/ultram4rine/vscode-choosealicense?style=flat-square",
-      "href": "https://travis-ci.com/github/ultram4rine/vscode-choosealicense",
-      "description": "Build Status"
+      "url": "https://img.shields.io/github/workflow/status/ultram4rine/vscode-choosealicense/CI?style=flat-square",
+      "href": "https://github.com/ultram4rine/vscode-choosealicense/actions?query=workflow%3ACI",
+      "description": "GitHub Workflow Status"
     },
     {
       "url": "https://img.shields.io/codecov/c/github/ultram4rine/vscode-choosealicense?style=flat-square",
