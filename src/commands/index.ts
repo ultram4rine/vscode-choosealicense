@@ -27,24 +27,24 @@ export const choose = vscode.commands.registerCommand(
       if (folders === undefined) {
         vscode.window.showErrorMessage("No folder to create a license");
       } else {
-        let extension: any = vscode.workspace
-          .getConfiguration("")
-          .get("license.extension");
-        let year: any = vscode.workspace
-          .getConfiguration("")
-          .get("license.year");
-        let author: any = vscode.workspace
-          .getConfiguration("")
-          .get("license.author");
+        const author: string | undefined = vscode.workspace
+          .getConfiguration("license")
+          .get("author");
+        let year: string | undefined = vscode.workspace
+          .getConfiguration("license")
+          .get("year");
+        const extension: string | undefined = vscode.workspace
+          .getConfiguration("license")
+          .get("extension");
 
-        if (year !== "") {
+        if (year !== undefined) {
           if (year === "auto") {
             year = new Date().getFullYear().toString();
           }
           text = Utils.replaceYear(year, key, text);
         }
 
-        if (author !== "") {
+        if (author !== undefined) {
           text = Utils.replaceAuthor(author, key, text);
         }
 
@@ -58,19 +58,25 @@ export const choose = vscode.commands.registerCommand(
         if (folder === undefined) {
           vscode.window.showErrorMessage("No folder to create a license");
         } else {
-          let licensePath = path.join(folder.uri.fsPath, `LICENSE${extension}`);
-          if (fs.existsSync(licensePath)) {
-            const answer = await vscode.window.showInformationMessage(
-              "License file already exists in this folder. Override it?",
-              "Yes",
-              "No"
+          if (extension !== undefined) {
+            const licensePath = path.join(
+              folder.uri.fsPath,
+              `LICENSE${extension}`
             );
 
-            if (answer === "Yes") {
+            if (fs.existsSync(licensePath)) {
+              const answer = await vscode.window.showInformationMessage(
+                "License file already exists in this folder. Override it?",
+                "Yes",
+                "No"
+              );
+
+              if (answer === "Yes") {
+                fs.writeFileSync(licensePath, text, "utf8");
+              }
+            } else {
               fs.writeFileSync(licensePath, text, "utf8");
             }
-          } else {
-            fs.writeFileSync(licensePath, text, "utf8");
           }
         }
       }
