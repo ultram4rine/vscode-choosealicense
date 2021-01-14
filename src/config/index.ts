@@ -1,13 +1,13 @@
 import { window, workspace, ConfigurationTarget } from "vscode";
 
 export default class Config {
-  public static async setConfProperty(property: string): Promise<void> {
+  public static async setAuthorProperty(): Promise<void> {
     const value = await window.showInputBox({
-      prompt: `Set ${property} for licenses`,
+      prompt: "Set author for licenses",
     });
 
     if (value) {
-      this.setProp(property, value);
+      this.setProp("author", value);
     }
   }
 

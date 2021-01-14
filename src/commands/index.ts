@@ -87,7 +87,7 @@ export const choose = vscode.commands.registerCommand(
 export const setAuthor = vscode.commands.registerCommand(
   "license.setAuthor",
   async () => {
-    Config.setConfProperty("author");
+    Config.setAuthorProperty();
   }
 );
 
