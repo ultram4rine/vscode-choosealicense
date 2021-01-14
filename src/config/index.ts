@@ -111,13 +111,13 @@ export default class Config {
         }
 
         await workspace
-          .getConfiguration()
-          .update(`license.${property}`, value, selected.target);
+          .getConfiguration("license")
+          .update(property, value, selected.target);
       }
     } else {
       await workspace
-        .getConfiguration()
-        .update(`license.${property}`, value, ConfigurationTarget.Global);
+        .getConfiguration("license")
+        .update(property, value, ConfigurationTarget.Global);
     }
   }
 }
