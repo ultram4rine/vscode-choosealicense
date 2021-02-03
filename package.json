@@ -123,7 +123,7 @@
     }
   },
   "dependencies": {
-    "@octokit/graphql": "^4.5.9"
+    "@octokit/graphql": "^4.6.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.1.0",
