@@ -144,7 +144,7 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.44.0",
     "rollup-plugin-terser": "^7.0.2",
-    "typescript": "^4.2.3",
+    "typescript": "^4.2.4",
     "vsce": "^1.87.1",
     "vscode-test": "^1.5.2"
   }
