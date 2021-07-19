@@ -2,15 +2,20 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 
-import Config from "../config";
-import GraphQL from "../api";
-import Utils from "../utils";
+import {
+  setAuthorProperty,
+  setYearProperty,
+  setExtensionProperty,
+  setTokenProperty,
+} from "../config";
+import { getLicenses, getLicense } from "../api";
+import { replaceAuthor, replaceYear } from "../utils";
 
 export const choose = vscode.commands.registerCommand(
   "license.choose",
   async () => {
     try {
-      const licenses = await GraphQL.getLicenses();
+      const licenses = await getLicenses();
 
       const selected = await vscode.window.showQuickPick(
         licenses.map((l) => {
@@ -23,7 +28,7 @@ export const choose = vscode.commands.registerCommand(
         const key = selected.key;
 
         try {
-          const license = await GraphQL.getLicense(key);
+          const license = await getLicense(key);
           let text = license.body;
 
           let folders = vscode.workspace.workspaceFolders;
@@ -44,11 +49,11 @@ export const choose = vscode.commands.registerCommand(
               if (year === "auto") {
                 year = new Date().getFullYear().toString();
               }
-              text = Utils.replaceYear(year, key, text);
+              text = replaceYear(year, key, text);
             }
 
             if (author !== undefined) {
-              text = Utils.replaceAuthor(author, key, text);
+              text = replaceAuthor(author, key, text);
             }
 
             let folder: vscode.WorkspaceFolder | undefined;
@@ -96,27 +101,27 @@ export const choose = vscode.commands.registerCommand(
 export const setAuthor = vscode.commands.registerCommand(
   "license.setAuthor",
   async () => {
-    Config.setAuthorProperty();
+    setAuthorProperty();
   }
 );
 
 export const setYear = vscode.commands.registerCommand(
   "license.setYear",
   async () => {
-    Config.setYearProperty();
+    setYearProperty();
   }
 );
 
 export const setExtension = vscode.commands.registerCommand(
   "license.setExtension",
   async () => {
-    Config.setExtensionProperty();
+    setExtensionProperty();
   }
 );
 
 export const setToken = vscode.commands.registerCommand(
   "license.setToken",
   async () => {
-    Config.setTokenProperty();
+    setTokenProperty();
   }
 );
