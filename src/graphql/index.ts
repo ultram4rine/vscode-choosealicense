@@ -31,12 +31,12 @@ const LICENSE_QUERY = `
   }
 `;
 
-interface License {
+type License = {
   key: string;
   name: string;
   spdxId: string;
   body: string;
-}
+};
 
 export default class GraphQL {
   public static async getLicenses(): Promise<License[]> {
