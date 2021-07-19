@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 import Config from "../config";
-import GraphQL from "../graphql";
+import GraphQL from "../api";
 import Utils from "../utils";
 
 export const choose = vscode.commands.registerCommand(
