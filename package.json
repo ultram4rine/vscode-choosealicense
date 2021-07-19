@@ -75,20 +75,26 @@
       {
         "category": "License",
         "command": "license.setAuthor",
-        "title": "Set author for licenses",
+        "title": "Set author",
         "description": "Set author for licenses."
       },
       {
         "category": "License",
         "command": "license.setYear",
-        "title": "Set year for licenses",
+        "title": "Set year",
         "description": "Set year for licenses."
       },
       {
         "category": "License",
         "command": "license.setExtension",
-        "title": "Set extension for license files",
-        "description": "extension for license files."
+        "title": "Set extension",
+        "description": "Set extension for license files."
+      },
+      {
+        "category": "License",
+        "command": "license.setToken",
+        "title": "Set token",
+        "description": "Set token for api access."
       }
     ],
     "configuration": {
@@ -107,7 +113,7 @@
         "license.extension": {
           "type": "string",
           "default": "",
-          "description": "Set license file extension",
+          "description": "Set license file extension.",
           "enum": [
             "",
             ".md",
@@ -118,6 +124,11 @@
             "Create licenses with .md extension",
             "Create licenses with .txt extension"
           ]
+        },
+        "license.token": {
+          "type": "string",
+          "default": "",
+          "description": "Set token for api access."
         }
       }
     }

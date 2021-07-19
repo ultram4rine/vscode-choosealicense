@@ -87,6 +87,16 @@ export default class Config {
     }
   }
 
+  public static async setTokenProperty(): Promise<void> {
+    const value = await window.showInputBox({
+      prompt: "Set token for api access",
+    });
+
+    if (value) {
+      this.setProp("token", value);
+    }
+  }
+
   private static async setProp(property: string, value: string): Promise<void> {
     if (workspace.workspaceFolders) {
       const selected = await window.showQuickPick(

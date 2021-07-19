@@ -104,3 +104,10 @@ export const setExtension = vscode.commands.registerCommand(
     Config.setExtensionProperty();
   }
 );
+
+export const setToken = vscode.commands.registerCommand(
+  "license.setToken",
+  async () => {
+    Config.setTokenProperty();
+  }
+);

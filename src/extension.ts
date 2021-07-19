@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 
-import { choose, setAuthor, setYear, setExtension } from "./commands";
+import { choose, setAuthor, setYear, setExtension, setToken } from "./commands";
 
 export async function activate({
   subscriptions,
@@ -9,4 +9,5 @@ export async function activate({
   subscriptions.push(setAuthor);
   subscriptions.push(setYear);
   subscriptions.push(setExtension);
+  subscriptions.push(setToken);
 }

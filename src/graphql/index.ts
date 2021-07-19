@@ -1,9 +1,15 @@
-import { window } from "vscode";
+import { window, workspace } from "vscode";
 import { graphql } from "@octokit/graphql";
+
+const token: string | undefined = workspace
+  .getConfiguration("license")
+  .get("token");
 
 const graphqlWithAuth = graphql.defaults({
   headers: {
-    authorization: "bearer 5c81fc122369cb33cdd7e34070e4ffded3c8ba72",
+    authorization: `bearer ${
+      token ? token : "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"
+    }`,
   },
 });
 
