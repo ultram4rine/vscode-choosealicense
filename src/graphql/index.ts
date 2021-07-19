@@ -46,8 +46,7 @@ export default class GraphQL {
       );
       return licenses;
     } catch (error) {
-      window.showErrorMessage(error.message);
-      return [];
+      throw error;
     }
   }
 
@@ -59,8 +58,7 @@ export default class GraphQL {
       );
       return license;
     } catch (error) {
-      window.showErrorMessage(error.message);
-      return {} as License;
+      throw error;
     }
   }
 }
