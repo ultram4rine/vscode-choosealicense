@@ -103,17 +103,17 @@
         "license.author": {
           "type": "string",
           "default": "",
-          "description": "Set author for licenses."
+          "description": "Author for licenses."
         },
         "license.year": {
           "type": "string",
           "default": "auto",
-          "description": "Set year for licenses. Set 'auto' for automatic year detection."
+          "description": "Year for licenses. Set 'auto' for automatic year detection."
         },
         "license.extension": {
           "type": "string",
           "default": "",
-          "description": "Set license file extension.",
+          "description": "License file extension.",
           "enum": [
             "",
             ".md",
@@ -128,7 +128,7 @@
         "license.token": {
           "type": "string",
           "default": "",
-          "description": "Set token for api access."
+          "description": "Token for api access."
         }
       }
     }
