@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.5.0]
+
+- Use GitHub REST API instead of GraphQL.
+- New setting for access token.
+
 ## [0.4.0]
 
 - Extension now bundled with rollup.
