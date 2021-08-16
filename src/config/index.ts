@@ -88,7 +88,7 @@ export const setExtensionProperty = async () => {
 
 export const setTokenProperty = async () => {
   const value = await window.showInputBox({
-    prompt: "Set token for api access",
+    prompt: "Set token for GitHub API access",
   });
 
   if (value) {
