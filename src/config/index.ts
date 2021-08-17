@@ -1,5 +1,11 @@
 import { window, workspace, ConfigurationTarget } from "vscode";
 
+export const setDefaultLicenseProperty = async (value: string | undefined) => {
+  if (value) {
+    setProp("default", value);
+  }
+};
+
 export const setAuthorProperty = async () => {
   const value = await window.showInputBox({
     prompt: "Set author for licenses",

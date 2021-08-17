@@ -74,6 +74,18 @@
       },
       {
         "category": "License",
+        "command": "license.addDefaultLicense",
+        "title": "Add default license",
+        "description": "Add default license to repository."
+      },
+      {
+        "category": "License",
+        "command": "license.setDefaultLicense",
+        "title": "Set default license",
+        "description": "Set default license to use."
+      },
+      {
+        "category": "License",
         "command": "license.setAuthor",
         "title": "Set author",
         "description": "Set author for licenses."
@@ -100,6 +112,11 @@
     "configuration": {
       "title": "Choose a License",
       "properties": {
+        "license.default": {
+          "type": "string",
+          "default": "",
+          "description": "Default license."
+        },
         "license.author": {
           "type": "string",
           "default": "",
