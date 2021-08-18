@@ -1,9 +1,7 @@
 import { window, workspace, ConfigurationTarget } from "vscode";
 
-export const setDefaultLicenseProperty = async (value: string | undefined) => {
-  if (value) {
-    setProp("default", value);
-  }
+export const setDefaultLicenseProperty = async (value: string) => {
+  setProp("default", value);
 };
 
 export const setAuthorProperty = async () => {
