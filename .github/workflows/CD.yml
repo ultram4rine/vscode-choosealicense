@@ -22,4 +22,4 @@ jobs:
       - name: Publish
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
-        run: vsce publish --yarn -p $VSCE_PAT
+        run: vsce publish --yarn -p "$VSCE_PAT"
