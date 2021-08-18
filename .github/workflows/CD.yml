@@ -20,4 +20,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Publish
-        run: vsce publish -p ${{ secrets.VSCE_PAT }}
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: vsce publish --yarn -p $VSCE_PAT
