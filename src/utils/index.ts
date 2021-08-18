@@ -1,20 +1,20 @@
-export const replaceAuthor = (author: string, lKey: string, lText: string) => {
-  switch (lKey) {
+export const replaceAuthor = (author: string, key: string, text: string) => {
+  switch (key) {
     case "agpl-3.0":
     case "gpl-2.0":
     case "gpl-3.0":
     case "lgpl-2.1":
-      lText = lText.replace(/<name of author>/g, author);
+      text = text.replace(/<name of author>/g, author);
       break;
 
     case "apache-2.0":
-      lText = lText.replace(/\[name of copyright owner\]/g, author);
+      text = text.replace(/\[name of copyright owner\]/g, author);
       break;
 
     case "bsd-2-clause":
     case "bsd-3-clause":
     case "mit":
-      lText = lText.replace(/\[fullname\]/g, author);
+      text = text.replace(/\[fullname\]/g, author);
       break;
 
     case "cc0-1.0":
@@ -28,26 +28,26 @@ export const replaceAuthor = (author: string, lKey: string, lText: string) => {
       break;
   }
 
-  return lText;
+  return text;
 };
 
-export const replaceYear = (year: string, lKey: string, lText: string) => {
-  switch (lKey) {
+export const replaceYear = (year: string, key: string, text: string) => {
+  switch (key) {
     case "agpl-3.0":
     case "gpl-2.0":
     case "gpl-3.0":
     case "lgpl-2.1":
-      lText = lText.replace(/<year>/g, year);
+      text = text.replace(/<year>/g, year);
       break;
 
     case "apache-2.0":
-      lText = lText.replace(/\[yyyy\]/g, year);
+      text = text.replace(/\[yyyy\]/g, year);
       break;
 
     case "bsd-2-clause":
     case "bsd-3-clause":
     case "mit":
-      lText = lText.replace(/\[year\]/g, year);
+      text = text.replace(/\[year\]/g, year);
       break;
 
     case "bsl-1.0":
@@ -61,5 +61,5 @@ export const replaceYear = (year: string, lKey: string, lText: string) => {
       break;
   }
 
-  return lText;
+  return text;
 };
