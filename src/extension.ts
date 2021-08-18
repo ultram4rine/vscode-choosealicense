@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 
 import {
-  choose,
+  chooseLicense,
   addDefaultLicense,
   setDefaultLicense,
   setAuthor,
@@ -13,7 +13,7 @@ import {
 export async function activate({
   subscriptions,
 }: vscode.ExtensionContext): Promise<void> {
-  subscriptions.push(choose);
+  subscriptions.push(chooseLicense);
   subscriptions.push(addDefaultLicense);
   subscriptions.push(setDefaultLicense);
   subscriptions.push(setAuthor);

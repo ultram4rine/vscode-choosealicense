@@ -12,8 +12,8 @@ import {
 import { getLicenses, getLicense, License } from "../api";
 import { replaceAuthor, replaceYear } from "../utils";
 
-export const choose = vscode.commands.registerCommand(
-  "license.choose",
+export const chooseLicense = vscode.commands.registerCommand(
+  "license.chooseLicense",
   async () => {
     try {
       const licenses = await getLicenses();
