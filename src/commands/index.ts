@@ -18,9 +18,21 @@ export const choose = vscode.commands.registerCommand(
     try {
       const licenses = await getLicenses();
 
+      const defaultKey: string | undefined = vscode.workspace
+        .getConfiguration("license")
+        .get("default");
+
       const selected = await vscode.window.showQuickPick(
         licenses.map((l) => {
-          return { label: l.spdxId, detail: l.name, key: l.key };
+          if (defaultKey === l.key) {
+            return {
+              label: `${l.spdxId} (Default)`,
+              detail: l.name,
+              key: l.key,
+            };
+          } else {
+            return { label: l.spdxId, detail: l.name, key: l.key };
+          }
         }),
         { placeHolder: "Choose a license from the list." }
       );
