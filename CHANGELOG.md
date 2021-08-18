@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.6.0]
+
+- Ability to set and add default license.
+
 ## [0.5.0]
 
 - Use GitHub REST API instead of GraphQL.
