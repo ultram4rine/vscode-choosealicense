@@ -5,7 +5,7 @@ const getToken = () => {
   return workspace.getConfiguration("license").get<string>("token");
 };
 
-type License = {
+export type License = {
   key: string;
   name: string;
   spdxId: string;
@@ -42,7 +42,7 @@ export const getLicense = async (key: string) => {
       },
     });
     const d = resp.data;
-    return { body: d.body } as License;
+    return { key: key, body: d.body } as License;
   } catch (error) {
     throw error;
   }
