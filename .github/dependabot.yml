@@ -6,3 +6,7 @@ updates:
       interval: "daily"
     ignore:
       - dependency-name: "@types/vscode"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
