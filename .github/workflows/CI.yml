@@ -15,7 +15,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Run tests
-        uses: GabrielBB/xvfb-action@v1.0
+        uses: GabrielBB/xvfb-action@v1.5
         with:
           run: yarn test
       - name: Coverage
