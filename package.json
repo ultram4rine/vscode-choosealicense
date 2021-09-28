@@ -61,7 +61,8 @@
     "test-compile": "rimraf ./out && tsc -p ./",
     "test-watch": "rimraf ./out && tsc -watch -p ./",
     "pretest": "yarn run lint && yarn run test-compile",
-    "test": "nyc --reporter=lcov node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "nyc": "nyc --reporter=lcov yarn test"
   },
   "contributes": {
     "commands": [

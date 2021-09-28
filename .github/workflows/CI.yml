@@ -17,7 +17,7 @@ jobs:
       - name: Run tests
         uses: GabrielBB/xvfb-action@v1.5
         with:
-          run: yarn test
+          run: yarn nyc
       - name: Coverage
         uses: codecov/codecov-action@v2
 
