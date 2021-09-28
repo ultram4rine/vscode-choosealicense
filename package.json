@@ -163,6 +163,7 @@
     "@types/vscode": "^1.43.0",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.29.2",
+    "@vscode/test-electron": "^1.6.2",
     "eslint": "^7.32.0",
     "glob": "^7.1.7",
     "mocha": "^9.0.3",
@@ -171,7 +172,6 @@
     "rollup": "^2.56.2",
     "rollup-plugin-terser": "^7.0.2",
     "typescript": "^4.3.5",
-    "vsce": "^1.96.1",
-    "vscode-test": "^1.6.1"
+    "vsce": "^1.96.1"
   }
 }
