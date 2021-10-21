@@ -160,7 +160,7 @@
     "@rollup/plugin-typescript": "^8.2.5",
     "@types/glob": "^7.1.4",
     "@types/mocha": "^9.0.0",
-    "@types/node": "^16.6.1",
+    "@types/node": "^16.11.2",
     "@types/vscode": "^1.43.0",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.29.2",
