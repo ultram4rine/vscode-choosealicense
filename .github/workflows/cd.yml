@@ -15,11 +15,9 @@ jobs:
         uses: actions/setup-node@v2.4.1
         with:
           node-version: 14
-      - name: Install vsce
-        run: npm install -g vsce
       - name: Install dependencies
         run: yarn install
       - name: Publish
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
-        run: vsce publish --yarn -p "$VSCE_PAT"
+        run: yarn vscode:publish
