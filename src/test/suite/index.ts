@@ -2,7 +2,7 @@ import * as path from "path";
 import * as Mocha from "mocha";
 import * as glob from "glob";
 
-export function run(): Promise<void> {
+export async function run(): Promise<void> {
   // Create the mocha test
   const mocha = new Mocha({
     ui: "tdd",
@@ -11,10 +11,10 @@ export function run(): Promise<void> {
 
   const testsRoot = path.resolve(__dirname, "..");
 
-  return new Promise((c, e) => {
+  return new Promise<void>((resolve, reject) => {
     glob("**/**.test.js", { cwd: testsRoot }, (err, files) => {
       if (err) {
-        return e(err);
+        return reject(err);
       }
 
       // Add files to the test suite
@@ -24,14 +24,14 @@ export function run(): Promise<void> {
         // Run the mocha test
         mocha.run((failures) => {
           if (failures > 0) {
-            e(new Error(`${failures} tests failed.`));
+            reject(new Error(`${failures} tests failed.`));
           } else {
-            c();
+            resolve();
           }
         });
-      } catch (err) {
-        console.error(err);
-        e(err);
+      } catch (error) {
+        console.error(error);
+        reject(error);
       }
     });
   });
