@@ -1,0 +1,5 @@
+{
+  "reporter": ["text", "lcovonly"],
+  "include": ["out/**/*.js"],
+  "exclude": ["out/test/**"]
+}

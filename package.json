@@ -63,7 +63,7 @@
     "test-watch": "rimraf ./out && tsc -watch -p ./",
     "pretest": "yarn run lint && yarn run test-compile",
     "test": "node ./out/test/runTest.js",
-    "nyc": "nyc --reporter=lcov yarn test"
+    "coverage": "rimraf ./coverage && c8 yarn test"
   },
   "contributes": {
     "commands": [
@@ -156,7 +156,6 @@
     "@octokit/request-error": "^2.1.0"
   },
   "devDependencies": {
-    "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.0.6",
@@ -168,10 +167,10 @@
     "@typescript-eslint/eslint-plugin": "^5.3.1",
     "@typescript-eslint/parser": "^5.3.1",
     "@vscode/test-electron": "^1.6.2",
+    "c8": "^7.10.0",
     "eslint": "^8.2.0",
     "glob": "^7.2.0",
     "mocha": "^9.1.3",
-    "nyc": "^15.1.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.59.0",
     "rollup-plugin-terser": "^7.0.2",
