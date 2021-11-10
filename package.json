@@ -151,7 +151,8 @@
     }
   },
   "dependencies": {
-    "@octokit/request": "^5.6.2"
+    "@octokit/request": "^5.6.2",
+    "@octokit/request-error": "^2.1.0"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",

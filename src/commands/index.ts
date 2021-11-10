@@ -2,6 +2,8 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 
+import { RequestError } from "@octokit/request-error";
+
 import {
   setDefaultLicenseProperty,
   setAuthorProperty,
@@ -44,11 +46,11 @@ export const chooseLicense = vscode.commands.registerCommand(
           const license = await getLicense(key);
           addLicense(license);
         } catch (error) {
-          vscode.window.showErrorMessage(error.message);
+          vscode.window.showErrorMessage((error as RequestError).message);
         }
       }
     } catch (error) {
-      vscode.window.showErrorMessage(error.message);
+      vscode.window.showErrorMessage((error as RequestError).message);
     }
   }
 );
@@ -68,7 +70,7 @@ export const addDefaultLicense = vscode.commands.registerCommand(
         vscode.window.showErrorMessage("No default license provided");
       }
     } catch (error) {
-      vscode.window.showErrorMessage(error.message);
+      vscode.window.showErrorMessage((error as RequestError).message);
     }
   }
 );
@@ -90,7 +92,7 @@ export const setDefaultLicense = vscode.commands.registerCommand(
         setDefaultLicenseProperty(selected.key);
       }
     } catch (error) {
-      vscode.window.showErrorMessage(error.message);
+      vscode.window.showErrorMessage((error as RequestError).message);
     }
   }
 );
