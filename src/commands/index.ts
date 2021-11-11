@@ -11,8 +11,9 @@ import {
   setExtensionProperty,
   setTokenProperty,
 } from "../config";
-import { getLicenses, getLicense, License } from "../api";
+import { getLicenses, getLicense } from "../api";
 import { replaceAuthor, replaceYear } from "../utils";
+import { License } from "../types";
 
 export const chooseLicense = vscode.commands.registerCommand(
   "license.chooseLicense",
@@ -28,12 +29,16 @@ export const chooseLicense = vscode.commands.registerCommand(
         licenses.map((l) => {
           if (defaultKey === l.key) {
             return {
-              label: `${l.spdxId} (Default)`,
+              label: `${l.spdx_id ? l.spdx_id : ""} (Default)`,
               detail: l.name,
               key: l.key,
             };
           } else {
-            return { label: l.spdxId, detail: l.name, key: l.key };
+            return {
+              label: l.spdx_id ? l.spdx_id : "",
+              detail: l.name,
+              key: l.key,
+            };
           }
         }),
         { placeHolder: "Choose a license from the list." }
@@ -83,7 +88,11 @@ export const setDefaultLicense = vscode.commands.registerCommand(
 
       const selected = await vscode.window.showQuickPick(
         licenses.map((l) => {
-          return { label: l.spdxId, detail: l.name, key: l.key };
+          return {
+            label: l.spdx_id ? l.spdx_id : "",
+            detail: l.name,
+            key: l.key,
+          };
         }),
         { placeHolder: "Choose a license from the list." }
       );
