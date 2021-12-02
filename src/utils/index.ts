@@ -17,13 +17,11 @@ export const replaceAuthor = (author: string, key: string, text: string) => {
       text = text.replace(/\[fullname\]/g, author);
       break;
 
+    case "bsl-1.0":
     case "cc0-1.0":
     case "epl-2.0":
-    case "lgpl-3.0":
     case "mpl-2.0":
     case "unlicense":
-      break;
-
     default:
       break;
   }
@@ -55,8 +53,6 @@ export const replaceYear = (year: string, key: string, text: string) => {
     case "epl-2.0":
     case "mpl-2.0":
     case "unlicense":
-      break;
-
     default:
       break;
   }
