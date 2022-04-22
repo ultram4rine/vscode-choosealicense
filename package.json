@@ -54,16 +54,17 @@
   ],
   "main": "./out/extension.js",
   "scripts": {
-    "vscode:prepublish": "yarn run compile",
-    "vscode:publish": "vsce publish --yarn -p '$VSCE_PAT'",
-    "compile": "rimraf ./out && rollup -c",
     "lint": "eslint src --ext ts",
-    "watch": "rimraf ./out && rollup -c -w",
     "test-compile": "rimraf ./out && tsc -p ./",
     "test-watch": "rimraf ./out && tsc -watch -p ./",
     "pretest": "yarn run lint && yarn run test-compile",
     "test": "node ./out/test/runTest.js",
-    "coverage": "rimraf ./coverage && c8 yarn test"
+    "coverage": "rimraf ./coverage && c8 yarn test",
+    "compile": "yarn run lint && rimraf ./out && rollup -c",
+    "watch": "rimraf ./out && rollup -c -w",
+    "prepackage": "yarn run compile",
+    "package": "vsce package --yarn",
+    "vscode:publish": "vsce publish --yarn -p '$VSCE_PAT' -i"
   },
   "contributes": {
     "commands": [

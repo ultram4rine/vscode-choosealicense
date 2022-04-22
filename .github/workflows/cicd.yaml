@@ -1,0 +1,88 @@
+name: CI/CD
+
+on:
+  push:
+    paths-ignore:
+      - ".github/dependabot.yml"
+      - "images/**"
+      - "*.md"
+      - "LICENSE"
+      - "ncurc.json"
+  pull_request:
+    paths-ignore:
+      - ".github/dependabot.yml"
+      - "images/**"
+      - "*.md"
+      - "LICENSE"
+      - "ncurc.json"
+
+jobs:
+  test-n-build:
+    name: Test and build
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run tests and make coverage
+        uses: GabrielBB/xvfb-action@v1.6
+        with:
+          run: yarn coverage
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+
+      - name: Bundle
+        run: yarn package
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: vsix
+          path: vscode-choosealicense-*.vsix
+
+  release:
+    name: Release
+    runs-on: ubuntu-20.04
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: test-n-build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Create release body file
+        run: |
+          awk -v ver=$(grep 'version' package.json | awk -F: '{ print $2 }' | tr -d \ \",) '/^#+ \[/ { if (p) { exit }; if ($2 == "["ver"]") { p=1; next } } p && NF' CHANGELOG.md > changes.txt
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: vsix
+
+      - name: Publish
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: yarn vscode:publish vscode-choosealicense-*.vsix
+
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: changes.txt
+          files: |
+            vscode-choosealicense-*.vsix
