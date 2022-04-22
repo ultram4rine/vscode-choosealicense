@@ -1,6 +1,7 @@
-package-lock.json
-coverage
-out
-node_modules
+.idea/
 .vscode-test/
+coverage/
+node_modules/
+out/
+package-lock.json
 *.vsix
