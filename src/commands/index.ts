@@ -49,7 +49,7 @@ export const chooseLicense = vscode.commands.registerCommand(
 
         try {
           const license = await getLicense(key);
-          addLicense(license);
+          await addLicense(license);
         } catch (error) {
           vscode.window.showErrorMessage((error as RequestError).message);
         }
@@ -70,7 +70,7 @@ export const addDefaultLicense = vscode.commands.registerCommand(
 
       if (key) {
         const license = await getLicense(key);
-        addLicense(license);
+        await addLicense(license);
       } else {
         vscode.window.showErrorMessage("No default license provided");
       }
@@ -98,7 +98,7 @@ export const setDefaultLicense = vscode.commands.registerCommand(
       );
 
       if (selected) {
-        setDefaultLicenseProperty(selected.key);
+        await setDefaultLicenseProperty(selected.key);
       }
     } catch (error) {
       vscode.window.showErrorMessage((error as RequestError).message);
@@ -109,28 +109,28 @@ export const setDefaultLicense = vscode.commands.registerCommand(
 export const setAuthor = vscode.commands.registerCommand(
   "license.setAuthor",
   async () => {
-    setAuthorProperty();
+    await setAuthorProperty();
   }
 );
 
 export const setYear = vscode.commands.registerCommand(
   "license.setYear",
   async () => {
-    setYearProperty();
+    await setYearProperty();
   }
 );
 
 export const setExtension = vscode.commands.registerCommand(
   "license.setExtension",
   async () => {
-    setExtensionProperty();
+    await setExtensionProperty();
   }
 );
 
 export const setToken = vscode.commands.registerCommand(
   "license.setToken",
   async () => {
-    setTokenProperty();
+    await setTokenProperty();
   }
 );
 

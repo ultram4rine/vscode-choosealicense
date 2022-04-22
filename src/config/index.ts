@@ -1,7 +1,7 @@
 import { window, workspace, ConfigurationTarget } from "vscode";
 
 export const setDefaultLicenseProperty = async (value: string) => {
-  setProp("default", value);
+  await setProp("default", value);
 };
 
 export const setAuthorProperty = async () => {
@@ -10,7 +10,7 @@ export const setAuthorProperty = async () => {
   });
 
   if (value) {
-    setProp("author", value);
+    await setProp("author", value);
   }
 };
 
@@ -40,10 +40,10 @@ export const setYearProperty = async () => {
     const value = selected.value;
     switch (value) {
       case "auto":
-        setProp("year", value);
+        await setProp("year", value);
         break;
       case "current":
-        setProp("year", new Date().getFullYear().toString());
+        await setProp("year", new Date().getFullYear().toString());
         break;
       case "certain":
         {
@@ -52,7 +52,7 @@ export const setYearProperty = async () => {
           });
 
           if (year) {
-            setProp("year", year);
+            await setProp("year", year);
           }
         }
         break;
@@ -86,7 +86,7 @@ export const setExtensionProperty = async () => {
   );
 
   if (selected) {
-    setProp("extension", selected.value);
+    await setProp("extension", selected.value);
   }
 };
 
@@ -96,7 +96,7 @@ export const setTokenProperty = async () => {
   });
 
   if (value) {
-    setProp("token", value);
+    await setProp("token", value);
   }
 };
 
