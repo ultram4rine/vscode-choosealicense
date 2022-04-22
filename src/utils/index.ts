@@ -8,13 +8,13 @@ export const replaceAuthor = (author: string, key: string, text: string) => {
       break;
 
     case "apache-2.0":
-      text = text.replace(/\[name of copyright owner\]/g, author);
+      text = text.replace(/\[name of copyright owner]/g, author);
       break;
 
     case "bsd-2-clause":
     case "bsd-3-clause":
     case "mit":
-      text = text.replace(/\[fullname\]/g, author);
+      text = text.replace(/\[fullname]/g, author);
       break;
 
     case "bsl-1.0":
@@ -39,13 +39,13 @@ export const replaceYear = (year: string, key: string, text: string) => {
       break;
 
     case "apache-2.0":
-      text = text.replace(/\[yyyy\]/g, year);
+      text = text.replace(/\[yyyy]/g, year);
       break;
 
     case "bsd-2-clause":
     case "bsd-3-clause":
     case "mit":
-      text = text.replace(/\[year\]/g, year);
+      text = text.replace(/\[year]/g, year);
       break;
 
     case "bsl-1.0":
