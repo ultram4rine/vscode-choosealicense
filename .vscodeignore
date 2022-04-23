@@ -17,5 +17,4 @@ images/screenshot*
 .gitignore
 .ncurc.json
 .nycrc.json
-rollup.config.js
 tsconfig.json
