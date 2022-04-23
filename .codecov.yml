@@ -6,3 +6,11 @@ coverage:
       default:
         target: 0%
         threshold: 0%
+    patch:
+      default:
+        target: 0%
+        threshold: 0%
+        base: auto
+        if_not_found: success
+        informational: false
+        only_pulls: false
