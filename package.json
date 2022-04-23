@@ -21,8 +21,13 @@
   "badges": [
     {
       "url": "https://img.shields.io/visual-studio-marketplace/v/ultram4rine.vscode-choosealicense?style=flat-square",
-      "href": "https://marketplace.visualstudio.com/items/ultram4rine.vscode-choosealicense/changelog",
+      "href": "https://marketplace.visualstudio.com/items/ultram4rine.vscode-choosealicense",
       "description": "Visual Studio Marketplace Version"
+    },
+    {
+      "url": "https://img.shields.io/open-vsx/v/ultram4rine/vscode-choosealicense?style=flat-square",
+      "href": "https://open-vsx.org/extension/ultram4rine/vscode-choosealicense",
+      "description": "Open VSX Version"
     },
     {
       "url": "https://img.shields.io/github/license/ultram4rine/vscode-choosealicense?style=flat-square",
