@@ -1,11 +1,11 @@
-import { window, workspace, ConfigurationTarget } from "vscode";
+import * as vscode from "vscode";
 
 export const setDefaultLicenseProperty = async (value: string) => {
   await setProp("default", value);
 };
 
 export const setAuthorProperty = async () => {
-  const value = await window.showInputBox({
+  const value = await vscode.window.showInputBox({
     prompt: "Set author for licenses",
   });
 
@@ -15,7 +15,7 @@ export const setAuthorProperty = async () => {
 };
 
 export const setYearProperty = async () => {
-  const selected = await window.showQuickPick(
+  const selected = await vscode.window.showQuickPick(
     [
       {
         label: "Auto",
@@ -47,7 +47,7 @@ export const setYearProperty = async () => {
         break;
       case "certain":
         {
-          const year = await window.showInputBox({
+          const year = await vscode.window.showInputBox({
             prompt: "Set year for licenses",
           });
 
@@ -57,14 +57,14 @@ export const setYearProperty = async () => {
         }
         break;
       default:
-        window.showErrorMessage("Invalid year selection");
+        vscode.window.showErrorMessage("Invalid year selection");
         break;
     }
   }
 };
 
 export const setExtensionProperty = async () => {
-  const selected = await window.showQuickPick(
+  const selected = await vscode.window.showQuickPick(
     [
       {
         label: "Empty",
@@ -91,7 +91,7 @@ export const setExtensionProperty = async () => {
 };
 
 export const setTokenProperty = async () => {
-  const value = await window.showInputBox({
+  const value = await vscode.window.showInputBox({
     prompt: "Set token for GitHub API access",
   });
 
@@ -101,18 +101,18 @@ export const setTokenProperty = async () => {
 };
 
 const setProp = async (property: string, value: string) => {
-  if (workspace.workspaceFolders) {
-    const selected = await window.showQuickPick(
+  if (vscode.workspace.workspaceFolders) {
+    const selected = await vscode.window.showQuickPick(
       [
         {
           label: "User",
           description: "User Settings",
-          target: ConfigurationTarget.Global,
+          target: vscode.ConfigurationTarget.Global,
         },
         {
           label: "Workspace",
           description: "Workspace Settings",
-          target: ConfigurationTarget.Workspace,
+          target: vscode.ConfigurationTarget.Workspace,
         },
       ],
       { placeHolder: "Select the configuration target." }
@@ -123,13 +123,13 @@ const setProp = async (property: string, value: string) => {
         value = "";
       }
 
-      await workspace
+      await vscode.workspace
         .getConfiguration("license")
         .update(property, value, selected.target);
     }
   } else {
-    await workspace
+    await vscode.workspace
       .getConfiguration("license")
-      .update(property, value, ConfigurationTarget.Global);
+      .update(property, value, vscode.ConfigurationTarget.Global);
   }
 };
