@@ -28,6 +28,19 @@ describe("GitHub API and utils", () => {
               assert.ok(yearReplaced.indexOf("1941") !== -1);
             });
             break;
+          case "bsl-1.0":
+          case "cc0-1.0":
+          case "epl-2.0":
+          case "mpl-2.0":
+          case "unlicense":
+            it(`author and year not replaced in ${license.key}`, async () => {
+              const l = await getLicense(license.key);
+              const authorReplaced = replaceAuthor("John Doe", l.key, l.body);
+              const yearReplaced = replaceYear("1941", l.key, l.body);
+              assert.ok(authorReplaced.indexOf("John Doe") === -1);
+              assert.ok(yearReplaced.indexOf("1941") === -1);
+            });
+            break;
           default:
             break;
         }
