@@ -11,7 +11,8 @@ src/
 **/*.ts
 **/*.vsix
 
-images/screenshot*
+images/cmds.png
+images/demo.gif
 .codecov.yml
 .eslintrc.json
 .gitignore

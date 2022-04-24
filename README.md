@@ -4,7 +4,7 @@
 
 Choose a license for your project in VS Code via [GitHub Licenses API](https://developer.github.com/v3/licenses/)
 
-![demo](https://raw.githubusercontent.com/ultram4rine/vscode-choosealicense/master/images/screenshot.gif)
+![demo](https://raw.githubusercontent.com/ultram4rine/vscode-choosealicense/master/images/demo.gif)
 
 ## Usage
 
@@ -12,4 +12,4 @@ Use `License: Choose license` command to create a license file in your project. 
 
 ## Commands
 
-![commands](https://raw.githubusercontent.com/ultram4rine/vscode-choosealicense/master/images/screenshot_cmds.png)
+![commands](https://raw.githubusercontent.com/ultram4rine/vscode-choosealicense/master/images/cmds.png)
