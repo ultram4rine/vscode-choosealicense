@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.2] - 2022-04-24
+
+### Changed
+
+- Cosmetic changes: new icon and gallery banner for marketplace.
+
 ## [0.6.1] - 2022-04-24
 
 ### Added
