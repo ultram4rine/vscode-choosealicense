@@ -8,11 +8,11 @@ const octokit = new Octokit({
 });
 
 export const getLicenses = async (): Promise<Licenses> => {
-  const resp = await octokit.licenses.getAllCommonlyUsed();
+  const resp = await octokit.rest.licenses.getAllCommonlyUsed();
   return resp.data;
 };
 
 export const getLicense = async (key: string): Promise<License> => {
-  const resp = await octokit.licenses.get({ license: key });
+  const resp = await octokit.rest.licenses.get({ license: key });
   return resp.data;
 };
