@@ -1,78 +1,44 @@
 {
   "name": "vscode-choosealicense",
   "displayName": "Choose A License",
-  "description": "Choose a license for your project in VS Code",
   "version": "0.6.1",
-  "publisher": "ultram4rine",
-  "license": "MIT",
-  "icon": "images/icon.png",
-  "author": {
-    "name": "ultram4rine",
-    "email": "ultramarine730@gmail.com"
-  },
-  "homepage": "https://github.com/ultram4rine/vscode-choosealicense",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ultram4rine/vscode-choosealicense"
-  },
-  "bugs": {
-    "url": "https://github.com/ultram4rine/vscode-choosealicense/issues"
-  },
-  "badges": [
-    {
-      "url": "https://img.shields.io/visual-studio-marketplace/v/ultram4rine.vscode-choosealicense?style=flat-square",
-      "href": "https://marketplace.visualstudio.com/items/ultram4rine.vscode-choosealicense",
-      "description": "Visual Studio Marketplace Version"
-    },
-    {
-      "url": "https://img.shields.io/open-vsx/v/ultram4rine/vscode-choosealicense?style=flat-square",
-      "href": "https://open-vsx.org/extension/ultram4rine/vscode-choosealicense",
-      "description": "Open VSX Version"
-    },
-    {
-      "url": "https://img.shields.io/github/license/ultram4rine/vscode-choosealicense?style=flat-square",
-      "href": "https://github.com/ultram4rine/vscode-choosealicense/blob/master/LICENSE",
-      "description": "License"
-    },
-    {
-      "url": "https://img.shields.io/github/workflow/status/ultram4rine/vscode-choosealicense/CI?logo=github&style=flat-square",
-      "href": "https://github.com/ultram4rine/vscode-choosealicense/actions?query=workflow%3ACI",
-      "description": "GitHub Workflow Status"
-    },
-    {
-      "url": "https://img.shields.io/codecov/c/github/ultram4rine/vscode-choosealicense?logo=codecov&style=flat-square",
-      "href": "https://codecov.io/gh/ultram4rine/vscode-choosealicense",
-      "description": "Codecov"
-    }
-  ],
-  "engines": {
-    "vscode": "^1.43.0"
-  },
+  "description": "Choose a license for your project in VS Code",
   "categories": [
     "Other"
   ],
   "keywords": [
     "license"
   ],
-  "activationEvents": [
-    "onStartupFinished"
-  ],
+  "homepage": "https://github.com/ultram4rine/vscode-choosealicense",
+  "bugs": {
+    "url": "https://github.com/ultram4rine/vscode-choosealicense/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ultram4rine/vscode-choosealicense"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "ultram4rine",
+    "email": "ultramarine730@gmail.com"
+  },
+  "publisher": "ultram4rine",
   "main": "./out/extension.js",
   "scripts": {
     "clean": "rimraf -rf coverage out *.vsix",
-    "lint": "eslint src --ext ts",
-    "test-compile": "yarn run clean && tsc -p ./",
-    "test-watch": "yarn run clean && tsc -watch -p ./",
-    "pretest": "yarn run lint && yarn run test-compile",
-    "test": "node ./out/test/runTest.js",
+    "compile": "yarn run lint && yarn run clean && yarn run esbuild",
     "coverage": "rimraf ./coverage && c8 yarn test",
     "esbuild": "esbuild ./src/extension.ts --bundle --external:vscode --platform=node --tsconfig=./tsconfig.json --log-level=info --color=true --format=cjs --target=es2017 --minify --outfile=./out/extension.js",
-    "compile": "yarn run lint && yarn run clean && yarn run esbuild",
-    "watch": "yarn run clean && yarn run esbuild --watch",
+    "lint": "eslint src --ext ts",
     "prepackage": "yarn run compile",
     "package": "vsce package --yarn",
+    "publish:ovsx": "ovsx publish -p $OVSX_PAT",
     "publish:vsce": "vsce publish --yarn -p $VSCE_PAT -i",
-    "publish:ovsx": "ovsx publish -p $OVSX_PAT"
+    "pretest": "yarn run lint && yarn run test-compile",
+    "test": "node ./out/test/runTest.js",
+    "test-compile": "yarn run clean && tsc -p ./",
+    "test-watch": "yarn run clean && tsc -watch -p ./",
+    "watch": "yarn run clean && yarn run esbuild --watch"
   },
   "contributes": {
     "commands": [
@@ -160,6 +126,9 @@
       }
     }
   },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "dependencies": {
     "@octokit/request-error": "^2.1.0",
     "@octokit/rest": "^18.12.0"
@@ -181,5 +150,36 @@
     "rimraf": "^3.0.2",
     "typescript": "^4.6.3",
     "vsce": "^2.7.0"
-  }
+  },
+  "engines": {
+    "vscode": "^1.43.0"
+  },
+  "icon": "images/icon.png",
+  "badges": [
+    {
+      "description": "Visual Studio Marketplace Version",
+      "url": "https://img.shields.io/visual-studio-marketplace/v/ultram4rine.vscode-choosealicense?style=flat-square",
+      "href": "https://marketplace.visualstudio.com/items/ultram4rine.vscode-choosealicense"
+    },
+    {
+      "description": "Open VSX Version",
+      "url": "https://img.shields.io/open-vsx/v/ultram4rine/vscode-choosealicense?style=flat-square",
+      "href": "https://open-vsx.org/extension/ultram4rine/vscode-choosealicense"
+    },
+    {
+      "description": "License",
+      "url": "https://img.shields.io/github/license/ultram4rine/vscode-choosealicense?style=flat-square",
+      "href": "https://github.com/ultram4rine/vscode-choosealicense/blob/master/LICENSE"
+    },
+    {
+      "description": "GitHub Workflow Status",
+      "url": "https://img.shields.io/github/workflow/status/ultram4rine/vscode-choosealicense/CI?logo=github&style=flat-square",
+      "href": "https://github.com/ultram4rine/vscode-choosealicense/actions?query=workflow%3ACI"
+    },
+    {
+      "description": "Codecov",
+      "url": "https://img.shields.io/codecov/c/github/ultram4rine/vscode-choosealicense?logo=codecov&style=flat-square",
+      "href": "https://codecov.io/gh/ultram4rine/vscode-choosealicense"
+    }
+  ]
 }
