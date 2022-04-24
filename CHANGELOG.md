@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.1] - 2022-04-24
+
+### Added
+
+- Published to [Open VSX Registry](https://open-vsx.org/extension/ultram4rine/vscode-choosealicense).
+
+### Changed
+
+- [@octokit/rest](https://github.com/octokit/rest.js) is now used to access the GitHub API.
+- Extension now bundled with [esbuild](https://esbuild.github.io/).
+
+### Security
+
+- Many dependency updates.
+
 ## [0.6.0] - 2021-08-18
 
 ### Added
