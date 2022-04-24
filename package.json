@@ -116,7 +116,7 @@
         "category": "License",
         "command": "license.setToken",
         "title": "Set token",
-        "description": "Set token for api access."
+        "description": "Set token for GitHub REST API access."
       }
     ],
     "configuration": {
