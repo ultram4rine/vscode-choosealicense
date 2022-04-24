@@ -12,4 +12,22 @@ Use `License: Choose license` command to create a license file in your project. 
 
 ## Commands
 
+Press `Ctrl+Shift+P` (Windows) or `Cmd+Shift+P` (Mac) to open the command palette and type `License`.
+
 ![commands](https://raw.githubusercontent.com/ultram4rine/vscode-choosealicense/master/images/cmds.png)
+
+| Command             | Description                           |
+| ------------------- | ------------------------------------- |
+| Choose license      | Choose a license to create.           |
+| Add default license | Add default license to repository.    |
+| Set default license | Set default license to use.           |
+| Set author          | Set author for licenses.              |
+| Set year            | Set year for licenses.                |
+| Set extension       | Set extension for license files.      |
+| Set token           | Set token for GitHub REST API access. |
+
+## About access token
+
+Setting an access token is optional, but it's increases your [API rate limit](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting).
+
+If you want to, you can start with [creating token](https://github.com/settings/tokens/new?description=vscode-choosealicense) (no scopes are required).
