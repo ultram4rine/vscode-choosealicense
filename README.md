@@ -6,6 +6,8 @@ Choose a license for your project in VS Code via [GitHub Licenses API](https://d
 
 ![demo](https://raw.githubusercontent.com/ultram4rine/vscode-choosealicense/master/images/demo.gif)
 
+_Theme: [GitHub Dark Default](https://marketplace.visualstudio.com/items?itemName=GitHub.github-vscode-theme)_
+
 ## Usage
 
 Use `License: Choose license` command to create a license file in your project. You can also set `year` and `author` properties for auto replacing this fields in license.
@@ -15,6 +17,8 @@ Use `License: Choose license` command to create a license file in your project. 
 Press `Ctrl+Shift+P` (Windows) or `Cmd+Shift+P` (Mac) to open the command palette and type `License`.
 
 ![commands](https://raw.githubusercontent.com/ultram4rine/vscode-choosealicense/master/images/cmds.png)
+
+_Theme: [GitHub Dark Default](https://marketplace.visualstudio.com/items?itemName=GitHub.github-vscode-theme)_
 
 | Command             | Description                           |
 | ------------------- | ------------------------------------- |
