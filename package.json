@@ -181,5 +181,9 @@
       "url": "https://img.shields.io/codecov/c/github/ultram4rine/vscode-choosealicense?logo=codecov&style=flat-square",
       "href": "https://codecov.io/gh/ultram4rine/vscode-choosealicense"
     }
-  ]
+  ],
+  "galleryBanner": {
+    "color": "#212121",
+    "theme": "dark"
+  }
 }
