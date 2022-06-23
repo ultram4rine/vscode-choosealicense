@@ -149,7 +149,7 @@
     "ovsx": "^0.3.0",
     "rimraf": "^3.0.2",
     "typescript": "^4.7.4",
-    "vsce": "^2.7.0"
+    "vsce": "^2.9.2"
   },
   "engines": {
     "vscode": "^1.43.0"
