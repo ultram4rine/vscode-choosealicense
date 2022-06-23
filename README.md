@@ -28,6 +28,7 @@ _Theme: [GitHub Dark Default](https://marketplace.visualstudio.com/items?itemNam
 | Set author          | Set author for licenses.              |
 | Set year            | Set year for licenses.                |
 | Set extension       | Set extension for license files.      |
+| Set filename        | Set filename for license files.       |
 | Set token           | Set token for GitHub REST API access. |
 
 ## About access token
