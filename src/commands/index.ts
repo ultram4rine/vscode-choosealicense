@@ -21,9 +21,8 @@ export const chooseLicense = vscode.commands.registerCommand(
     try {
       const licenses = await getLicenses();
 
-      const defaultKey: string | undefined = vscode.workspace
-        .getConfiguration("license")
-        .get("default");
+      const defaultKey: string =
+        vscode.workspace.getConfiguration("license").get("default") ?? "";
 
       const selected = await vscode.window.showQuickPick(
         licenses.map((l) => {
@@ -64,11 +63,10 @@ export const addDefaultLicense = vscode.commands.registerCommand(
   "license.addDefaultLicense",
   async () => {
     try {
-      const key: string | undefined = vscode.workspace
-        .getConfiguration("license")
-        .get("default");
+      const key: string =
+        vscode.workspace.getConfiguration("license").get("default") ?? "";
 
-      if (key) {
+      if (key !== "") {
         const license = await getLicense(key);
         await addLicense(license);
       } else {
@@ -137,46 +135,41 @@ export const setToken = vscode.commands.registerCommand(
 const addLicense = async (license: License) => {
   const folder = await chooseFolder();
   if (folder) {
-    const author: string | undefined = vscode.workspace
-      .getConfiguration("license")
-      .get("author");
-    let year: string | undefined = vscode.workspace
-      .getConfiguration("license")
-      .get("year");
+    const author: string =
+      vscode.workspace.getConfiguration("license").get("author") ?? "";
+    let year: string =
+      vscode.workspace.getConfiguration("license").get("year") ?? "auto";
 
     let text = license.body;
 
-    if (year) {
+    if (year !== "") {
       if (year === "auto") {
         year = new Date().getFullYear().toString();
       }
       text = replaceYear(year, license.key, text);
     }
 
-    if (author) {
+    if (author !== "") {
       text = replaceAuthor(author, license.key, text);
     }
 
-    const extension: string | undefined = vscode.workspace
-      .getConfiguration("license")
-      .get("extension");
+    const extension: string =
+      vscode.workspace.getConfiguration("license").get("extension") ?? "";
 
-    if (extension !== undefined) {
-      const licensePath = path.join(folder.uri.fsPath, `LICENSE${extension}`);
+    const licensePath = path.join(folder.uri.fsPath, `LICENSE${extension}`);
 
-      if (fs.existsSync(licensePath)) {
-        const answer = await vscode.window.showInformationMessage(
-          "License file already exists in this folder. Override it?",
-          "Yes",
-          "No"
-        );
+    if (fs.existsSync(licensePath)) {
+      const answer = await vscode.window.showInformationMessage(
+        "License file already exists in this folder. Override it?",
+        "Yes",
+        "No"
+      );
 
-        if (answer === "Yes") {
-          fs.writeFileSync(licensePath, text, "utf8");
-        }
-      } else {
+      if (answer === "Yes") {
         fs.writeFileSync(licensePath, text, "utf8");
       }
+    } else {
+      fs.writeFileSync(licensePath, text, "utf8");
     }
   } else {
     vscode.window.showErrorMessage("No folder to create a license");
