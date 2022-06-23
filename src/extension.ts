@@ -7,6 +7,7 @@ import {
   setAuthor,
   setYear,
   setExtension,
+  setFilename,
   setToken,
 } from "./commands";
 
@@ -19,5 +20,6 @@ export async function activate({
   subscriptions.push(setAuthor);
   subscriptions.push(setYear);
   subscriptions.push(setExtension);
+  subscriptions.push(setFilename);
   subscriptions.push(setToken);
 }

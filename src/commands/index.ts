@@ -9,6 +9,7 @@ import {
   setAuthorProperty,
   setYearProperty,
   setExtensionProperty,
+  setFilenameProperty,
   setTokenProperty,
 } from "../config";
 import { getLicenses, getLicense } from "../api";
@@ -127,6 +128,13 @@ export const setExtension = vscode.commands.registerCommand(
   }
 );
 
+export const setFilename = vscode.commands.registerCommand(
+  "license.setFilename",
+  async () => {
+    await setFilenameProperty();
+  }
+);
+
 export const setToken = vscode.commands.registerCommand(
   "license.setToken",
   async () => {
@@ -161,8 +169,14 @@ const addLicense = async (license: License) => {
       .getConfiguration("license")
       .get("extension");
 
+    const filename: string =
+      vscode.workspace.getConfiguration("license").get("filename") ?? "LICENSE";
+
     if (extension !== undefined) {
-      const licensePath = path.join(folder.uri.fsPath, `LICENSE${extension}`);
+      const licensePath = path.join(
+        folder.uri.fsPath,
+        `${filename}${extension}`
+      );
 
       if (fs.existsSync(licensePath)) {
         const answer = await vscode.window.showInformationMessage(
