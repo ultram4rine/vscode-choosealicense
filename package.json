@@ -130,7 +130,14 @@
     }
   },
   "activationEvents": [
-    "onStartupFinished"
+    "onCommand:license.chooseLicense",
+    "onCommand:license.addDefaultLicense",
+    "onCommand:license.setDefaultLicense",
+    "onCommand:license.setAuthor",
+    "onCommand:license.setYear",
+    "onCommand:license.setExtension",
+    "onCommand:license.setFilename",
+    "onCommand:license.setToken"
   ],
   "dependencies": {
     "@octokit/request-error": "^2.1.0",
