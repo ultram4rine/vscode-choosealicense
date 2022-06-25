@@ -42,7 +42,7 @@ export const chooseLicense = vscode.commands.registerCommand(
             };
           }
         }),
-        { placeHolder: "Choose a license from the list." }
+        { placeHolder: "Choose a license to create." }
       );
 
       if (selected) {
@@ -94,7 +94,7 @@ export const setDefaultLicense = vscode.commands.registerCommand(
             key: l.key,
           };
         }),
-        { placeHolder: "Choose a license from the list." }
+        { placeHolder: "Set default license to use." }
       );
 
       if (selected) {

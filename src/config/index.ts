@@ -91,7 +91,7 @@ export const setExtensionProperty = async () => {
         value: ".txt",
       },
     ],
-    { placeHolder: "Select license file extension." }
+    { placeHolder: "Set extension for license files." }
   );
 
   if (selected) {
@@ -105,7 +105,7 @@ export const setFilenameProperty = async () => {
 
   const value = await vscode.window.showInputBox({
     placeHolder: "Filename",
-    prompt: "Set license filename.",
+    prompt: "Set filename for license files.",
     value: filename,
   });
 
@@ -117,7 +117,7 @@ export const setFilenameProperty = async () => {
 export const setTokenProperty = async () => {
   const value = await vscode.window.showInputBox({
     placeHolder: "Token",
-    prompt: "Set token for GitHub API access",
+    prompt: "Set token for GitHub REST API access.",
     password: true,
   });
 
