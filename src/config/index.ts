@@ -5,8 +5,13 @@ export const setDefaultLicenseProperty = async (value: string) => {
 };
 
 export const setAuthorProperty = async () => {
+  const author: string =
+    vscode.workspace.getConfiguration("license").get("author") ?? "";
+
   const value = await vscode.window.showInputBox({
+    placeHolder: "Author",
     prompt: "Set author for licenses",
+    value: author,
   });
 
   if (value) {
@@ -15,21 +20,23 @@ export const setAuthorProperty = async () => {
 };
 
 export const setYearProperty = async () => {
+  const currentYear = new Date().getFullYear().toString();
   const selected = await vscode.window.showQuickPick(
     [
       {
         label: "Auto",
-        description: "Automatic year detection",
+        detail: "Set automatic year detection",
         value: "auto",
       },
       {
         label: "Current",
-        description: "Set current year",
+        detail: "Set current year",
+        description: currentYear,
         value: "current",
       },
       {
         label: "Certain",
-        description: "Set certain year",
+        detail: "Set certain year",
         value: "certain",
       },
     ],
@@ -48,7 +55,9 @@ export const setYearProperty = async () => {
       case "certain":
         {
           const year = await vscode.window.showInputBox({
+            placeHolder: "Year",
             prompt: "Set year for licenses",
+            value: currentYear,
           });
 
           if (year) {
@@ -68,17 +77,17 @@ export const setExtensionProperty = async () => {
     [
       {
         label: "Empty",
-        description: "Create licenses without extension",
+        detail: "Create licenses without extension",
         value: "empty",
       },
       {
         label: "Markdown",
-        description: "Create licenses with .md extension",
+        detail: "Create licenses with .md extension",
         value: ".md",
       },
       {
         label: "Text",
-        description: "Create licenses with .txt extension",
+        detail: "Create licenses with .txt extension",
         value: ".txt",
       },
     ],
@@ -91,8 +100,13 @@ export const setExtensionProperty = async () => {
 };
 
 export const setFilenameProperty = async () => {
+  const filename: string =
+    vscode.workspace.getConfiguration("license").get("filename") ?? "LICENSE";
+
   const value = await vscode.window.showInputBox({
+    placeHolder: "Filename",
     prompt: "Set license filename.",
+    value: filename,
   });
 
   if (value) {
@@ -102,7 +116,9 @@ export const setFilenameProperty = async () => {
 
 export const setTokenProperty = async () => {
   const value = await vscode.window.showInputBox({
+    placeHolder: "Token",
     prompt: "Set token for GitHub API access",
+    password: true,
   });
 
   if (value) {
