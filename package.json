@@ -45,50 +45,42 @@
       {
         "category": "License",
         "command": "license.chooseLicense",
-        "title": "Choose license",
-        "description": "Choose a license to create."
+        "title": "Choose license"
       },
       {
         "category": "License",
         "command": "license.addDefaultLicense",
-        "title": "Add default license",
-        "description": "Add default license to repository."
+        "title": "Add default license"
       },
       {
         "category": "License",
         "command": "license.setDefaultLicense",
-        "title": "Set default license",
-        "description": "Set default license to use."
+        "title": "Set default license"
       },
       {
         "category": "License",
         "command": "license.setAuthor",
-        "title": "Set author",
-        "description": "Set author for licenses."
+        "title": "Set author"
       },
       {
         "category": "License",
         "command": "license.setYear",
-        "title": "Set year",
-        "description": "Set year for licenses."
+        "title": "Set year"
       },
       {
         "category": "License",
         "command": "license.setExtension",
-        "title": "Set extension",
-        "description": "Set extension for license files."
+        "title": "Set extension"
       },
       {
         "category": "License",
         "command": "license.setFilename",
-        "title": "Set filename",
-        "description": "Set filename for license files."
+        "title": "Set filename"
       },
       {
         "category": "License",
         "command": "license.setToken",
-        "title": "Set token",
-        "description": "Set token for GitHub REST API access."
+        "title": "Set token"
       }
     ],
     "configuration": {
