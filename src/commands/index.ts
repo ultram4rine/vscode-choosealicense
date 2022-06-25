@@ -28,8 +28,9 @@ export const chooseLicense = vscode.commands.registerCommand(
         licenses.map((l) => {
           if (defaultKey === l.key) {
             return {
-              label: `${l.spdx_id ? l.spdx_id : l.key} (Default)`,
+              label: l.spdx_id ? l.spdx_id : l.key,
               detail: l.name,
+              description: "Default",
               key: l.key,
             };
           } else {
