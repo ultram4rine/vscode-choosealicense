@@ -7,9 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.0] - 2022-06-25
+
 ### Added
 
 - Added ability to set filename for licenses.
+
+### Changed
+
+- Use `onCommand` activation event.
+- Improved inputs.
 
 ## [0.6.2] - 2022-04-24
 
