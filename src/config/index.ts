@@ -78,7 +78,7 @@ export const setExtensionProperty = async () => {
       {
         label: "Empty",
         detail: "Create licenses without extension",
-        value: "empty",
+        value: "",
       },
       {
         label: "Markdown",
@@ -144,11 +144,7 @@ const setProp = async (property: string, value: string) => {
       { placeHolder: "Select the configuration target." }
     );
 
-    if (value && selected) {
-      if (property === "extension" && value === "empty") {
-        value = "";
-      }
-
+    if (selected) {
       await vscode.workspace
         .getConfiguration("license")
         .update(property, value, selected.target);
