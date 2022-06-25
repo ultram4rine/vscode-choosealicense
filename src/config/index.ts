@@ -90,6 +90,16 @@ export const setExtensionProperty = async () => {
   }
 };
 
+export const setFilenameProperty = async () => {
+  const value = await vscode.window.showInputBox({
+    prompt: "Set license filename.",
+  });
+
+  if (value) {
+    await setProp("filename", value);
+  }
+};
+
 export const setTokenProperty = async () => {
   const value = await vscode.window.showInputBox({
     prompt: "Set token for GitHub API access",

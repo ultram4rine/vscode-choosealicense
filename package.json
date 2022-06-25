@@ -80,6 +80,12 @@
       },
       {
         "category": "License",
+        "command": "license.setFilename",
+        "title": "Set filename",
+        "description": "Set filename for license files."
+      },
+      {
+        "category": "License",
         "command": "license.setToken",
         "title": "Set token",
         "description": "Set token for GitHub REST API access."
@@ -117,6 +123,11 @@
             "Create licenses with .md extension",
             "Create licenses with .txt extension"
           ]
+        },
+        "license.filename": {
+          "type": "string",
+          "default": "LICENSE",
+          "description": "License filename."
         },
         "license.token": {
           "type": "string",

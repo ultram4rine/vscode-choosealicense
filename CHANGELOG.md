@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added ability to set filename for licenses.
+
 ## [0.6.2] - 2022-04-24
 
 ### Changed
