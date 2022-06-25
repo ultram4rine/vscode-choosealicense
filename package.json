@@ -27,7 +27,7 @@
   "scripts": {
     "clean": "rimraf -rf coverage out *.vsix",
     "compile": "yarn run lint && yarn run clean && yarn run esbuild",
-    "coverage": "rimraf ./coverage && c8 --config .c8rc.json --all yarn test",
+    "coverage": "rimraf ./coverage && c8 --config .c8rc.json yarn test",
     "esbuild": "esbuild ./src/extension.ts --bundle --external:vscode --platform=node --tsconfig=./tsconfig.json --log-level=info --color=true --format=cjs --target=es2017 --minify --outfile=./out/extension.js",
     "lint": "eslint src --ext ts",
     "prepackage": "yarn run compile",
