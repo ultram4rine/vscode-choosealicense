@@ -3,6 +3,7 @@ name: CI/CD
 on:
   push:
     paths-ignore:
+      - ".devcontainer/**"
       - ".github/dependabot.yml"
       - "images/**"
       - "*.md"
@@ -10,6 +11,7 @@ on:
       - "ncurc.json"
   pull_request:
     paths-ignore:
+      - ".devcontainer/**"
       - ".github/dependabot.yml"
       - "images/**"
       - "*.md"
