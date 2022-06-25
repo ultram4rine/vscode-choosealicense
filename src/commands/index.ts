@@ -108,37 +108,27 @@ export const setDefaultLicense = vscode.commands.registerCommand(
 
 export const setAuthor = vscode.commands.registerCommand(
   "license.setAuthor",
-  async () => {
-    await setAuthorProperty();
-  }
+  setAuthorProperty
 );
 
 export const setYear = vscode.commands.registerCommand(
   "license.setYear",
-  async () => {
-    await setYearProperty();
-  }
+  setYearProperty
 );
 
 export const setExtension = vscode.commands.registerCommand(
   "license.setExtension",
-  async () => {
-    await setExtensionProperty();
-  }
+  setExtensionProperty
 );
 
 export const setFilename = vscode.commands.registerCommand(
   "license.setFilename",
-  async () => {
-    await setFilenameProperty();
-  }
+  setFilenameProperty
 );
 
 export const setToken = vscode.commands.registerCommand(
   "license.setToken",
-  async () => {
-    await setTokenProperty();
-  }
+  setTokenProperty
 );
 
 const addLicense = async (license: License) => {
