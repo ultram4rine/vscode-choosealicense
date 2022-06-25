@@ -168,11 +168,7 @@ const addLicense = async (license: License) => {
     const filename: string =
       vscode.workspace.getConfiguration("license").get("filename") ?? "LICENSE";
 
-    if (extension !== undefined) {
-      const licensePath = path.join(
-        folder.uri.fsPath,
-        `${filename}${extension}`
-      );
+    const licensePath = path.join(folder.uri.fsPath, `${filename}${extension}`);
 
     if (fs.existsSync(licensePath)) {
       const answer = await vscode.window.showInformationMessage(
