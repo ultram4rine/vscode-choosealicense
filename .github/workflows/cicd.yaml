@@ -39,6 +39,12 @@ jobs:
         with:
           run: yarn coverage
 
+      - name: Upload lcov.info
+        uses: actions/upload-artifact@v3
+        with:
+          name: lcov
+          path: coverage
+
       - name: Upload coverage
         uses: codecov/codecov-action@v3
 
