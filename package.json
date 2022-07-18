@@ -140,7 +140,7 @@
     "onCommand:license.setToken"
   ],
   "dependencies": {
-    "@octokit/request-error": "^2.1.0",
+    "@octokit/request-error": "^3.0.0",
     "@octokit/rest": "^19.0.3"
   },
   "devDependencies": {
