@@ -14,7 +14,23 @@ import {
 } from "../config";
 import { getLicenses, getLicense } from "../api";
 import { replaceAuthor, replaceYear } from "../utils";
-import { License } from "../types";
+import { Licenses, License } from "../types";
+
+/**
+ * Uncommon licenses.
+ * They not seen at `/licenses`, but accessible at `/licenses/<key>`.
+ */
+/* eslint-disable @typescript-eslint/naming-convention */
+const uncommonLicenses: Licenses = [
+  {
+    key: "wtfpl",
+    name: "Do What The F*ck You Want To Public License",
+    spdx_id: "WTFPL",
+    url: "https://api.github.com/licenses/wtfpl",
+    node_id: "MDc6TGljZW5zZTE4",
+  },
+];
+/* eslint-enable @typescript-eslint/naming-convention */
 
 export const chooseLicense = vscode.commands.registerCommand(
   "license.chooseLicense",
@@ -26,8 +42,8 @@ export const chooseLicense = vscode.commands.registerCommand(
         vscode.workspace.getConfiguration("license").get("default") ?? "";
 
       const selected = await vscode.window.showQuickPick(
-        licenses.map((l) => {
-          if (defaultKey === l.key) {
+        licenses.concat(uncommonLicenses).map((l) => {
+          if (l.key === defaultKey) {
             return {
               label: l.spdx_id ? l.spdx_id : l.key,
               detail: l.name,
@@ -87,7 +103,7 @@ export const setDefaultLicense = vscode.commands.registerCommand(
       const licenses = await getLicenses();
 
       const selected = await vscode.window.showQuickPick(
-        licenses.map((l) => {
+        licenses.concat(uncommonLicenses).map((l) => {
           return {
             label: l.spdx_id ? l.spdx_id : l.key,
             detail: l.name,
