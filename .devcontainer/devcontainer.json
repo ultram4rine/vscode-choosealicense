@@ -27,8 +27,8 @@
         "esbenp.prettier-vscode",
         "redhat.vscode-yaml",
         "visualstudioexptteam.vs",
-        "eg2.vscode-npm-script",
-        "christian-kohler.npm-intellisense"
+        "christian-kohler.npm-intellisense",
+        "onlyutkarsh.vsix-viewer"
       ]
     }
   },
