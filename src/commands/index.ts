@@ -28,8 +28,40 @@ const uncommonLicenses: Licenses = [
     spdx_id: "WTFPL",
     url: "https://api.github.com/licenses/wtfpl",
     node_id: "MDc6TGljZW5zZTE4",
+    html_url: "http://choosealicense.com/licenses/wtfpl/",
   },
 ];
+
+const licenseToQuickPickItem = (
+  l: {
+    key: string;
+    name: string;
+    spdx_id: string | null;
+    url: string | null;
+    node_id: string;
+    html_url?: string | undefined;
+  },
+  defaultKey: string
+): {
+  label: string;
+  detail?: string;
+  description?: string;
+  key: string;
+  kind?: vscode.QuickPickItemKind;
+} => {
+  return l.key === defaultKey
+    ? {
+        label: l.spdx_id ? l.spdx_id : l.key,
+        detail: l.name,
+        description: "Default",
+        key: l.key,
+      }
+    : {
+        label: l.spdx_id ? l.spdx_id : l.key,
+        detail: l.name,
+        key: l.key,
+      };
+};
 /* eslint-enable @typescript-eslint/naming-convention */
 
 export const chooseLicense = vscode.commands.registerCommand(
@@ -42,22 +74,18 @@ export const chooseLicense = vscode.commands.registerCommand(
         vscode.workspace.getConfiguration("license").get("default") ?? "";
 
       const selected = await vscode.window.showQuickPick(
-        licenses.concat(uncommonLicenses).map((l) => {
-          if (l.key === defaultKey) {
-            return {
-              label: l.spdx_id ? l.spdx_id : l.key,
-              detail: l.name,
-              description: "Default",
-              key: l.key,
-            };
-          } else {
-            return {
-              label: l.spdx_id ? l.spdx_id : l.key,
-              detail: l.name,
-              key: l.key,
-            };
-          }
-        }),
+        licenses
+          .map((l) => licenseToQuickPickItem(l, defaultKey))
+          .concat([
+            {
+              label: "Uncommon licenses",
+              key: "separator",
+              kind: vscode.QuickPickItemKind.Separator,
+            },
+          ])
+          .concat(
+            uncommonLicenses.map((l) => licenseToQuickPickItem(l, defaultKey))
+          ),
         { placeHolder: "Choose a license to create." }
       );
 
@@ -103,13 +131,16 @@ export const setDefaultLicense = vscode.commands.registerCommand(
       const licenses = await getLicenses();
 
       const selected = await vscode.window.showQuickPick(
-        licenses.concat(uncommonLicenses).map((l) => {
-          return {
-            label: l.spdx_id ? l.spdx_id : l.key,
-            detail: l.name,
-            key: l.key,
-          };
-        }),
+        licenses
+          .map((l) => licenseToQuickPickItem(l, ""))
+          .concat([
+            {
+              label: "Uncommon licenses",
+              key: "separator",
+              kind: vscode.QuickPickItemKind.Separator,
+            },
+          ])
+          .concat(uncommonLicenses.map((l) => licenseToQuickPickItem(l, ""))),
         { placeHolder: "Set default license to use." }
       );
 
