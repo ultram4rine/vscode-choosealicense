@@ -43,18 +43,13 @@ jobs:
         uses: codecov/codecov-action@v3
 
       - name: Bundle
-        id: bundle
-        uses: HaaLeo/publish-vscode-extension@v1
-        with:
-          pat: "Don't needed here"
-          yarn: true
-          dryRun: true
+        run: yarn package
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: vsix
-          path: ${{ steps.bundle.outputs.vsixPath }}
+          path: vscode-choosealicense-*.vsix
 
   release:
     name: Release
