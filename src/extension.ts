@@ -4,14 +4,12 @@ import {
   chooseLicense,
   addDefaultLicense,
   setDefaultLicense,
+  setAuthor,
+  setYear,
+  setExtension,
+  setFilename,
+  setToken,
 } from "./commands";
-import {
-  setAuthorProperty,
-  setExtensionProperty,
-  setFilenameProperty,
-  setTokenProperty,
-  setYearProperty,
-} from "./config";
 
 export async function activate({
   subscriptions,
@@ -32,21 +30,18 @@ export async function activate({
     )
   );
   subscriptions.push(
-    vscode.commands.registerCommand("license.setAuthor", setAuthorProperty)
+    vscode.commands.registerCommand("license.setAuthor", setAuthor)
   );
   subscriptions.push(
-    vscode.commands.registerCommand("license.setYear", setYearProperty)
+    vscode.commands.registerCommand("license.setYear", setYear)
   );
   subscriptions.push(
-    vscode.commands.registerCommand(
-      "license.setExtension",
-      setExtensionProperty
-    )
+    vscode.commands.registerCommand("license.setExtension", setExtension)
   );
   subscriptions.push(
-    vscode.commands.registerCommand("license.setFilename", setFilenameProperty)
+    vscode.commands.registerCommand("license.setFilename", setFilename)
   );
   subscriptions.push(
-    vscode.commands.registerCommand("license.setToken", setTokenProperty)
+    vscode.commands.registerCommand("license.setToken", setToken)
   );
 }

@@ -5,16 +5,71 @@ import * as fs from "fs";
 // as well as import your extension to test it
 import * as vscode from "vscode";
 
-import { setDefaultLicenseProperty } from "../../config";
-import { addDefaultLicense } from "../../commands";
+import {
+  setDefaultLicenseProperty,
+  setAuthorProperty,
+  setYearProperty,
+  setExtensionProperty,
+  setFilenameProperty,
+  setTokenProperty,
+} from "../../config";
 
 describe("Extension Test Suite", () => {
   vscode.window.showInformationMessage("Start all tests.");
 
-  it("configuration", async () => {
-    await setDefaultLicenseProperty("mit");
-    await addDefaultLicense();
+  describe("Configuration", () => {
+    it("Set default license", async () => {
+      await setDefaultLicenseProperty("mit");
 
-    assert.ok(fs.existsSync("LICENSE"));
+      assert.ok(
+        (vscode.workspace.getConfiguration("license").get("default") ?? "") ===
+          "mit"
+      );
+    });
+
+    it("Set author", async () => {
+      await setAuthorProperty("John Doe");
+
+      assert.ok(
+        (vscode.workspace.getConfiguration("license").get("author") ?? "") ===
+          "John Doe"
+      );
+    });
+
+    it("Set year", async () => {
+      await setYearProperty("1941");
+
+      assert.ok(
+        (vscode.workspace.getConfiguration("license").get("year") ?? "") ===
+          "1941"
+      );
+    });
+
+    it("Set extension", async () => {
+      await setExtensionProperty("md");
+
+      assert.ok(
+        (vscode.workspace.getConfiguration("license").get("extension") ??
+          "") === "md"
+      );
+    });
+
+    it("Set filename", async () => {
+      await setFilenameProperty("license");
+
+      assert.ok(
+        (vscode.workspace.getConfiguration("license").get("filename") ?? "") ===
+          "license"
+      );
+    });
+
+    it("Set token", async () => {
+      await setTokenProperty("gh_token");
+
+      assert.ok(
+        (vscode.workspace.getConfiguration("license").get("token") ?? "") ===
+          "gh_token"
+      );
+    });
   });
 });
