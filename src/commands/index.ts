@@ -21,7 +21,7 @@ import { Licenses, License } from "../types";
  * They not seen at `/licenses`, but accessible at `/licenses/<key>`.
  */
 /* eslint-disable @typescript-eslint/naming-convention */
-const uncommonLicenses: Licenses = [
+export const uncommonLicenses: Licenses = [
   {
     key: "wtfpl",
     name: "Do What The F*ck You Want To Public License",
