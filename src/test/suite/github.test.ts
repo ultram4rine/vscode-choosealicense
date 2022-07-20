@@ -21,6 +21,7 @@ describe("GitHub API and utils", () => {
           case "bsd-2-clause":
           case "bsd-3-clause":
           case "mit":
+          case "isc":
           case "wtfpl":
             it(`author and year replaced in ${license.key}`, async () => {
               const l = await getLicense(license.key);
