@@ -63,6 +63,7 @@ const licenseToQuickPickItem = (
   detail?: string;
   description?: string;
   key: string;
+  alwaysShow?: boolean;
   kind?: vscode.QuickPickItemKind;
 } => {
   return l.key === defaultKey
@@ -71,6 +72,7 @@ const licenseToQuickPickItem = (
         detail: l.name,
         description: "Default",
         key: l.key,
+        alwaysShow: true,
       }
     : {
         label: l.spdx_id ? l.spdx_id : l.key,
