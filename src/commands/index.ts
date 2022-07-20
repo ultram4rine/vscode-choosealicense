@@ -23,6 +23,14 @@ import { Licenses, License } from "../types";
 /* eslint-disable @typescript-eslint/naming-convention */
 export const uncommonLicenses: Licenses = [
   {
+    key: "cc-by-4.0",
+    name: "Creative Commons Attribution 4.0 International",
+    spdx_id: "CC-BY-4.0",
+    url: "https://api.github.com/licenses/cc-by-4.0",
+    node_id: "MDc6TGljZW5zZTI1",
+    html_url: "http://choosealicense.com/licenses/cc-by-4.0/",
+  },
+  {
     key: "isc",
     name: "ISC License",
     spdx_id: "ISC",
