@@ -65,18 +65,22 @@ jobs:
         with:
           name: vsix
 
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(jq -r .version package.json)
+
       - name: Publish to Visual Studio Marketplace
         uses: HaaLeo/publish-vscode-extension@v1
         with:
           pat: ${{ secrets.VSCE_PAT }}
-          extensionFile: vscode-choosealicense-*.vsix
+          extensionFile: vscode-choosealicense-${{ steps.get_version.outputs.VERSION }}.vsix
           registryUrl: https://marketplace.visualstudio.com
 
       - name: Publish to Open VSX Registry
         uses: HaaLeo/publish-vscode-extension@v1
         with:
           pat: ${{ secrets.OVSX_PAT }}
-          extensionFile: vscode-choosealicense-*.vsix
+          extensionFile: vscode-choosealicense-${{ steps.get_version.outputs.VERSION }}.vsix
           registryUrl: https://open-vsx.org
 
       - name: Create release body file
