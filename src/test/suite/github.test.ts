@@ -1,5 +1,6 @@
 import * as assert from "assert";
 
+import { uncommonLicenses } from "../../commands";
 import { Licenses } from "../../types";
 import { getLicenses, getLicense } from "../../api";
 import { replaceAuthor, replaceYear } from "../../utils";
@@ -10,7 +11,7 @@ describe("GitHub API and utils", () => {
   before(async () => {
     licenses = await getLicenses();
     describe("Utils on each license", () => {
-      licenses.forEach((license) => {
+      licenses.concat(uncommonLicenses).forEach((license) => {
         switch (license.key) {
           case "agpl-3.0":
           case "gpl-2.0":
@@ -20,6 +21,7 @@ describe("GitHub API and utils", () => {
           case "bsd-2-clause":
           case "bsd-3-clause":
           case "mit":
+          case "wtfpl":
             it(`author and year replaced in ${license.key}`, async () => {
               const l = await getLicense(license.key);
               const authorReplaced = replaceAuthor("John Doe", l.key, l.body);
