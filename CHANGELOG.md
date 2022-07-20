@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added uncommon licenses (`ISC` and `WTFPL`).
+- Added uncommon licenses (`CC-BY-4.0`, `ISC` and `WTFPL`).
 
 ## [0.7.0] - 2022-06-25
 

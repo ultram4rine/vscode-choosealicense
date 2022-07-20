@@ -36,6 +36,7 @@ describe("GitHub API and utils", () => {
           case "epl-2.0":
           case "mpl-2.0":
           case "unlicense":
+          case "cc-by-4.0":
             it(`author and year not replaced in ${license.key}`, async () => {
               const l = await getLicense(license.key);
               const authorReplaced = replaceAuthor("John Doe", l.key, l.body);
