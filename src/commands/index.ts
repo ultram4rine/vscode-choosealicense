@@ -23,6 +23,14 @@ import { Licenses, License } from "../types";
 /* eslint-disable @typescript-eslint/naming-convention */
 export const uncommonLicenses: Licenses = [
   {
+    key: "isc",
+    name: "ISC License",
+    spdx_id: "ISC",
+    url: "https://api.github.com/licenses/isc",
+    node_id: "MDc6TGljZW5zZTEw",
+    html_url: "http://choosealicense.com/licenses/isc/",
+  },
+  {
     key: "wtfpl",
     name: "Do What The F*ck You Want To Public License",
     spdx_id: "WTFPL",
