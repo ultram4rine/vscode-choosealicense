@@ -21,7 +21,7 @@ describe("Extension Test Suite", () => {
 
   describe("Configuration", () => {
     it("Set default license", async () => {
-      setDefaultLicenseProperty("unlicense");
+      const pr = setDefaultLicenseProperty("unlicense");
       await vscode.commands.executeCommand(
         "workbench.action.quickOpenSelectNext"
       );
@@ -32,14 +32,16 @@ describe("Extension Test Suite", () => {
         "workbench.action.acceptSelectedQuickOpenItem"
       );
 
-      assert.strictEqual(
-        vscode.workspace.getConfiguration("license").get("default") ?? "",
-        "unlicense"
+      pr.then(() =>
+        assert.strictEqual(
+          vscode.workspace.getConfiguration("license").get("default") ?? "",
+          "unlicense"
+        )
       );
     });
 
     it("Set author", async () => {
-      setAuthorProperty("John Doe");
+      const pr = setAuthorProperty("John Doe");
       await vscode.commands.executeCommand(
         "workbench.action.quickOpenSelectNext"
       );
@@ -50,14 +52,16 @@ describe("Extension Test Suite", () => {
         "workbench.action.acceptSelectedQuickOpenItem"
       );
 
-      assert.strictEqual(
-        vscode.workspace.getConfiguration("license").get("author") ?? "",
-        "John Doe"
+      pr.then(() =>
+        assert.strictEqual(
+          vscode.workspace.getConfiguration("license").get("author") ?? "",
+          "John Doe"
+        )
       );
     });
 
     it("Set year", async () => {
-      setYearProperty("1941");
+      const pr = setYearProperty("1941");
       await vscode.commands.executeCommand(
         "workbench.action.quickOpenSelectNext"
       );
@@ -68,14 +72,16 @@ describe("Extension Test Suite", () => {
         "workbench.action.acceptSelectedQuickOpenItem"
       );
 
-      assert.strictEqual(
-        vscode.workspace.getConfiguration("license").get("year") ?? "",
-        "1941"
+      pr.then(() =>
+        assert.strictEqual(
+          vscode.workspace.getConfiguration("license").get("year") ?? "",
+          "1941"
+        )
       );
     });
 
     it("Set extension", async () => {
-      setExtensionProperty(".md");
+      const pr = setExtensionProperty(".md");
       await vscode.commands.executeCommand(
         "workbench.action.quickOpenSelectNext"
       );
@@ -86,14 +92,16 @@ describe("Extension Test Suite", () => {
         "workbench.action.acceptSelectedQuickOpenItem"
       );
 
-      assert.strictEqual(
-        vscode.workspace.getConfiguration("license").get("extension") ?? "",
-        ".md"
+      pr.then(() =>
+        assert.strictEqual(
+          vscode.workspace.getConfiguration("license").get("extension") ?? "",
+          ".md"
+        )
       );
     });
 
     it("Set filename", async () => {
-      setFilenameProperty("license");
+      const pr = setFilenameProperty("license");
       await vscode.commands.executeCommand(
         "workbench.action.quickOpenSelectNext"
       );
@@ -104,15 +112,17 @@ describe("Extension Test Suite", () => {
         "workbench.action.acceptSelectedQuickOpenItem"
       );
 
-      assert.strictEqual(
-        vscode.workspace.getConfiguration("license").get("filename") ?? "",
-        "license"
+      pr.then(() =>
+        assert.strictEqual(
+          vscode.workspace.getConfiguration("license").get("filename") ?? "",
+          "license"
+        )
       );
     });
 
     it("Set token", async () => {
       const token = process.env.GITHUB_TOKEN ?? "";
-      setTokenProperty(token);
+      const pr = setTokenProperty(token);
       await vscode.commands.executeCommand(
         "workbench.action.quickOpenSelectNext"
       );
@@ -123,9 +133,11 @@ describe("Extension Test Suite", () => {
         "workbench.action.acceptSelectedQuickOpenItem"
       );
 
-      assert.strictEqual(
-        vscode.workspace.getConfiguration("license").get("token") ?? "",
-        token
+      pr.then(() =>
+        assert.strictEqual(
+          vscode.workspace.getConfiguration("license").get("token") ?? "",
+          token
+        )
       );
     });
   });
