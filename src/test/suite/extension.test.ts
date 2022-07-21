@@ -15,12 +15,6 @@ import {
 } from "../../config";
 import { chooseLicense, addDefaultLicense } from "../../commands";
 
-function sleep(ms: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
-
 describe("Extension Test Suite", () => {
   vscode.window.showInformationMessage("Start all tests.");
 
@@ -116,7 +110,8 @@ describe("Extension Test Suite", () => {
     });
 
     it("Set token", async () => {
-      setTokenProperty("gh_token");
+      const token = process.env.GITHUB_TOKEN ?? "";
+      setTokenProperty(token);
       await vscode.commands.executeCommand(
         "workbench.action.quickOpenSelectNext"
       );
@@ -129,7 +124,7 @@ describe("Extension Test Suite", () => {
 
       assert.strictEqual(
         vscode.workspace.getConfiguration("license").get("token") ?? "",
-        "gh_token"
+        token
       );
     });
   });
