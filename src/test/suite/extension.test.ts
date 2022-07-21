@@ -15,6 +15,12 @@ import {
 } from "../../config";
 import { chooseLicense, addDefaultLicense } from "../../commands";
 
+function sleep(ms: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 describe("Extension Test Suite", () => {
   vscode.window.showInformationMessage("Start all tests.");
 
@@ -25,10 +31,13 @@ describe("Extension Test Suite", () => {
         "workbench.action.quickOpenSelectNext"
       );
       await vscode.commands.executeCommand(
+        "workbench.action.quickOpenSelectNext"
+      );
+      await vscode.commands.executeCommand(
         "workbench.action.acceptSelectedQuickOpenItem"
       );
 
-      assert.equal(
+      assert.strictEqual(
         vscode.workspace.getConfiguration("license").get("default") ?? "",
         "unlicense"
       );
@@ -40,10 +49,13 @@ describe("Extension Test Suite", () => {
         "workbench.action.quickOpenSelectNext"
       );
       await vscode.commands.executeCommand(
+        "workbench.action.quickOpenSelectNext"
+      );
+      await vscode.commands.executeCommand(
         "workbench.action.acceptSelectedQuickOpenItem"
       );
 
-      assert.equal(
+      assert.strictEqual(
         vscode.workspace.getConfiguration("license").get("author") ?? "",
         "John Doe"
       );
@@ -55,17 +67,23 @@ describe("Extension Test Suite", () => {
         "workbench.action.quickOpenSelectNext"
       );
       await vscode.commands.executeCommand(
+        "workbench.action.quickOpenSelectNext"
+      );
+      await vscode.commands.executeCommand(
         "workbench.action.acceptSelectedQuickOpenItem"
       );
 
-      assert.equal(
+      assert.strictEqual(
         vscode.workspace.getConfiguration("license").get("year") ?? "",
         "1941"
       );
     });
 
     it("Set extension", async () => {
-      setExtensionProperty("md");
+      setExtensionProperty(".md");
+      await vscode.commands.executeCommand(
+        "workbench.action.quickOpenSelectNext"
+      );
       await vscode.commands.executeCommand(
         "workbench.action.quickOpenSelectNext"
       );
@@ -73,9 +91,9 @@ describe("Extension Test Suite", () => {
         "workbench.action.acceptSelectedQuickOpenItem"
       );
 
-      assert.equal(
+      assert.strictEqual(
         vscode.workspace.getConfiguration("license").get("extension") ?? "",
-        "md"
+        ".md"
       );
     });
 
@@ -85,10 +103,13 @@ describe("Extension Test Suite", () => {
         "workbench.action.quickOpenSelectNext"
       );
       await vscode.commands.executeCommand(
+        "workbench.action.quickOpenSelectNext"
+      );
+      await vscode.commands.executeCommand(
         "workbench.action.acceptSelectedQuickOpenItem"
       );
 
-      assert.equal(
+      assert.strictEqual(
         vscode.workspace.getConfiguration("license").get("filename") ?? "",
         "license"
       );
@@ -100,10 +121,13 @@ describe("Extension Test Suite", () => {
         "workbench.action.quickOpenSelectNext"
       );
       await vscode.commands.executeCommand(
+        "workbench.action.quickOpenSelectNext"
+      );
+      await vscode.commands.executeCommand(
         "workbench.action.acceptSelectedQuickOpenItem"
       );
 
-      assert.equal(
+      assert.strictEqual(
         vscode.workspace.getConfiguration("license").get("token") ?? "",
         "gh_token"
       );
@@ -114,40 +138,19 @@ describe("Extension Test Suite", () => {
     it("Create license", async () => {
       chooseLicense();
       await vscode.commands.executeCommand(
+        "workbench.action.quickOpenSelectNext"
+      );
+      await vscode.commands.executeCommand(
         "workbench.action.acceptSelectedQuickOpenItem"
       );
 
-      assert.ok(fs.existsSync("~/license.md"));
+      assert.ok(fs.existsSync("license.md"));
     });
 
     it("Create default license", async () => {
-      setDefaultLicenseProperty("unlicense");
-      await vscode.commands.executeCommand(
-        "workbench.action.quickOpenSelectNext"
-      );
-      await vscode.commands.executeCommand(
-        "workbench.action.acceptSelectedQuickOpenItem"
-      );
-
-      setExtensionProperty("md");
-      await vscode.commands.executeCommand(
-        "workbench.action.quickOpenSelectNext"
-      );
-      await vscode.commands.executeCommand(
-        "workbench.action.acceptSelectedQuickOpenItem"
-      );
-
-      setFilenameProperty("license");
-      await vscode.commands.executeCommand(
-        "workbench.action.quickOpenSelectNext"
-      );
-      await vscode.commands.executeCommand(
-        "workbench.action.acceptSelectedQuickOpenItem"
-      );
-
       await addDefaultLicense();
 
-      assert.ok(fs.existsSync("~/license.md"));
+      assert.ok(fs.existsSync("license.md"));
     });
   });
 });
