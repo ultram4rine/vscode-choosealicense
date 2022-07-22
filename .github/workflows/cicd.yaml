@@ -83,13 +83,16 @@ jobs:
           extensionFile: vscode-choosealicense-${{ steps.get_version.outputs.VERSION }}.vsix
           registryUrl: https://open-vsx.org
 
-      - name: Create release body file
-        run: |
-          awk -v ver=$(grep 'version' package.json | awk -F: '{ print $2 }' | tr -d \ \",) '/^#+ \[/ { if (p) { exit }; if ($2 == "["ver"]") { p=1; next } } p && NF' CHANGELOG.md > changes.txt
+      - name: Create release body
+        id: make_release
+        uses: ultram4rine/make-release-body-action@v1
+        with:
+          changelog: CHANGELOG.md
+          version: ${{ steps.get_version.outputs.VERSION }}
 
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
-          body_path: changes.txt
+          body: ${{ steps.make_release.outputs.changes }}
           files: |
             vscode-choosealicense-*.vsix
