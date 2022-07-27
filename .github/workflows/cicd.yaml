@@ -84,8 +84,8 @@ jobs:
           registryUrl: https://open-vsx.org
 
       - name: Create release body
-        id: make_release
-        uses: ultram4rine/make-release-body-action@v1
+        id: extract_changes
+        uses: ultram4rine/extract-changes-action@v1
         with:
           changelog: CHANGELOG.md
           version: ${{ steps.get_version.outputs.VERSION }}
@@ -93,6 +93,6 @@ jobs:
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
-          body: ${{ steps.make_release.outputs.changes }}
+          body: ${{ steps.extract_changes.outputs.changes }}
           files: |
             vscode-choosealicense-*.vsix
