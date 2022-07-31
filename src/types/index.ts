@@ -1,14 +1,22 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-export type Licenses = {
-  key: string;
-  name: string;
-  url: string | null;
-  spdx_id: string | null;
-  node_id: string;
-  html_url?: string | undefined;
-}[];
 
-export type License = {
+type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
+
+export type LicenseItem = Optional<
+  Omit<
+    License,
+    | "description"
+    | "implementation"
+    | "permissions"
+    | "conditions"
+    | "limitations"
+    | "body"
+    | "featured"
+  >,
+  "html_url"
+>;
+
+export interface License {
   key: string;
   name: string;
   spdx_id: string | null;
@@ -22,4 +30,4 @@ export type License = {
   limitations: string[];
   body: string;
   featured: boolean;
-};
+}
