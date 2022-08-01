@@ -14,7 +14,73 @@ import {
 } from "../config";
 import { getLicenses, getLicense } from "../api";
 import { replaceAuthor, replaceYear } from "../utils";
-import { License } from "../types";
+import { Licenses, License } from "../types";
+
+/**
+ * Uncommon licenses.
+ * They not seen at `/licenses`, but accessible at `/licenses/<key>`.
+ */
+/* eslint-disable @typescript-eslint/naming-convention */
+export const uncommonLicenses: Licenses = [
+  {
+    key: "cc-by-4.0",
+    name: "Creative Commons Attribution 4.0 International",
+    spdx_id: "CC-BY-4.0",
+    url: "https://api.github.com/licenses/cc-by-4.0",
+    node_id: "MDc6TGljZW5zZTI1",
+    html_url: "http://choosealicense.com/licenses/cc-by-4.0/",
+  },
+  {
+    key: "isc",
+    name: "ISC License",
+    spdx_id: "ISC",
+    url: "https://api.github.com/licenses/isc",
+    node_id: "MDc6TGljZW5zZTEw",
+    html_url: "http://choosealicense.com/licenses/isc/",
+  },
+  {
+    key: "wtfpl",
+    name: "Do What The F*ck You Want To Public License",
+    spdx_id: "WTFPL",
+    url: "https://api.github.com/licenses/wtfpl",
+    node_id: "MDc6TGljZW5zZTE4",
+    html_url: "http://choosealicense.com/licenses/wtfpl/",
+  },
+];
+
+const licenseToQuickPickItem = (
+  l: {
+    key: string;
+    name: string;
+    spdx_id: string | null;
+    url: string | null;
+    node_id: string;
+    html_url?: string | undefined;
+  },
+  defaultKey: string
+): {
+  label: string;
+  detail?: string;
+  description?: string;
+  key: string;
+  alwaysShow?: boolean;
+  kind?: vscode.QuickPickItemKind;
+} => {
+  return l.key === defaultKey
+    ? {
+        label: l.spdx_id ? l.spdx_id : l.key,
+        detail: l.name,
+        description: "Default",
+        key: l.key,
+        alwaysShow: true,
+      }
+    : {
+        label: l.spdx_id ? l.spdx_id : l.key,
+        detail: l.name,
+        key: l.key,
+      };
+};
+/* eslint-enable @typescript-eslint/naming-convention */
 
 export const chooseLicense = async () => {
   try {

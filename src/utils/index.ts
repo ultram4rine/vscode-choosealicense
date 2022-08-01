@@ -14,7 +14,12 @@ export const replaceAuthor = (author: string, key: string, text: string) => {
     case "bsd-2-clause":
     case "bsd-3-clause":
     case "mit":
+    case "isc":
       text = text.replace(/\[fullname]/g, author);
+      break;
+
+    case "wtfpl":
+      text = text.replace(/Sam Hocevar <sam@hocevar.net>/g, author);
       break;
 
     case "bsl-1.0":
@@ -22,6 +27,7 @@ export const replaceAuthor = (author: string, key: string, text: string) => {
     case "epl-2.0":
     case "mpl-2.0":
     case "unlicense":
+    case "cc-by-4.0":
     default:
       break;
   }
@@ -45,7 +51,14 @@ export const replaceYear = (year: string, key: string, text: string) => {
     case "bsd-2-clause":
     case "bsd-3-clause":
     case "mit":
+    case "isc":
       text = text.replace(/\[year]/g, year);
+      break;
+
+    case "wtfpl":
+      // Replace second occurrence.
+      let t = 0;
+      text = text.replace(/2004/g, (match) => (++t === 2 ? year : match));
       break;
 
     case "bsl-1.0":
@@ -53,6 +66,7 @@ export const replaceYear = (year: string, key: string, text: string) => {
     case "epl-2.0":
     case "mpl-2.0":
     case "unlicense":
+    case "cc-by-4.0":
     default:
       break;
   }
