@@ -128,6 +128,11 @@
   resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-12.10.1.tgz#57b5cc6c7b4e55d8642c93d06401fb1af4839899"
   integrity sha512-P+SukKanjFY0ZhsK6wSVnQmxTP2eVPPE8OPSNuxaMYtgVzwJZgfGdwlYjf4RlRU4vLEw4ts2fsE2icG4nZ5ddQ==
 
+"@octokit/openapi-types@^13.1.0":
+  version "13.1.0"
+  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-13.1.0.tgz#30459b45e6dd388d48d72de166f2f08ee8ece5b6"
+  integrity sha512-Z7vzLqfTkoVQyoy/2iQla1N2I4Vav2wi4JbZK8QxIYAfBimhuflosFxmsqw5LTH7DkdNW46ZYpAcqJf0XaS8SQ==
+
 "@octokit/plugin-paginate-rest@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@octokit/plugin-paginate-rest/-/plugin-paginate-rest-3.0.0.tgz#df779de686aeb21b5e776e4318defc33b0418566"
@@ -148,12 +153,12 @@
     "@octokit/types" "^6.40.0"
     deprecation "^2.3.1"
 
-"@octokit/request-error@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@octokit/request-error/-/request-error-3.0.0.tgz#f527d178f115a3b62d76ce4804dd5bdbc0270a81"
-  integrity sha512-WBtpzm9lR8z4IHIMtOqr6XwfkGvMOOILNLxsWvDwtzm/n7f5AWuqJTXQXdDtOvPfTDrH4TPhEvW2qMlR4JFA2w==
+"@octokit/request-error@^3.0.0", "@octokit/request-error@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@octokit/request-error/-/request-error-3.0.1.tgz#3fd747913c06ab2195e52004a521889dadb4b295"
+  integrity sha512-ym4Bp0HTP7F3VFssV88WD1ZyCIRoE8H35pXSKwLeMizcdZAYc/t6N9X9Yr9n6t3aG9IH75XDnZ6UeZph0vHMWQ==
   dependencies:
-    "@octokit/types" "^6.0.3"
+    "@octokit/types" "^7.0.0"
     deprecation "^2.0.0"
     once "^1.4.0"
 
@@ -185,6 +190,13 @@
   integrity sha512-MFZOU5r8SwgJWDMhrLUSvyJPtVsqA6VnbVI3TNbsmw+Jnvrktzvq2fYES/6RiJA/5Ykdwq4mJmtlYUfW7CGjmw==
   dependencies:
     "@octokit/openapi-types" "^12.10.0"
+
+"@octokit/types@^7.0.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-7.1.0.tgz#98e345dbc6eba326dad5cfa4074171d89abb9d84"
+  integrity sha512-+ClA0jRc9zGFj5mfQeQNfgTlelzhpAexbAueQG1t2Xn8yhgnsjkF8bgLcUUpwrpqkv296uXyiGwkqXRSU7KYzQ==
+  dependencies:
+    "@octokit/openapi-types" "^13.1.0"
 
 "@tootallnate/once@1":
   version "1.1.2"
