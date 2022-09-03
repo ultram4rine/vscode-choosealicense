@@ -1,0 +1,18 @@
+image:
+  file: .gitpod.Dockerfile
+tasks:
+  - init: yarn install && yarn run compile
+    command: yarn run watch
+vscode:
+  extensions:
+    - "dbaeumer.vscode-eslint"
+    - "mhutchie.git-graph"
+    - "cschleiden.vscode-github-actions"
+    - "github.vscode-pull-request-github"
+    - "oderwat.indent-rainbow"
+    - "davidanson.vscode-markdownlint"
+    - "esbenp.prettier-vscode"
+    - "redhat.vscode-yaml"
+    - "visualstudioexptteam.vs"
+    - "christian-kohler.npm-intellisense"
+    - "onlyutkarsh.vsix-viewer"

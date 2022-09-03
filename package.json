@@ -190,6 +190,11 @@
       "description": "Codecov",
       "url": "https://img.shields.io/codecov/c/github/ultram4rine/vscode-choosealicense?logo=codecov&style=flat-square",
       "href": "https://codecov.io/gh/ultram4rine/vscode-choosealicense"
+    },
+    {
+      "description": "Contribute with Gitpod",
+      "url": "https://img.shields.io/badge/Contribute%20with-Gitpod-908a85?style=flat-square&logo=gitpod",
+      "href": "https://gitpod.io/#https://github.com/ultram4rine/vscode-choosealicense"
     }
   ],
   "galleryBanner": {
