@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
-import * as fs from "fs";
-import * as path from "path";
+import { TextEncoder } from "util";
 
 import { RequestError } from "@octokit/request-error";
 
@@ -223,9 +222,12 @@ const addLicense = async (license: License) => {
     const filename: string =
       vscode.workspace.getConfiguration("license").get("filename") ?? "LICENSE";
 
-    const licensePath = path.join(folder.uri.fsPath, `${filename}${extension}`);
+    const content = new TextEncoder().encode(text);
+    const licensePath = vscode.Uri.file(
+      `${folder.uri.fsPath}/${filename}${extension}`
+    );
 
-    if (fs.existsSync(licensePath)) {
+    if ((await vscode.workspace.fs.stat(licensePath)).size !== 0) {
       const answer = await vscode.window.showInformationMessage(
         "License file already exists in this folder. Override it?",
         "Yes",
@@ -233,10 +235,10 @@ const addLicense = async (license: License) => {
       );
 
       if (answer === "Yes") {
-        fs.writeFileSync(licensePath, text, "utf8");
+        await vscode.workspace.fs.writeFile(licensePath, content);
       }
     } else {
-      fs.writeFileSync(licensePath, text, "utf8");
+      await vscode.workspace.fs.writeFile(licensePath, content);
     }
   } else {
     vscode.window.showErrorMessage("No folder to create a license");
