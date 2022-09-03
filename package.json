@@ -27,8 +27,7 @@
   "browser": "./out/web/extension.js",
   "scripts": {
     "clean": "rimraf -rf coverage out *.vsix",
-    "compile": "yarn run lint && yarn run clean && yarn run esbuild",
-    "compile-web": "yarn run lint && yarn run clean && yarn run esbuild-web",
+    "compile": "yarn run lint && yarn run clean && yarn run esbuild && yarn run esbuild-web",
     "coverage": "rimraf ./coverage && c8 yarn test",
     "esbuild": "esbuild ./src/extension.ts --bundle --external:vscode --platform=node --tsconfig=./tsconfig.json --log-level=info --color=true --format=cjs --target=es2017 --minify --outfile=./out/extension.js",
     "esbuild-web": "esbuild ./src/extension.ts --bundle --external:vscode --tsconfig=./tsconfig.json --log-level=info --color=true --format=cjs --minify --outfile=./out/web/extension.js",
