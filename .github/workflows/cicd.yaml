@@ -6,17 +6,21 @@ on:
       - ".devcontainer/**"
       - ".github/dependabot.yml"
       - "images/**"
+      - ".gitpod.Dockerfile"
+      - ".gitpod.yml"
+      - ".ncurc.json"
       - "*.md"
       - "LICENSE"
-      - "ncurc.json"
   pull_request:
     paths-ignore:
       - ".devcontainer/**"
       - ".github/dependabot.yml"
       - "images/**"
+      - ".gitpod.Dockerfile"
+      - ".gitpod.yml"
+      - ".ncurc.json"
       - "*.md"
       - "LICENSE"
-      - "ncurc.json"
 
 jobs:
   test-n-build:
