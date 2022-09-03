@@ -14,12 +14,34 @@ import {
 export async function activate({
   subscriptions,
 }: vscode.ExtensionContext): Promise<void> {
-  subscriptions.push(chooseLicense);
-  subscriptions.push(addDefaultLicense);
-  subscriptions.push(setDefaultLicense);
-  subscriptions.push(setAuthor);
-  subscriptions.push(setYear);
-  subscriptions.push(setExtension);
-  subscriptions.push(setFilename);
-  subscriptions.push(setToken);
+  subscriptions.push(
+    vscode.commands.registerCommand("license.chooseLicense", chooseLicense)
+  );
+  subscriptions.push(
+    vscode.commands.registerCommand(
+      "license.addDefaultLicense",
+      addDefaultLicense
+    )
+  );
+  subscriptions.push(
+    vscode.commands.registerCommand(
+      "license.setDefaultLicense",
+      setDefaultLicense
+    )
+  );
+  subscriptions.push(
+    vscode.commands.registerCommand("license.setAuthor", setAuthor)
+  );
+  subscriptions.push(
+    vscode.commands.registerCommand("license.setYear", setYear)
+  );
+  subscriptions.push(
+    vscode.commands.registerCommand("license.setExtension", setExtension)
+  );
+  subscriptions.push(
+    vscode.commands.registerCommand("license.setFilename", setFilename)
+  );
+  subscriptions.push(
+    vscode.commands.registerCommand("license.setToken", setToken)
+  );
 }
