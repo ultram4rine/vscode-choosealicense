@@ -1,5 +1,4 @@
 import * as vscode from "vscode";
-import { TextEncoder } from "util";
 
 import { RequestError } from "@octokit/request-error";
 
