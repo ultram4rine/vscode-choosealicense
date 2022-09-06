@@ -3,7 +3,7 @@
   "tasks": [
     {
       "type": "npm",
-      "script": "watch",
+      "script": "esbuild",
       "problemMatcher": "$tsc-watch",
       "isBackground": true,
       "presentation": {
@@ -13,6 +13,13 @@
         "kind": "build",
         "isDefault": true
       }
+    },
+    {
+      "type": "npm",
+      "script": "esbuild-web",
+      "group": "build",
+      "isBackground": true,
+      "problemMatcher": ["$tsc-watch"]
     }
   ]
 }
