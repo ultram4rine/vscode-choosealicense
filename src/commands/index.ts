@@ -226,7 +226,9 @@ const addLicense = async (license: License) => {
       `${folder.uri.fsPath}/${filename}${extension}`
     );
 
-    if ((await vscode.workspace.fs.stat(licensePath)).size !== 0) {
+    try {
+      await vscode.workspace.fs.stat(licensePath);
+
       const answer = await vscode.window.showInformationMessage(
         "License file already exists in this folder. Override it?",
         "Yes",
@@ -236,7 +238,7 @@ const addLicense = async (license: License) => {
       if (answer === "Yes") {
         await vscode.workspace.fs.writeFile(licensePath, content);
       }
-    } else {
+    } catch {
       await vscode.workspace.fs.writeFile(licensePath, content);
     }
   } else {
