@@ -31,6 +31,7 @@
     "coverage": "rimraf ./coverage && c8 yarn test",
     "esbuild": "esbuild ./src/extension.ts --bundle --external:vscode --platform=node --tsconfig=./tsconfig.json --log-level=info --color=true --format=cjs --target=es2017 --minify --outfile=./out/extension.js",
     "esbuild-web": "esbuild ./src/extension.ts --bundle --external:vscode --tsconfig=./tsconfig.json --log-level=info --color=true --format=cjs --minify --outfile=./out/web/extension.js",
+    "open-in-browser": "vscode-test-web --extensionDevelopmentPath=. .",
     "lint": "eslint src --ext ts",
     "prepackage": "yarn run compile",
     "package": "vsce package --yarn",
@@ -39,8 +40,7 @@
     "pretest": "yarn run lint && yarn run test-compile",
     "test": "node ./out/test/runTest.js",
     "test-compile": "yarn run clean && tsc -p ./",
-    "test-watch": "yarn run clean && tsc -watch -p ./",
-    "watch": "yarn run clean && yarn run esbuild --watch"
+    "test-watch": "yarn run clean && tsc -watch -p ./"
   },
   "contributes": {
     "commands": [
