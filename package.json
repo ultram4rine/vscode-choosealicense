@@ -128,6 +128,18 @@
           "description": "Token for api access."
         }
       }
+    },
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "license.chooseLicense",
+          "when": "workspaceFolderCount > 0 && !virtualWorkspace"
+        },
+        {
+          "command": "license.addDefaultLicense",
+          "when": "workspaceFolderCount > 0 && !virtualWorkspace"
+        }
+      ]
     }
   },
   "activationEvents": [
