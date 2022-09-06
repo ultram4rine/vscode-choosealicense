@@ -41,6 +41,12 @@
     "test": "node ./out/test/runTest.js",
     "test-compile": "tsc --lib DOM -p ./"
   },
+  "capabilities": {
+    "virtualWorkspaces": {
+      "supported": "limited",
+      "description": "In virtual workspaces, creating license is not supported."
+    }
+  },
   "contributes": {
     "commands": [
       {
