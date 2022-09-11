@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added ability to choose multiple licenses. Files named in form `<filename>-<SPDX_ID><extension>`.
+
 ## [0.8.0] - 2022-07-20
 
 ### Added

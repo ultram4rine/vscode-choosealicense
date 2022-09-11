@@ -54,6 +54,11 @@
       },
       {
         "category": "License",
+        "command": "license.chooseMultipleLicenses",
+        "title": "Choose multiple licenses"
+      },
+      {
+        "category": "License",
         "command": "license.setDefaultLicense",
         "title": "Set default license"
       },
@@ -132,6 +137,7 @@
   "activationEvents": [
     "onCommand:license.chooseLicense",
     "onCommand:license.addDefaultLicense",
+    "onCommand:license.chooseMultipleLicenses",
     "onCommand:license.setDefaultLicense",
     "onCommand:license.setAuthor",
     "onCommand:license.setYear",

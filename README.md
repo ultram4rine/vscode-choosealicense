@@ -20,16 +20,17 @@ Press `Ctrl+Shift+P` (Windows) or `Cmd+Shift+P` (Mac) to open the command palett
 
 _Theme: [GitHub Dark Default](https://marketplace.visualstudio.com/items?itemName=GitHub.github-vscode-theme)_
 
-| Command             | Description                           |
-| ------------------- | ------------------------------------- |
-| Choose license      | Choose a license to create.           |
-| Add default license | Add default license to repository.    |
-| Set default license | Set default license to use.           |
-| Set author          | Set author for licenses.              |
-| Set year            | Set year for licenses.                |
-| Set extension       | Set extension for license files.      |
-| Set filename        | Set filename for license files.       |
-| Set token           | Set token for GitHub REST API access. |
+| Command                  | Description                           |
+| ------------------------ | ------------------------------------- |
+| Choose license           | Choose a license to create.           |
+| Add default license      | Add default license to repository.    |
+| Choose multiple licenses | Add multiple licenses.                |
+| Set default license      | Set default license to use.           |
+| Set author               | Set author for licenses.              |
+| Set year                 | Set year for licenses.                |
+| Set extension            | Set extension for license files.      |
+| Set filename             | Set filename for license files.       |
+| Set token                | Set token for GitHub REST API access. |
 
 ## About access token
 
