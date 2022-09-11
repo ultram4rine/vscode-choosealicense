@@ -149,6 +149,10 @@
         {
           "command": "license.addDefaultLicense",
           "when": "workspaceFolderCount > 0 && !virtualWorkspace"
+        },
+        {
+          "command": "license.chooseMultipleLicenses",
+          "when": "workspaceFolderCount > 0 && !virtualWorkspace"
         }
       ]
     }
