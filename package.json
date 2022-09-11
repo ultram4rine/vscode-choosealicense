@@ -24,21 +24,28 @@
   },
   "publisher": "ultram4rine",
   "main": "./out/extension.js",
+  "browser": "./out/web/extension.js",
   "scripts": {
     "clean": "rimraf -rf coverage out *.vsix",
-    "compile": "yarn run lint && yarn run clean && yarn run esbuild",
-    "coverage": "rimraf ./coverage && c8 yarn test",
+    "compile": "yarn run lint && yarn run clean && yarn run esbuild && yarn run esbuild-web",
+    "coverage": "c8 yarn test",
     "esbuild": "esbuild ./src/extension.ts --bundle --external:vscode --platform=node --tsconfig=./tsconfig.json --log-level=info --color=true --format=cjs --target=es2017 --minify --outfile=./out/extension.js",
+    "esbuild-web": "esbuild ./src/extension.ts --bundle --external:vscode --tsconfig=./tsconfig.json --log-level=info --color=true --format=cjs --minify --outfile=./out/web/extension.js",
+    "open-in-browser": "vscode-test-web --extensionDevelopmentPath=. .",
     "lint": "eslint src --ext ts",
     "prepackage": "yarn run compile",
     "package": "vsce package --yarn",
     "publish:ovsx": "ovsx publish -p $OVSX_PAT",
     "publish:vsce": "vsce publish --yarn -p $VSCE_PAT -i",
-    "pretest": "yarn run lint && yarn run test-compile",
+    "pretest": "yarn run lint && yarn run clean && yarn run test-compile",
     "test": "node ./out/test/runTest.js",
-    "test-compile": "yarn run clean && tsc -p ./",
-    "test-watch": "yarn run clean && tsc -watch -p ./",
-    "watch": "yarn run clean && yarn run esbuild --watch"
+    "test-compile": "tsc --lib DOM -p ./"
+  },
+  "capabilities": {
+    "virtualWorkspaces": {
+      "supported": "limited",
+      "description": "In virtual workspaces, creating license is not supported."
+    }
   },
   "contributes": {
     "commands": [
@@ -132,6 +139,22 @@
           "description": "Token for api access."
         }
       }
+    },
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "license.chooseLicense",
+          "when": "workspaceFolderCount > 0 && !virtualWorkspace"
+        },
+        {
+          "command": "license.addDefaultLicense",
+          "when": "workspaceFolderCount > 0 && !virtualWorkspace"
+        },
+        {
+          "command": "license.chooseMultipleLicenses",
+          "when": "workspaceFolderCount > 0 && !virtualWorkspace"
+        }
+      ]
     }
   },
   "activationEvents": [
@@ -157,6 +180,7 @@
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
     "@vscode/test-electron": "^2.1.5",
+    "@vscode/test-web": "^0.0.29",
     "c8": "^7.12.0",
     "esbuild": "^0.15.7",
     "eslint": "^8.23.0",
