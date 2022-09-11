@@ -1,12 +1,12 @@
 import * as assert from "assert";
 
 import { uncommonLicenses } from "../../commands";
-import { Licenses } from "../../types";
+import { LicenseItem } from "../../types";
 import { getLicenses, getLicense } from "../../api";
 import { replaceAuthor, replaceYear } from "../../utils";
 
 describe("GitHub API and utils", () => {
-  let licenses: Licenses;
+  let licenses: LicenseItem[];
 
   before(async () => {
     licenses = await getLicenses();

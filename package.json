@@ -61,6 +61,11 @@
       },
       {
         "category": "License",
+        "command": "license.chooseMultipleLicenses",
+        "title": "Choose multiple licenses"
+      },
+      {
+        "category": "License",
         "command": "license.setDefaultLicense",
         "title": "Set default license"
       },
@@ -151,6 +156,7 @@
   "activationEvents": [
     "onCommand:license.chooseLicense",
     "onCommand:license.addDefaultLicense",
+    "onCommand:license.chooseMultipleLicenses",
     "onCommand:license.setDefaultLicense",
     "onCommand:license.setAuthor",
     "onCommand:license.setYear",
@@ -165,20 +171,20 @@
   "devDependencies": {
     "@types/glob": "^8.0.0",
     "@types/mocha": "^9.1.1",
-    "@types/node": "^18.7.14",
+    "@types/node": "^18.7.16",
     "@types/vscode": "^1.43.0",
-    "@typescript-eslint/eslint-plugin": "^5.36.1",
-    "@typescript-eslint/parser": "^5.36.1",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
     "@vscode/test-electron": "^2.1.5",
     "@vscode/test-web": "^0.0.29",
     "c8": "^7.12.0",
-    "esbuild": "^0.15.6",
+    "esbuild": "^0.15.7",
     "eslint": "^8.23.0",
     "glob": "^8.0.3",
     "mocha": "^10.0.0",
     "ovsx": "^0.5.1",
     "rimraf": "^3.0.2",
-    "typescript": "^4.8.2",
+    "typescript": "^4.8.3",
     "vsce": "^2.11.0"
   },
   "engines": {

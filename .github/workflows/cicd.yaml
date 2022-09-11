@@ -4,7 +4,9 @@ on:
   push:
     paths-ignore:
       - ".devcontainer/**"
+      - ".github/workflows/codeql.yml"
       - ".github/dependabot.yml"
+      - ".vscode/**"
       - "images/**"
       - ".gitpod.Dockerfile"
       - ".gitpod.yml"
@@ -14,7 +16,9 @@ on:
   pull_request:
     paths-ignore:
       - ".devcontainer/**"
+      - ".github/workflows/codeql.yml"
       - ".github/dependabot.yml"
+      - ".vscode/**"
       - "images/**"
       - ".gitpod.Dockerfile"
       - ".gitpod.yml"

@@ -1,13 +1,13 @@
 import { workspace } from "vscode";
 import { Octokit } from "@octokit/rest";
 
-import { Licenses, License } from "../types";
+import { LicenseItem, License } from "../types";
 
 const octokit = new Octokit({
   auth: workspace.getConfiguration("license").get<string>("token"),
 });
 
-export const getLicenses = async (): Promise<Licenses> => {
+export const getLicenses = async (): Promise<LicenseItem[]> => {
   const resp = await octokit.rest.licenses.getAllCommonlyUsed();
   return resp.data;
 };
