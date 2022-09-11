@@ -1,6 +1,6 @@
 {
   "name": "vscode-choosealicense",
-  "displayName": "Choose A License",
+  "displayName": "Choose a License",
   "version": "0.8.0",
   "description": "Choose a license for your project in VS Code",
   "categories": [
