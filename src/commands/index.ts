@@ -246,8 +246,8 @@ const addLicense = async (license: License, multiple: boolean) => {
 
     const licensePath = path.join(
       folder.uri.fsPath,
-      `${
-        multiple ? `LICENSE-${license.spdx_id?.toUpperCase()}` : filename
+      `${filename}${
+        multiple ? `-${license.spdx_id?.toUpperCase()}` : ""
       }${extension}`
     );
 
