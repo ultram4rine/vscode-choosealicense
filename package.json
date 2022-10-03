@@ -178,7 +178,7 @@
     "@types/node": "^18.7.16",
     "@types/vscode": "^1.43.0",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
-    "@typescript-eslint/parser": "^5.36.2",
+    "@typescript-eslint/parser": "^5.39.0",
     "@vscode/test-electron": "^2.1.5",
     "@vscode/test-web": "^0.0.30",
     "c8": "^7.12.0",
