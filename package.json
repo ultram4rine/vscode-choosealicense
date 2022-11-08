@@ -169,27 +169,27 @@
     "onCommand:license.setToken"
   ],
   "dependencies": {
-    "@octokit/request-error": "^3.0.1",
-    "@octokit/rest": "^19.0.4"
+    "@octokit/request-error": "^3.0.2",
+    "@octokit/rest": "^19.0.5"
   },
   "devDependencies": {
     "@types/glob": "^8.0.0",
-    "@types/mocha": "^9.1.1",
+    "@types/mocha": "^10.0.0",
     "@types/node": "^18.11.9",
     "@types/vscode": "^1.43.0",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
-    "@vscode/test-electron": "^2.1.5",
-    "@vscode/test-web": "^0.0.30",
+    "@vscode/test-electron": "^2.2.0",
+    "@vscode/test-web": "^0.0.32",
     "c8": "^7.12.0",
     "esbuild": "^0.15.13",
     "eslint": "^8.27.0",
     "glob": "^8.0.3",
-    "mocha": "^10.0.0",
-    "ovsx": "^0.5.1",
+    "mocha": "^10.1.0",
+    "ovsx": "^0.5.2",
     "rimraf": "^3.0.2",
-    "typescript": "^4.8.3",
-    "vsce": "^2.11.0"
+    "typescript": "^4.8.4",
+    "vsce": "^2.14.0"
   },
   "engines": {
     "vscode": "^1.43.0"
