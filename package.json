@@ -212,9 +212,9 @@
       "href": "https://github.com/ultram4rine/vscode-choosealicense/blob/master/LICENSE"
     },
     {
-      "description": "GitHub Workflow Status",
-      "url": "https://img.shields.io/github/workflow/status/ultram4rine/vscode-choosealicense/CI?logo=github&style=flat-square",
-      "href": "https://github.com/ultram4rine/vscode-choosealicense/actions?query=workflow%3ACI"
+      "description": "CI/CD status",
+      "url": "https://img.shields.io/github/actions/workflow/status/ultram4rine/vscode-choosealicense/cicd.yaml?label=CI%2FCD&logo=github&style=flat-square",
+      "href": "https://github.com/ultram4rine/vscode-choosealicense/actions/workflows/cicd.yaml"
     },
     {
       "description": "Codecov",
