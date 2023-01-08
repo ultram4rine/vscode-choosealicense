@@ -14,7 +14,7 @@ Use `License: Choose license` command to create a license file in your project. 
 
 ## Commands
 
-Press `Ctrl+Shift+P` (Windows) or `Cmd+Shift+P` (Mac) to open the command palette and type `License`.
+Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> (Windows) or <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> (Mac) to open the command palette and type `License`.
 
 ![commands](https://raw.githubusercontent.com/ultram4rine/vscode-choosealicense/master/images/cmds.png)
 
