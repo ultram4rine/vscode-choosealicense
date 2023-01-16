@@ -26,7 +26,7 @@
   "main": "./out/extension.js",
   "browser": "./out/web/extension.js",
   "scripts": {
-    "clean": "rimraf -rf coverage out *.vsix",
+    "clean": "rimraf coverage out *.vsix",
     "compile": "yarn run lint && yarn run clean && yarn run esbuild && yarn run esbuild-web",
     "coverage": "c8 yarn test",
     "esbuild": "esbuild ./src/extension.ts --bundle --external:vscode --platform=node --tsconfig=./tsconfig.json --log-level=info --color=true --format=cjs --target=es2017 --minify --outfile=./out/extension.js",
@@ -180,16 +180,16 @@
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
     "@vscode/test-electron": "^2.2.2",
-    "@vscode/test-web": "^0.0.33",
+    "@vscode/test-web": "^0.0.34",
+    "@vscode/vsce": "^2.16.0",
     "c8": "^7.12.0",
-    "esbuild": "^0.17.0",
-    "eslint": "^8.31.0",
-    "glob": "^8.0.3",
+    "esbuild": "^0.17.1",
+    "eslint": "^8.32.0",
+    "glob": "^8.1.0",
     "mocha": "^10.2.0",
     "ovsx": "^0.8.0",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.9.4",
-    "vsce": "^2.14.0"
+    "rimraf": "^4.0.7",
+    "typescript": "^4.9.4"
   },
   "engines": {
     "vscode": "^1.43.0"
