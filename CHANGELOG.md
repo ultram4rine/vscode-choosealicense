@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.2] - 2023-01-17
+
+### Changed
+
+- Use `<kbd>` tag in README for keyboard shortcuts.
+- Updated dependencies.
+
 ## [0.9.1] - 2022-12-26
 
 ### Changed
