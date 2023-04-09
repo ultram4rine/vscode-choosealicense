@@ -75,7 +75,7 @@ jobs:
 
       - name: Get the version
         id: get_version
-        run: echo ::set-output name=VERSION::$(jq -r .version package.json)
+        run: echo VERSION=$(jq -r .version package.json) >> $GITHUB_OUTPUT
 
       - name: Publish to Visual Studio Marketplace
         uses: HaaLeo/publish-vscode-extension@v1
