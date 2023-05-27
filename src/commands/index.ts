@@ -2,8 +2,8 @@ import * as vscode from "vscode";
 
 import { RequestError } from "@octokit/request-error";
 
-import * as cp from "child_process";
 import { getLicense, getLicenses } from "../api";
+import { GitExtension } from "../api/git";
 import {
   setAuthorProperty,
   setDefaultLicenseProperty,
@@ -279,49 +279,42 @@ const addLicense = async (
       .getConfiguration("license")
       .get("author");
 
-    // deal with child process
-    cp.exec(
-      "git config --global --get user.name",
-      async (err, stdout, stderr) => {
-        if (err) {
-          vscode.window.showErrorMessage(err.message);
-          return;
-        }
+    // get author from .gitconfig
+    const gitExtension =
+      vscode.extensions.getExtension<GitExtension>("vscode.git")!.exports;
+    const git = gitExtension.getAPI(1);
 
-        if (stderr) {
-          vscode.window.showErrorMessage(stderr);
-          return;
-        }
+    // folder must be a git repo
+    const repo = git.getRepository(folder.uri);
+    if (!repo) {
+      vscode.window.showErrorMessage("Please use git init.");
+      return;
+    }
 
-        if (!author) {
-          if (stdout !== "") {
-            text = replaceAuthor(stdout, license.key, text);
-          } else {
-            vscode.commands.executeCommand("license.setAuthor");
-          }
-        } else {
-          text = replaceAuthor(author, license.key, text);
-        }
-
-        const content = new TextEncoder().encode(text);
-
-        try {
-          await vscode.workspace.fs.stat(licensePath);
-
-          const answer = await vscode.window.showInformationMessage(
-            "License file already exists in this folder. Override it?",
-            "Yes",
-            "No"
-          );
-
-          if (answer === "Yes") {
-            download(licensePath, content);
-          }
-        } catch {
-          download(licensePath, content);
-        }
-      }
-    );
+    if (!author) {
+      // local
+      repo
+        .getConfig("user.name")
+        .then((localAuthor) => {
+          text = replaceAuthor(localAuthor, license.key, text);
+          generate(licensePath, text);
+        })
+        .catch(() => {
+          // global
+          repo
+            .getGlobalConfig("user.name")
+            .then((globalAuthor) => {
+              text = replaceAuthor(globalAuthor, license.key, text);
+              generate(licensePath, text);
+            })
+            .catch(() => {
+              vscode.commands.executeCommand("license.setAuthor");
+            });
+        });
+    } else {
+      text = replaceAuthor(author, license.key, text);
+      generate(licensePath, text);
+    }
   } else {
     vscode.window.showErrorMessage("No folder to create a license");
   }
@@ -339,6 +332,25 @@ const chooseFolder = async () => {
     return folder;
   } else {
     return undefined;
+  }
+};
+
+const generate = async (uri: vscode.Uri, text: string) => {
+  const content = new TextEncoder().encode(text);
+  try {
+    await vscode.workspace.fs.stat(uri);
+
+    const answer = await vscode.window.showInformationMessage(
+      "License file already exists in this folder. Override it?",
+      "Yes",
+      "No"
+    );
+
+    if (answer === "Yes") {
+      download(uri, content);
+    }
+  } catch {
+    download(uri, content);
   }
 };
 
