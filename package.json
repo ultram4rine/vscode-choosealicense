@@ -1,7 +1,7 @@
 {
   "name": "vscode-choosealicense",
   "displayName": "Choose a License",
-  "version": "0.9.2",
+  "version": "0.10.0",
   "description": "Choose a license for your project in VS Code",
   "categories": [
     "Other"
@@ -52,47 +52,47 @@
       {
         "category": "License",
         "command": "license.chooseLicense",
-        "title": "Choose license"
+        "title": "Choose License"
       },
       {
         "category": "License",
         "command": "license.addDefaultLicense",
-        "title": "Add default license"
+        "title": "Choose Default License"
       },
       {
         "category": "License",
         "command": "license.chooseMultipleLicenses",
-        "title": "Choose multiple licenses"
+        "title": "Choose Multiple Licenses"
       },
       {
         "category": "License",
         "command": "license.setDefaultLicense",
-        "title": "Set default license"
+        "title": "Set Default License"
       },
       {
         "category": "License",
         "command": "license.setAuthor",
-        "title": "Set author"
+        "title": "Set Author"
       },
       {
         "category": "License",
         "command": "license.setYear",
-        "title": "Set year"
+        "title": "Set Year"
       },
       {
         "category": "License",
         "command": "license.setExtension",
-        "title": "Set extension"
+        "title": "Set Extension"
       },
       {
         "category": "License",
         "command": "license.setFilename",
-        "title": "Set filename"
+        "title": "Set Filename"
       },
       {
         "category": "License",
         "command": "license.setToken",
-        "title": "Set token"
+        "title": "Set Token"
       }
     ],
     "configuration": {
@@ -101,6 +101,25 @@
         "license.default": {
           "type": "string",
           "default": "",
+          "enum": [
+            "agpl-3.0",
+            "apache-2.0",
+            "bsd-2-clause",
+            "bsd-3-clause",
+            "bsl-1.0",
+            "cc0-1.0",
+            "epl-2.0",
+            "gpl-2.0",
+            "gpl-3.0",
+            "lgpl-2.1",
+            "mit",
+            "mpl-2.0",
+            "unlicense",
+            "separator",
+            "cc-by-4.0",
+            "isc",
+            "wtfpl"
+          ],
           "description": "Default license."
         },
         "license.author": {
@@ -153,6 +172,23 @@
         {
           "command": "license.chooseMultipleLicenses",
           "when": "workspaceFolderCount > 0 && !virtualWorkspace"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "license.chooseLicense",
+          "group": "1_modification",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "license.addDefaultLicense",
+          "group": "1_modification",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "license.chooseMultipleLicenses",
+          "group": "1_modification",
+          "when": "explorerResourceIsFolder"
         }
       ]
     }
