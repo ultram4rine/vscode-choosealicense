@@ -57,7 +57,7 @@ interface QuickPickLicenseItem {
   buttons?: vscode.QuickInputButton[];
 }
 
-export const licenseToQuickPickItem = (
+const licenseToQuickPickItem = (
   l: LicenseItem,
   defaultKey: string
 ): QuickPickLicenseItem => {
