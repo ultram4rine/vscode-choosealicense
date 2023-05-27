@@ -1,27 +1,42 @@
 import * as vscode from "vscode";
 
 import {
-  chooseLicense,
   addDefaultLicense,
+  chooseLicense,
   chooseMultipleLicenses,
-  setDefaultLicense,
   setAuthor,
-  setYear,
+  setDefaultLicense,
   setExtension,
   setFilename,
   setToken,
+  setYear,
 } from "./commands";
 
-export async function activate({
-  subscriptions,
-}: vscode.ExtensionContext): Promise<void> {
-  subscriptions.push(chooseLicense);
-  subscriptions.push(addDefaultLicense);
-  subscriptions.push(chooseMultipleLicenses);
-  subscriptions.push(setDefaultLicense);
-  subscriptions.push(setAuthor);
-  subscriptions.push(setYear);
-  subscriptions.push(setExtension);
-  subscriptions.push(setFilename);
-  subscriptions.push(setToken);
+export async function activate(context: vscode.ExtensionContext) {
+  const chooseLicenseHandler = vscode.commands.registerCommand(
+    "license.chooseLicense",
+    async () => await chooseLicense(context)
+  );
+
+  const addDefaultLicenseHandler = vscode.commands.registerCommand(
+    "license.addDefaultLicense",
+    async () => await addDefaultLicense(context)
+  );
+
+  const chooseMultipleLicensesHandler = vscode.commands.registerCommand(
+    "license.chooseMultipleLicenses",
+    async () => await chooseMultipleLicenses(context)
+  );
+
+  context.subscriptions.push(
+    chooseLicenseHandler,
+    addDefaultLicenseHandler,
+    chooseMultipleLicensesHandler,
+    setDefaultLicense,
+    setAuthor,
+    setYear,
+    setExtension,
+    setFilename,
+    setToken
+  );
 }
