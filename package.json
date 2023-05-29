@@ -177,17 +177,17 @@
       "explorer/context": [
         {
           "command": "license.chooseLicense",
-          "group": "1_modification",
+          "group": "2_workspace",
           "when": "explorerResourceIsFolder"
         },
         {
           "command": "license.addDefaultLicense",
-          "group": "1_modification",
+          "group": "2_workspace",
           "when": "explorerResourceIsFolder"
         },
         {
           "command": "license.chooseMultipleLicenses",
-          "group": "1_modification",
+          "group": "2_workspace",
           "when": "explorerResourceIsFolder"
         }
       ]
