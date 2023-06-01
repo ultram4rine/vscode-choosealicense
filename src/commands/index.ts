@@ -292,25 +292,13 @@ const addLicense = async (
     }
 
     if (!author) {
-      // local
-      repo
-        .getConfig("user.name")
-        .then((localAuthor) => {
-          text = replaceAuthor(localAuthor, license.key, text);
-          generate(licensePath, text);
-        })
-        .catch(() => {
-          // global
-          repo
-            .getGlobalConfig("user.name")
-            .then((globalAuthor) => {
-              text = replaceAuthor(globalAuthor, license.key, text);
-              generate(licensePath, text);
-            })
-            .catch(() => {
-              vscode.commands.executeCommand("license.setAuthor");
-            });
-        });
+      try {
+        const gitAuthor = await repo.getConfig("user.name");
+        text = replaceAuthor(gitAuthor, license.key, text);
+        generate(licensePath, text);
+      } catch {
+        vscode.commands.executeCommand("license.setAuthor");
+      }
     } else {
       text = replaceAuthor(author, license.key, text);
       generate(licensePath, text);
