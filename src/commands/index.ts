@@ -3,15 +3,8 @@ import * as vscode from "vscode";
 import { RequestError } from "@octokit/request-error";
 
 import { getLicense, getLicenses } from "../api";
-import { GitExtension } from "../api/git";
-import {
-  setAuthorProperty,
-  setDefaultLicenseProperty,
-  setExtensionProperty,
-  setFilenameProperty,
-  setTokenProperty,
-  setYearProperty,
-} from "../config";
+import { GitExtension, Repository } from "../api/git";
+import { setDefaultLicenseProperty } from "../config";
 import { License, LicenseItem } from "../types";
 import { replaceAuthor, replaceYear } from "../utils";
 
@@ -19,7 +12,6 @@ import { replaceAuthor, replaceYear } from "../utils";
  * Uncommon licenses.
  * They not seen at `/licenses`, but accessible at `/licenses/<key>`.
  */
-/* eslint-disable @typescript-eslint/naming-convention */
 export const uncommonLicenses: LicenseItem[] = [
   {
     key: "cc-by-4.0",
@@ -73,21 +65,19 @@ const licenseToQuickPickItem = (
         label: l.spdx_id ? l.spdx_id : l.key,
         detail: l.name,
         key: l.key,
-        // add buttons for quickpick item. feat: set default license
         buttons: [
           {
             iconPath: new vscode.ThemeIcon("star"),
-            tooltip: "Set Default",
+            tooltip: "Set as Default",
           },
         ],
       };
 };
-/* eslint-enable @typescript-eslint/naming-convention */
 
 const showLicenses = async (
   options?: vscode.QuickPickOptions
 ): Promise<QuickPickLicenseItem[] | undefined> => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve, _reject) => {
     const quickPick = vscode.window.createQuickPick();
     quickPick.placeholder = options!.placeHolder;
     quickPick.canSelectMany = options!.canPickMany!;
@@ -96,6 +86,7 @@ const showLicenses = async (
       vscode.workspace.getConfiguration("license").get("default") ?? "";
 
     quickPick.busy = true;
+
     const licenses = await getLicenses();
     quickPick.items = licenses
       .map((l) => licenseToQuickPickItem(l, defaultKey))
@@ -125,6 +116,7 @@ const showLicenses = async (
     quickPick.onDidHide(() => {
       quickPick.dispose();
     });
+
     quickPick.show();
   });
 };
@@ -191,48 +183,20 @@ export const chooseMultipleLicenses = async (
   }
 };
 
-export const setDefaultLicense = vscode.commands.registerCommand(
-  "license.setDefaultLicense",
-  async () => {
-    try {
-      const selected = await showLicenses({
-        placeHolder: "Set default license to use.",
-        canPickMany: false,
-      });
+export const setDefaultLicense = async () => {
+  try {
+    const selected = await showLicenses({
+      placeHolder: "Set default license to use.",
+      canPickMany: false,
+    });
 
-      if (selected) {
-        await setDefaultLicenseProperty(selected[0].key);
-      }
-    } catch (error) {
-      vscode.window.showErrorMessage((error as RequestError).message);
+    if (selected) {
+      await setDefaultLicenseProperty(selected[0].key);
     }
+  } catch (error) {
+    vscode.window.showErrorMessage((error as RequestError).message);
   }
-);
-
-export const setAuthor = vscode.commands.registerCommand(
-  "license.setAuthor",
-  setAuthorProperty
-);
-
-export const setYear = vscode.commands.registerCommand(
-  "license.setYear",
-  setYearProperty
-);
-
-export const setExtension = vscode.commands.registerCommand(
-  "license.setExtension",
-  setExtensionProperty
-);
-
-export const setFilename = vscode.commands.registerCommand(
-  "license.setFilename",
-  setFilenameProperty
-);
-
-export const setToken = vscode.commands.registerCommand(
-  "license.setToken",
-  setTokenProperty
-);
+};
 
 const addLicense = async (
   context: vscode.ExtensionContext,
@@ -242,6 +206,14 @@ const addLicense = async (
   const folder = await chooseFolder();
   if (folder) {
     let text = license.body;
+
+    let author: string | undefined = vscode.workspace
+      .getConfiguration("license")
+      .get("author");
+
+    let year: string = vscode.workspace
+      .getConfiguration("license")
+      .get("year")!;
 
     const extension: string =
       vscode.workspace.getConfiguration("license").get("extension") ?? "";
@@ -255,11 +227,7 @@ const addLicense = async (
       }${extension}`
     );
 
-    let year: string = vscode.workspace
-      .getConfiguration("license")
-      .get("year")!;
-
-    // DONE: feat: autoupdate license year if set to auto. fix issue #578
+    // Update license year if set to auto.
     if (year === "auto") {
       // context.workspaceState.update(license.key, 1997); // test --> 1997-2023
       // about workspaceState, refer https://code.visualstudio.com/api/references/vscode-api#Memento
@@ -271,38 +239,75 @@ const addLicense = async (
         year = `${prevYear}-${currYear}`;
       }
     }
+
     text = replaceYear(year, license.key, text);
 
-    // DONE: feat: autoassign author from git. fix issue #579
-    // get author by 'git config --global --get user.name'
-    let author: string | undefined = vscode.workspace
-      .getConfiguration("license")
-      .get("author");
-
-    // get author from .gitconfig
-    const gitExtension =
-      vscode.extensions.getExtension<GitExtension>("vscode.git")!.exports;
-    const git = gitExtension.getAPI(1);
-
-    // folder must be a git repo
-    const repo = git.getRepository(folder.uri);
-    if (!repo) {
-      vscode.window.showErrorMessage("Please use git init.");
-      return;
-    }
-
-    if (!author) {
-      try {
-        const gitAuthor = await repo.getConfig("user.name");
-        text = replaceAuthor(gitAuthor, license.key, text);
-        generate(licensePath, text);
-      } catch {
-        vscode.commands.executeCommand("license.setAuthor");
-      }
-    } else {
+    if (author) {
       text = replaceAuthor(author, license.key, text);
-      generate(licensePath, text);
+    } else {
+      // Try to retrieve author username from git config if not set.
+      // Otherwise leave it as is.
+      try {
+        const gitExtension =
+          vscode.extensions.getExtension<GitExtension>("vscode.git")!.exports;
+        const git = gitExtension.getAPI(1);
+        const repos = git.repositories;
+
+        let gitAuthor = { name: "", config: "" };
+        try {
+          gitAuthor.name = await repos[0].getConfig("user.name");
+          gitAuthor.config = "Local config";
+        } catch {
+          gitAuthor.name = await repos[0].getGlobalConfig("user.name");
+          gitAuthor.config = "Global config";
+        }
+
+        // Hope this case won't happen too often.
+        if (repos.length > 1) {
+          const filtered: { label: string; detail: string; key: string }[] =
+            gitAuthor.config === "Global config"
+              ? [
+                  {
+                    label: gitAuthor.name,
+                    detail: gitAuthor.config,
+                    key: gitAuthor.name,
+                  },
+                ]
+              : [];
+
+          for (let r of repos) {
+            let current = "";
+            try {
+              current = await r.getConfig("user.name");
+            } catch {
+              current = await r.getGlobalConfig("user.name");
+            }
+
+            if (current !== gitAuthor.name) {
+              filtered.push({
+                label: current,
+                detail: r.rootUri.path,
+                key: current,
+              });
+            }
+          }
+          if (filtered.length > 1) {
+            const selected = await showAuthors(filtered);
+            if (selected) {
+              gitAuthor.name = selected;
+            }
+          }
+        }
+
+        text = replaceAuthor(gitAuthor.name, license.key, text);
+      } catch {
+        vscode.window.showWarningMessage(
+          "Failed to retrieve author from git config"
+        );
+      }
     }
+
+    generate(licensePath, text);
   } else {
     vscode.window.showErrorMessage("No folder to create a license");
   }
@@ -321,6 +326,13 @@ const chooseFolder = async () => {
   } else {
     return undefined;
   }
+};
+
+const showAuthors = async (
+  items: { label: string; detail: string; key: string }[]
+) => {
+  const selected = await vscode.window.showQuickPick(items);
+  return selected?.key;
 };
 
 const generate = async (uri: vscode.Uri, text: string) => {

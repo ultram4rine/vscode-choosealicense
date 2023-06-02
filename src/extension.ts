@@ -4,39 +4,72 @@ import {
   addDefaultLicense,
   chooseLicense,
   chooseMultipleLicenses,
-  setAuthor,
   setDefaultLicense,
-  setExtension,
-  setFilename,
-  setToken,
-  setYear,
 } from "./commands";
 
+import {
+  setAuthorProperty,
+  setExtensionProperty,
+  setFilenameProperty,
+  setTokenProperty,
+  setYearProperty,
+} from "./config";
+
 export async function activate(context: vscode.ExtensionContext) {
-  const chooseLicenseHandler = vscode.commands.registerCommand(
+  const chooseLicenseCommand = vscode.commands.registerCommand(
     "license.chooseLicense",
     async () => await chooseLicense(context)
   );
 
-  const addDefaultLicenseHandler = vscode.commands.registerCommand(
+  const addDefaultLicenseCommand = vscode.commands.registerCommand(
     "license.addDefaultLicense",
     async () => await addDefaultLicense(context)
   );
 
-  const chooseMultipleLicensesHandler = vscode.commands.registerCommand(
+  const chooseMultipleLicensesCommand = vscode.commands.registerCommand(
     "license.chooseMultipleLicenses",
     async () => await chooseMultipleLicenses(context)
   );
 
+  const setDefaultLicenseCommand = vscode.commands.registerCommand(
+    "license.setDefaultLicense",
+    setDefaultLicense
+  );
+
+  const setAuthorCommand = vscode.commands.registerCommand(
+    "license.setAuthor",
+    setAuthorProperty
+  );
+
+  const setYearCommand = vscode.commands.registerCommand(
+    "license.setYear",
+    setYearProperty
+  );
+
+  const setExtensionCommand = vscode.commands.registerCommand(
+    "license.setExtension",
+    setExtensionProperty
+  );
+
+  const setFilenameCommand = vscode.commands.registerCommand(
+    "license.setFilename",
+    setFilenameProperty
+  );
+
+  const setTokenCommand = vscode.commands.registerCommand(
+    "license.setToken",
+    setTokenProperty
+  );
+
   context.subscriptions.push(
-    chooseLicenseHandler,
-    addDefaultLicenseHandler,
-    chooseMultipleLicensesHandler,
-    setDefaultLicense,
-    setAuthor,
-    setYear,
-    setExtension,
-    setFilename,
-    setToken
+    chooseLicenseCommand,
+    addDefaultLicenseCommand,
+    chooseMultipleLicensesCommand,
+    setDefaultLicenseCommand,
+    setAuthorCommand,
+    setYearCommand,
+    setExtensionCommand,
+    setFilenameCommand,
+    setTokenCommand
   );
 }
