@@ -15,26 +15,18 @@ export async function run(): Promise<void> {
     try {
       const testFiles = globSync("**/**.test.js", { cwd: testsRoot });
 
-      for (const file of testFiles) {
-        // Add files to the test suite
-        mocha.addFile(path.resolve(testsRoot, file));
+      testFiles.forEach((f) => mocha.addFile(path.resolve(testsRoot, f)));
 
-        try {
-          // Run the mocha test
-          mocha.run((failures) => {
-            if (failures > 0) {
-              reject(new Error(`${failures} tests failed.`));
-            } else {
-              resolve();
-            }
-          });
-        } catch (error) {
-          console.error(error);
-          reject(error);
+      mocha.run((failures) => {
+        if (failures > 0) {
+          reject(new Error(`${failures} tests failed.`));
+        } else {
+          resolve();
         }
-      }
-    } catch (err: unknown) {
-      return reject(err);
+      });
+    } catch (error: unknown) {
+      console.error(error);
+      return reject(error);
     }
   });
 }
