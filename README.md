@@ -40,4 +40,4 @@ If you want to, you can start with [creating token](https://github.com/settings/
 
 ## Why not all licenses are available?
 
-List of licenses is retrieved using the [`Get all commonly used licenses`](https://docs.github.com/en/free-pro-team@latest/rest/licenses/licenses?apiVersion=2022-11-28#get-all-commonly-used-licenses) API method. Not all licenses are included in this list. If you need a license that is not presented in this extension, raise an [issue](https://github.com/ultram4rine/vscode-choosealicense/issues/new?template=uncommon_license).
+List of licenses is retrieved using the [`Get all commonly used licenses`](https://docs.github.com/en/free-pro-team@latest/rest/licenses/licenses?apiVersion=2022-11-28#get-all-commonly-used-licenses) API method. Not all licenses are included in this list. If you need a license that is not presented in this extension, raise an [issue](https://github.com/ultram4rine/vscode-choosealicense/issues/new?assignees=ultram4rine&labels=enhancement%2C+good+first+issue%2C+uncommon+license&projects=&template=uncommon-license.md&title=%5BUncommon+License+Request%5D+%3Clicense_spdx_id%3E).
