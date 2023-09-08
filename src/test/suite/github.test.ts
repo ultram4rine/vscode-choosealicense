@@ -37,6 +37,7 @@ describe("GitHub API and utils", () => {
           case "mpl-2.0":
           case "unlicense":
           case "cc-by-4.0":
+          case "lgpl-3.0":
             it(`author and year not replaced in ${license.key}`, async () => {
               const l = await getLicense(license.key);
               const authorReplaced = replaceAuthor("John Doe", l.key, l.body);
@@ -52,7 +53,7 @@ describe("GitHub API and utils", () => {
     });
   });
 
-  it("should be 13 licenses", () => {
-    assert.ok(licenses.length === 13);
+  it("should be 14 licenses", () => {
+    assert.ok(licenses.length === 14);
   });
 });
