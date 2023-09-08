@@ -28,6 +28,7 @@ export const replaceAuthor = (author: string, key: string, text: string) => {
     case "mpl-2.0":
     case "unlicense":
     case "cc-by-4.0":
+    case "lgpl-3.0":
     default:
       break;
   }
@@ -67,6 +68,7 @@ export const replaceYear = (year: string, key: string, text: string) => {
     case "mpl-2.0":
     case "unlicense":
     case "cc-by-4.0":
+    case "lgpl-3.0":
     default:
       break;
   }

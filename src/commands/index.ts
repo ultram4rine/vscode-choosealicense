@@ -37,6 +37,14 @@ export const uncommonLicenses: LicenseItem[] = [
     html_url: "http://choosealicense.com/licenses/isc/",
   },
   {
+    key: "lgpl-3.0",
+    name: "GNU Lesser General Public License v3.0",
+    spdx_id: "LGPL-3.0",
+    url: "https://api.github.com/licenses/lgpl-3.0",
+    node_id: "MDc6TGljZW5zZTEy",
+    html_url: "http://choosealicense.com/licenses/lgpl-3.0/",
+  },
+  {
     key: "wtfpl",
     name: "Do What The F*ck You Want To Public License",
     spdx_id: "WTFPL",
