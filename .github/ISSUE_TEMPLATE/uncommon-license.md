@@ -1,7 +1,7 @@
 ---
 name: Uncommon License Request
 about: Ask for specific license to be added.
-title: [Uncommon License Request] <license_spdx_id>
+title: "[Uncommon License Request] <license_spdx_id>"
 labels: enhancement, good first issue, uncommon license
 assignees: ultram4rine
 ---
