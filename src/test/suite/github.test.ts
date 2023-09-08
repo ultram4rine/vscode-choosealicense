@@ -53,7 +53,7 @@ describe("GitHub API and utils", () => {
     });
   });
 
-  it("should be 14 licenses", () => {
-    assert.ok(licenses.length === 14);
+  it("should be 13 licenses", () => {
+    assert.ok(licenses.length === 13);
   });
 });
