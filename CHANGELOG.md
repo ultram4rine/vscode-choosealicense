@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added `BSD-4-Clause` uncommon license.
+
 ## [0.9.3] - 2023-09-08
 
 ### Added

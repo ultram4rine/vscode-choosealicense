@@ -21,6 +21,14 @@ import { LicenseItem, License } from "../types";
 /* eslint-disable @typescript-eslint/naming-convention */
 export const uncommonLicenses: LicenseItem[] = [
   {
+    key: "bsd-4-clause",
+    name: 'BSD 4-Clause "Original" or "Old" License',
+    spdx_id: "BSD-4-Clause",
+    url: "https://api.github.com/licenses/bsd-4-clause",
+    node_id: "MDc6TGljZW5zZTM5",
+    html_url: "http://choosealicense.com/licenses/bsd-4-clause/",
+  },
+  {
     key: "cc-by-4.0",
     name: "Creative Commons Attribution 4.0 International",
     spdx_id: "CC-BY-4.0",
