@@ -50,7 +50,7 @@ jobs:
           run: yarn coverage
 
       - name: Upload coverage
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
 
       - name: Bundle
         run: yarn package
