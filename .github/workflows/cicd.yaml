@@ -45,7 +45,7 @@ jobs:
         run: yarn install
 
       - name: Run tests and make coverage
-        uses: GabrielBB/xvfb-action@v1.6
+        uses: coactions/setup-xvfb@v1
         with:
           run: yarn coverage
 
