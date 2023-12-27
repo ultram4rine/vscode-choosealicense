@@ -170,7 +170,7 @@
   ],
   "dependencies": {
     "@octokit/request-error": "^5.0.1",
-    "@octokit/rest": "^19.0.7"
+    "@octokit/rest": "^20.0.2"
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",
