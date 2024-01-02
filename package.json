@@ -116,8 +116,10 @@
             "mpl-2.0",
             "unlicense",
             "separator",
+            "bsd-4-clause",
             "cc-by-4.0",
             "isc",
+            "lgpl-3.0",
             "wtfpl"
           ],
           "description": "Default license."
