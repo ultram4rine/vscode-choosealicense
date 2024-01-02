@@ -7,8 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added two new settings, `"useAuthorFromGit"` and `"useGitEmail"` (both `false` by default), whose used to get author string from git if not set in settings.
+
 ### Changed
 
+- Various UI fixes and improvements.
 - Use Node.js v20 in CI.
 - Updated deps.
 
