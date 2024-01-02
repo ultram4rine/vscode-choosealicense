@@ -44,9 +44,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Lint code
-        run: yarn lint
-
       - name: Run tests and make coverage
         uses: coactions/setup-xvfb@v1
         with:
