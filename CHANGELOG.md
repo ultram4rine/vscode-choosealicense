@@ -7,8 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add lint stage to CI.
+
 ### Changed
 
+- Use Node.js v20 in CI.
 - Updated deps.
 
 ## [0.9.4] - 2023-12-27
