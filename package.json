@@ -128,6 +128,16 @@
           "default": "",
           "description": "Author for licenses."
         },
+        "license.useAuthorFromGit": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use \"user.name\" from git config if \"license.author\" is not set."
+        },
+        "license.useGitEmail": {
+          "type": "boolean",
+          "default": false,
+          "description": "If \"license.useAuthorFromGit\" is enabled, add <user.email> from git config to author string."
+        },
         "license.year": {
           "type": "string",
           "default": "auto",

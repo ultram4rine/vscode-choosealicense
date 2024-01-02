@@ -238,7 +238,11 @@ const addLicenses = async (
 
       if (author) {
         text = replaceAuthor(author, license.key, text);
-      } else {
+      } else if (
+        vscode.workspace
+          .getConfiguration("license")
+          .get<boolean>("useAuthorFromGit")
+      ) {
         // Try to retrieve author username from git config if it not set in settings.
         // Otherwise leave it as is.
         try {
@@ -330,6 +334,10 @@ const getAuthorFromGitConfig = async (): Promise<string> => {
   const git = gitExtension.getAPI(1);
   const repos = git.repositories;
 
+  const useGitEmail = vscode.workspace
+    .getConfiguration("license")
+    .get<boolean>("useGitEmail");
+
   if (repos.length < 1) {
     return Promise.reject("No repositories found");
   } else if (repos.length > 1) {
@@ -337,10 +345,18 @@ const getAuthorFromGitConfig = async (): Promise<string> => {
       "Repos count is more than 1, using author from global config"
     );
     const author = await repos[0].getGlobalConfig("user.name");
+    if (useGitEmail) {
+      const email = await repos[0].getGlobalConfig("user.email");
+      return `${author} <${email}>`;
+    }
     return author;
   } else {
     try {
       const author = await repos[0].getConfig("user.name");
+      if (useGitEmail) {
+        const email = await repos[0].getConfig("user.email");
+        return `${author} <${email}>`;
+      }
       return author;
     } catch {
       /* vscode.window.showWarningMessage(
@@ -348,6 +364,10 @@ const getAuthorFromGitConfig = async (): Promise<string> => {
       ); */
       try {
         const author = await repos[0].getGlobalConfig("user.name");
+        if (useGitEmail) {
+          const email = await repos[0].getGlobalConfig("user.email");
+          return `${author} <${email}>`;
+        }
         return author;
       } catch {
         return Promise.reject("Failed to get author from git config");
