@@ -288,6 +288,42 @@ const chooseFolder = async () => {
   }
 };
 
+// TODO: quick pick author from repos.
+/* if (repos.length > 1) {
+  const filtered: { label: string; detail: string; key: string }[] =
+    gitAuthor.config === "Global config"
+      ? [
+          {
+            label: gitAuthor.name,
+            detail: gitAuthor.config,
+            key: gitAuthor.name,
+          },
+        ]
+      : [];
+
+  for (let r of repos) {
+    let current = "";
+    try {
+      current = await r.getConfig("user.name");
+    } catch {
+      current = await r.getGlobalConfig("user.name");
+    }
+
+    if (current !== gitAuthor.name) {
+      filtered.push({
+        label: current,
+        detail: r.rootUri.path,
+        key: current,
+      });
+    }
+  }
+  if (filtered.length > 1) {
+    const selected = await vscode.window.showQuickPick(filtered);
+    if (selected) {
+      gitAuthor.name = selected.key;
+    }
+  }
+} */
 const getAuthorFromGitConfig = async (): Promise<string> => {
   const gitExtension =
     vscode.extensions.getExtension<GitExtension>("vscode.git")!.exports;
@@ -296,54 +332,28 @@ const getAuthorFromGitConfig = async (): Promise<string> => {
 
   if (repos.length < 1) {
     return Promise.reject("No repositories found");
-  }
-
-  let gitAuthor = { name: "", config: "" };
-  try {
-    gitAuthor.name = await repos[0].getConfig("user.name");
-    gitAuthor.config = "Local config";
-  } catch {
-    gitAuthor.name = await repos[0].getGlobalConfig("user.name");
-    gitAuthor.config = "Global config";
-  }
-
-  if (repos.length > 1) {
-    const filtered: { label: string; detail: string; key: string }[] =
-      gitAuthor.config === "Global config"
-        ? [
-            {
-              label: gitAuthor.name,
-              detail: gitAuthor.config,
-              key: gitAuthor.name,
-            },
-          ]
-        : [];
-
-    for (let r of repos) {
-      let current = "";
+  } else if (repos.length > 1) {
+    vscode.window.showInformationMessage(
+      "Repos count is more than 1, using author from global config"
+    );
+    const author = await repos[0].getGlobalConfig("user.name");
+    return author;
+  } else {
+    try {
+      const author = await repos[0].getConfig("user.name");
+      return author;
+    } catch {
+      /* vscode.window.showWarningMessage(
+        "Failed to get author from local git config, using global config"
+      ); */
       try {
-        current = await r.getConfig("user.name");
+        const author = await repos[0].getGlobalConfig("user.name");
+        return author;
       } catch {
-        current = await r.getGlobalConfig("user.name");
-      }
-
-      if (current !== gitAuthor.name) {
-        filtered.push({
-          label: current,
-          detail: r.rootUri.path,
-          key: current,
-        });
-      }
-    }
-    if (filtered.length > 1) {
-      const selected = await vscode.window.showQuickPick(filtered);
-      if (selected) {
-        gitAuthor.name = selected.key;
+        return Promise.reject("Failed to get author from git config");
       }
     }
   }
-
-  return gitAuthor.name;
 };
 
 const downloadLicense = (key: string) =>
