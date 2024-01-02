@@ -3,7 +3,7 @@ import * as vscode from "vscode";
 import { RequestError } from "@octokit/request-error";
 
 import { getLicense, getLicenses } from "../api";
-import { GitExtension, Repository } from "../api/git";
+import { GitExtension } from "../api/git";
 import { setDefaultLicenseProperty } from "../config";
 import { License, LicenseItem } from "../types";
 import { replaceAuthor, replaceYear } from "../utils";
@@ -68,8 +68,8 @@ interface QuickPickLicenseItem {
 const licenseToQuickPickItem = (
   l: LicenseItem,
   defaultKey: string
-): QuickPickLicenseItem => {
-  return l.key === defaultKey
+): QuickPickLicenseItem =>
+  l.key === defaultKey
     ? {
         label: l.spdx_id ? l.spdx_id : l.key,
         detail: l.name,
@@ -88,12 +88,11 @@ const licenseToQuickPickItem = (
           },
         ],
       };
-};
 
 const showLicenses = async (
   options?: vscode.QuickPickOptions
-): Promise<QuickPickLicenseItem[] | undefined> => {
-  return new Promise(async (resolve, _reject) => {
+): Promise<QuickPickLicenseItem[] | undefined> =>
+  new Promise(async (resolve, _reject) => {
     const quickPick = vscode.window.createQuickPick();
     quickPick.placeholder = options!.placeHolder;
     quickPick.canSelectMany = options!.canPickMany!;
@@ -135,7 +134,6 @@ const showLicenses = async (
 
     quickPick.show();
   });
-};
 
 export const chooseLicense = async (context: vscode.ExtensionContext) => {
   try {
