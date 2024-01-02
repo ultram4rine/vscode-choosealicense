@@ -4,6 +4,7 @@ on:
   push:
     paths-ignore:
       - ".devcontainer/**"
+      - ".github/ISSUE_TEMPLATE/**"
       - ".github/workflows/codeql.yml"
       - ".github/dependabot.yml"
       - ".vscode/**"
@@ -16,6 +17,7 @@ on:
   pull_request:
     paths-ignore:
       - ".devcontainer/**"
+      - ".github/ISSUE_TEMPLATE/**"
       - ".github/workflows/codeql.yml"
       - ".github/dependabot.yml"
       - ".vscode/**"
@@ -32,18 +34,18 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
 
       - name: Install dependencies
         run: yarn install
 
       - name: Run tests and make coverage
-        uses: GabrielBB/xvfb-action@v1.6
+        uses: coactions/setup-xvfb@v1
         with:
           run: yarn coverage
 
@@ -54,7 +56,7 @@ jobs:
         run: yarn package
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: vsix
           path: vscode-choosealicense-*.vsix
@@ -66,10 +68,10 @@ jobs:
     needs: test-n-build
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: vsix
 

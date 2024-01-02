@@ -14,6 +14,14 @@ import { replaceAuthor, replaceYear } from "../utils";
  */
 export const uncommonLicenses: LicenseItem[] = [
   {
+    key: "bsd-4-clause",
+    name: 'BSD 4-Clause "Original" or "Old" License',
+    spdx_id: "BSD-4-Clause",
+    url: "https://api.github.com/licenses/bsd-4-clause",
+    node_id: "MDc6TGljZW5zZTM5",
+    html_url: "http://choosealicense.com/licenses/bsd-4-clause/",
+  },
+  {
     key: "cc-by-4.0",
     name: "Creative Commons Attribution 4.0 International",
     spdx_id: "CC-BY-4.0",
@@ -28,6 +36,14 @@ export const uncommonLicenses: LicenseItem[] = [
     url: "https://api.github.com/licenses/isc",
     node_id: "MDc6TGljZW5zZTEw",
     html_url: "http://choosealicense.com/licenses/isc/",
+  },
+  {
+    key: "lgpl-3.0",
+    name: "GNU Lesser General Public License v3.0",
+    spdx_id: "LGPL-3.0",
+    url: "https://api.github.com/licenses/lgpl-3.0",
+    node_id: "MDc6TGljZW5zZTEy",
+    html_url: "http://choosealicense.com/licenses/lgpl-3.0/",
   },
   {
     key: "wtfpl",

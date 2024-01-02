@@ -14,6 +14,7 @@ export const replaceAuthor = (author: string, key: string, text: string) => {
     case "bsd-2-clause":
     case "bsd-3-clause":
     case "mit":
+    case "bsd-4-clause":
     case "isc":
       text = text.replace(/\[fullname]/g, author);
       break;
@@ -28,6 +29,7 @@ export const replaceAuthor = (author: string, key: string, text: string) => {
     case "mpl-2.0":
     case "unlicense":
     case "cc-by-4.0":
+    case "lgpl-3.0":
     default:
       break;
   }
@@ -51,6 +53,7 @@ export const replaceYear = (year: string, key: string, text: string) => {
     case "bsd-2-clause":
     case "bsd-3-clause":
     case "mit":
+    case "bsd-4-clause":
     case "isc":
       text = text.replace(/\[year]/g, year);
       break;
@@ -67,6 +70,7 @@ export const replaceYear = (year: string, key: string, text: string) => {
     case "mpl-2.0":
     case "unlicense":
     case "cc-by-4.0":
+    case "lgpl-3.0":
     default:
       break;
   }

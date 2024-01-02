@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Use Node.js v20 in CI.
+- Updated deps.
+
+## [0.9.4] - 2023-12-27
+
+### Added
+
+- Added `BSD-4-Clause` uncommon license.
+
+## [0.9.3] - 2023-09-08
+
+### Added
+
+- Added `LGPL-3.0` uncommon license.
+- Added `New Uncommon License` Issue Template.
+
 ## [0.9.2] - 2023-01-17
 
 ### Changed

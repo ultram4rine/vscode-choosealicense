@@ -1,7 +1,7 @@
 {
   "name": "vscode-choosealicense",
   "displayName": "Choose a License",
-  "version": "0.9.2",
+  "version": "0.9.4",
   "description": "Choose a license for your project in VS Code",
   "categories": [
     "Other"
@@ -207,27 +207,27 @@
     "onCommand:license.setToken"
   ],
   "dependencies": {
-    "@octokit/request-error": "^3.0.3",
-    "@octokit/rest": "^19.0.7"
+    "@octokit/request-error": "^5.0.1",
+    "@octokit/rest": "^20.0.2"
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",
-    "@types/mocha": "^10.0.1",
-    "@types/node": "^18.16.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.10.6",
     "@types/vscode": "^1.43.0",
-    "@typescript-eslint/eslint-plugin": "^5.59.1",
-    "@typescript-eslint/parser": "^5.59.1",
-    "@vscode/test-electron": "^2.3.0",
-    "@vscode/test-web": "^0.0.42",
-    "@vscode/vsce": "^2.19.0",
-    "c8": "^7.13.0",
-    "esbuild": "^0.17.18",
-    "eslint": "^8.39.0",
-    "glob": "^8.1.0",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "@vscode/test-electron": "^2.3.8",
+    "@vscode/test-web": "^0.0.50",
+    "@vscode/vsce": "^2.22.0",
+    "c8": "^8.0.1",
+    "esbuild": "^0.19.11",
+    "eslint": "^8.56.0",
+    "glob": "^10.3.10",
     "mocha": "^10.2.0",
-    "ovsx": "^0.8.0",
-    "rimraf": "^5.0.0",
-    "typescript": "^5.0.4"
+    "ovsx": "^0.8.3",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3"
   },
   "engines": {
     "vscode": "^1.43.0"

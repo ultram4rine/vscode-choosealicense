@@ -21,6 +21,7 @@ describe("GitHub API and utils", () => {
           case "bsd-2-clause":
           case "bsd-3-clause":
           case "mit":
+          case "bsd-4-clause":
           case "isc":
           case "wtfpl":
             it(`author and year replaced in ${license.key}`, async () => {
@@ -37,6 +38,7 @@ describe("GitHub API and utils", () => {
           case "mpl-2.0":
           case "unlicense":
           case "cc-by-4.0":
+          case "lgpl-3.0":
             it(`author and year not replaced in ${license.key}`, async () => {
               const l = await getLicense(license.key);
               const authorReplaced = replaceAuthor("John Doe", l.key, l.body);
