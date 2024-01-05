@@ -81,6 +81,11 @@
       },
       {
         "category": "License",
+        "command": "license.setStartYear",
+        "title": "Set Start Year For Your Project"
+      },
+      {
+        "category": "License",
         "command": "license.setExtension",
         "title": "Set Extension"
       },
@@ -211,6 +216,7 @@
     "onCommand:license.setDefaultLicense",
     "onCommand:license.setAuthor",
     "onCommand:license.setYear",
+    "onCommand:license.setStartYear",
     "onCommand:license.setExtension",
     "onCommand:license.setFilename",
     "onCommand:license.setToken"

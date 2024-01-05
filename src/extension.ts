@@ -13,6 +13,7 @@ import {
   setFilenameProperty,
   setTokenProperty,
   setYearProperty,
+  setStartYear,
 } from "./config";
 
 export async function activate(context: vscode.ExtensionContext) {
@@ -46,6 +47,11 @@ export async function activate(context: vscode.ExtensionContext) {
     setYearProperty
   );
 
+  const setStartYearCommand = vscode.commands.registerCommand(
+    "license.setStartYear",
+    async () => await setStartYear(context)
+  );
+
   const setExtensionCommand = vscode.commands.registerCommand(
     "license.setExtension",
     setExtensionProperty
@@ -68,6 +74,7 @@ export async function activate(context: vscode.ExtensionContext) {
     setDefaultLicenseCommand,
     setAuthorCommand,
     setYearCommand,
+    setStartYearCommand,
     setExtensionCommand,
     setFilenameCommand,
     setTokenCommand

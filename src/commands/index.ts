@@ -4,7 +4,7 @@ import { RequestError } from "@octokit/request-error";
 
 import { getLicense, getLicenses } from "../api";
 import { GitExtension } from "../api/git";
-import { setDefaultLicenseProperty } from "../config";
+import { setDefaultLicenseProperty, WORKSPACE_STATE_YEAR_KEY } from "../config";
 import { LicenseItem } from "../types";
 import { replaceAuthor, replaceYear } from "../utils";
 
@@ -221,19 +221,16 @@ const addLicenses = async (
         }${extension}`
       );
 
-      // Update license year if set to auto.
+      let prevYear = context.workspaceState
+        .get<number>(WORKSPACE_STATE_YEAR_KEY)
+        ?.toString();
+
       if (year === "auto") {
-        let prevYear = context.workspaceState.get<number>(license.key);
-        const currYear = new Date().getFullYear();
-        if (prevYear === undefined) {
-          context.workspaceState.update(license.key, currYear);
-          prevYear = currYear;
-        }
-        if (prevYear === currYear) {
-          year = currYear.toString();
-        } else {
-          year = `${prevYear}-${currYear}`;
-        }
+        year = new Date().getFullYear().toString();
+      }
+
+      if (prevYear && prevYear !== year) {
+        year = `${prevYear}-${year}`;
       }
 
       text = replaceYear(year, license.key, text);
