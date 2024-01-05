@@ -223,12 +223,14 @@ const addLicenses = async (
 
       // Update license year if set to auto.
       if (year === "auto") {
-        // context.workspaceState.update(license.key, 1997); // test --> 1997-2023
-        // about workspaceState, refer https://code.visualstudio.com/api/references/vscode-api#Memento
         let prevYear = context.workspaceState.get<number>(license.key);
-        let currYear = new Date().getFullYear();
-        if (prevYear === undefined || prevYear === currYear) {
-          year = currYear + "";
+        const currYear = new Date().getFullYear();
+        if (prevYear === undefined) {
+          context.workspaceState.update(license.key, currYear);
+          prevYear = currYear;
+        }
+        if (prevYear === currYear) {
+          year = currYear.toString();
         } else {
           year = `${prevYear}-${currYear}`;
         }
