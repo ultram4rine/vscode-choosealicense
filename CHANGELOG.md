@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added two new settings, `"useAuthorFromGit"` and `"useGitEmail"` (both `false` by default), whose used to get author string from git if not set in settings.
+- Save year in [`ExtensionContext.workspaceState`](https://code.visualstudio.com/api/extension-capabilities/common-capabilities#data-storage). If you regenerate the same license in new year, this field in license file will be set to `${prevYear}-{currYear}`.
 
 ### Changed
 
