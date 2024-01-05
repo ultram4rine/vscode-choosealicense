@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added new settings, `"useAuthorFromGit"` and `"useGitEmail"` (both `false` by default), whose used to get author string from git if not set in settings.
-- Added command to save year of starting working on the project in the [`ExtensionContext.workspaceState`](https://code.visualstudio.com/api/extension-capabilities/common-capabilities#data-storage). If it set, you will get the year field in license file in range form like `1999-2024`.
+- Added new settings, `"useAuthorFromGit"` and `"useGitEmail"` (both `false` by default), that are used to get author from git if it not set in configuration.
+- Added a command to save the year the project was started in the [`ExtensionContext.workspaceState`](https://code.visualstudio.com/api/extension-capabilities/common-capabilities#data-storage). If it set, you will get the year field in the license file as a range, such as `1999-2024`.
 
 ### Changed
 
