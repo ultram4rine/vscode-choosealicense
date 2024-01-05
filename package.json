@@ -126,27 +126,38 @@
             "unlicense",
             "wtfpl"
           ],
-          "description": "Default license."
+          "description": "Default license.",
+          "order": 0
         },
         "license.author": {
           "type": "string",
           "default": "",
-          "description": "Author for licenses."
+          "description": "Author for licenses.",
+          "order": 1
         },
         "license.useAuthorFromGit": {
           "type": "boolean",
           "default": false,
-          "description": "Use \"user.name\" from git config if \"license.author\" is not set."
+          "description": "Use 'user.name' from git config if 'license.author' is not set.",
+          "order": 2
         },
         "license.useGitEmail": {
           "type": "boolean",
           "default": false,
-          "description": "If \"license.useAuthorFromGit\" is enabled, add <user.email> from git config to author string."
+          "description": "If 'license.useAuthorFromGit' is enabled, add <user.email> from git config to author string.",
+          "order": 3
         },
         "license.year": {
           "type": "string",
           "default": "auto",
-          "description": "Year for licenses. Set 'auto' for automatic year detection."
+          "description": "Year for licenses. Set 'auto' for automatic year detection.",
+          "order": 4
+        },
+        "license.filename": {
+          "type": "string",
+          "default": "LICENSE",
+          "description": "License filename.",
+          "order": 5
         },
         "license.extension": {
           "type": "string",
@@ -161,17 +172,14 @@
             "Create licenses without extension",
             "Create licenses with .md extension",
             "Create licenses with .txt extension"
-          ]
-        },
-        "license.filename": {
-          "type": "string",
-          "default": "LICENSE",
-          "description": "License filename."
+          ],
+          "order": 6
         },
         "license.token": {
           "type": "string",
           "default": "",
-          "description": "Token for api access."
+          "description": "Token for GitHub API access.",
+          "order": 7
         }
       }
     },
