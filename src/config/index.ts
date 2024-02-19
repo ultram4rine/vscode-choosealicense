@@ -72,6 +72,22 @@ export const setYearProperty = async () => {
   }
 };
 
+export const WORKSPACE_STATE_YEAR_KEY = "vscode-choosealicense-year";
+
+export const setStartYear = async (context: vscode.ExtensionContext) => {
+  const startYear = context.workspaceState.get<number>(
+    WORKSPACE_STATE_YEAR_KEY
+  );
+
+  const value = await vscode.window.showInputBox({
+    placeHolder: "Start year",
+    prompt: "Set start year for your project",
+    value: startYear ? startYear.toString() : "",
+  });
+
+  context.workspaceState.update(WORKSPACE_STATE_YEAR_KEY, value);
+};
+
 export const setExtensionProperty = async () => {
   const selected = await vscode.window.showQuickPick(
     [

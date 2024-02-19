@@ -52,47 +52,52 @@
       {
         "category": "License",
         "command": "license.chooseLicense",
-        "title": "Choose license"
+        "title": "Choose License"
       },
       {
         "category": "License",
         "command": "license.addDefaultLicense",
-        "title": "Add default license"
+        "title": "Choose Default License"
       },
       {
         "category": "License",
         "command": "license.chooseMultipleLicenses",
-        "title": "Choose multiple licenses"
+        "title": "Choose Multiple Licenses"
       },
       {
         "category": "License",
         "command": "license.setDefaultLicense",
-        "title": "Set default license"
+        "title": "Set Default License"
       },
       {
         "category": "License",
         "command": "license.setAuthor",
-        "title": "Set author"
+        "title": "Set Author"
       },
       {
         "category": "License",
         "command": "license.setYear",
-        "title": "Set year"
+        "title": "Set Year"
+      },
+      {
+        "category": "License",
+        "command": "license.setStartYear",
+        "title": "Set Start Year For Your Project"
       },
       {
         "category": "License",
         "command": "license.setExtension",
-        "title": "Set extension"
+        "title": "Set Extension"
       },
       {
         "category": "License",
         "command": "license.setFilename",
-        "title": "Set filename"
+        "title": "Set Filename"
       },
       {
         "category": "License",
         "command": "license.setToken",
-        "title": "Set token"
+        "title": "Set Token"
       }
     ],
     "configuration": {
@@ -101,17 +106,58 @@
         "license.default": {
           "type": "string",
           "default": "",
-          "description": "Default license."
+          "enum": [
+            "agpl-3.0",
+            "apache-2.0",
+            "bsd-2-clause",
+            "bsd-3-clause",
+            "bsd-4-clause",
+            "bsl-1.0",
+            "cc-by-4.0",
+            "cc0-1.0",
+            "epl-2.0",
+            "gpl-2.0",
+            "gpl-3.0",
+            "isc",
+            "lgpl-2.1",
+            "lgpl-3.0",
+            "mit",
+            "mpl-2.0",
+            "unlicense",
+            "wtfpl"
+          ],
+          "description": "Default license.",
+          "order": 0
         },
         "license.author": {
           "type": "string",
           "default": "",
-          "description": "Author for licenses."
+          "description": "Author for licenses.",
+          "order": 1
+        },
+        "license.useAuthorFromGit": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use 'user.name' from git config if 'license.author' is not set.",
+          "order": 2
+        },
+        "license.useGitEmail": {
+          "type": "boolean",
+          "default": false,
+          "description": "If 'license.useAuthorFromGit' is enabled, add <user.email> from git config to author string.",
+          "order": 3
         },
         "license.year": {
           "type": "string",
           "default": "auto",
-          "description": "Year for licenses. Set 'auto' for automatic year detection."
+          "description": "Year for licenses. Set 'auto' for automatic year detection.",
+          "order": 4
+        },
+        "license.filename": {
+          "type": "string",
+          "default": "LICENSE",
+          "description": "License filename.",
+          "order": 5
         },
         "license.extension": {
           "type": "string",
@@ -126,17 +172,14 @@
             "Create licenses without extension",
             "Create licenses with .md extension",
             "Create licenses with .txt extension"
-          ]
-        },
-        "license.filename": {
-          "type": "string",
-          "default": "LICENSE",
-          "description": "License filename."
+          ],
+          "order": 6
         },
         "license.token": {
           "type": "string",
           "default": "",
-          "description": "Token for api access."
+          "description": "Token for GitHub API access.",
+          "order": 7
         }
       }
     },
@@ -154,6 +197,23 @@
           "command": "license.chooseMultipleLicenses",
           "when": "workspaceFolderCount > 0 && !virtualWorkspace"
         }
+      ],
+      "explorer/context": [
+        {
+          "command": "license.chooseLicense",
+          "group": "2_workspace",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "license.addDefaultLicense",
+          "group": "2_workspace",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "license.chooseMultipleLicenses",
+          "group": "2_workspace",
+          "when": "explorerResourceIsFolder"
+        }
       ]
     }
   },
@@ -164,6 +224,7 @@
     "onCommand:license.setDefaultLicense",
     "onCommand:license.setAuthor",
     "onCommand:license.setYear",
+    "onCommand:license.setStartYear",
     "onCommand:license.setExtension",
     "onCommand:license.setFilename",
     "onCommand:license.setToken"
@@ -193,6 +254,9 @@
   "engines": {
     "vscode": "^1.43.0"
   },
+  "extensionDependencies": [
+    "vscode.git"
+  ],
   "icon": "images/icon.png",
   "badges": [
     {
