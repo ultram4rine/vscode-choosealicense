@@ -47,7 +47,7 @@ jobs:
       - name: Run tests and make coverage
         uses: coactions/setup-xvfb@v1
         with:
-          run: npm coverage
+          run: npm run coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
@@ -56,7 +56,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Bundle
-        run: npm package
+        run: npm run package
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
