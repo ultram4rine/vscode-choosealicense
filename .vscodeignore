@@ -22,6 +22,5 @@ images/demo.gif
 .gitpod.yml
 .ncurc.json
 .nycrc.json
-.yarnrc
+package-lock.json
 tsconfig.json
-yarn.lock

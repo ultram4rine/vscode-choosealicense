@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Various UI fixes and improvements.
 - Use Node.js v20 in CI.
+- Use `npm` instead of `yarn`.
 - Updated deps.
 
 ## [0.9.4] - 2023-12-27
