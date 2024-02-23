@@ -169,7 +169,7 @@
     "onCommand:license.setToken"
   ],
   "dependencies": {
-    "@octokit/request-error": "^5.0.1",
+    "@octokit/request-error": "^6.0.0",
     "@octokit/rest": "^20.0.2"
   },
   "devDependencies": {
