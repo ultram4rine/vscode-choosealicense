@@ -98,7 +98,7 @@ jobs:
 
       - name: Create release body
         id: extract_changes
-        uses: ultram4rine/extract-changes-action@v1
+        uses: ultram4rine/extract-changes-action@v2
         with:
           changelog: CHANGELOG.md
           version: ${{ steps.get_version.outputs.VERSION }}
