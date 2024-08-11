@@ -18,7 +18,6 @@ import { LicenseItem, License } from "../types";
  * Uncommon licenses.
  * They not seen at `/licenses`, but accessible at `/licenses/<key>`.
  */
-/* eslint-disable @typescript-eslint/naming-convention */
 export const uncommonLicenses: LicenseItem[] = [
   {
     key: "bsd-4-clause",
@@ -89,7 +88,6 @@ const licenseToQuickPickItem = (
         key: l.key,
       };
 };
-/* eslint-enable @typescript-eslint/naming-convention */
 
 const showLicenses = async (
   options?: vscode.QuickPickOptions
@@ -287,7 +285,7 @@ const addLicense = async (license: License, multiple: boolean) => {
 };
 
 const chooseFolder = async () => {
-  let folders = vscode.workspace.workspaceFolders;
+  const folders = vscode.workspace.workspaceFolders;
   if (folders) {
     let folder: vscode.WorkspaceFolder | undefined;
     if (folders.length === 1) {

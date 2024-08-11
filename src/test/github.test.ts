@@ -1,11 +1,11 @@
 import * as assert from "assert";
 
-import { uncommonLicenses } from "../../commands";
-import { LicenseItem } from "../../types";
-import { getLicenses, getLicense } from "../../api";
-import { replaceAuthor, replaceYear } from "../../utils";
+import { uncommonLicenses } from "../commands";
+import { LicenseItem } from "../types";
+import { getLicenses, getLicense } from "../api";
+import { replaceAuthor, replaceYear } from "../utils";
 
-describe("GitHub API and utils", () => {
+describe("GitHub API and Utils Test Suite", () => {
   let licenses: LicenseItem[];
 
   before(async () => {
