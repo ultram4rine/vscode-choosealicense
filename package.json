@@ -160,17 +160,7 @@
       ]
     }
   },
-  "activationEvents": [
-    "onCommand:license.chooseLicense",
-    "onCommand:license.addDefaultLicense",
-    "onCommand:license.chooseMultipleLicenses",
-    "onCommand:license.setDefaultLicense",
-    "onCommand:license.setAuthor",
-    "onCommand:license.setYear",
-    "onCommand:license.setExtension",
-    "onCommand:license.setFilename",
-    "onCommand:license.setToken"
-  ],
+  "activationEvents": [],
   "dependencies": {
     "@octokit/request-error": "^5.1.0",
     "@octokit/rest": "^20.1.1"
@@ -180,7 +170,7 @@
     "@types/eslint__js": "^8.42.3",
     "@types/mocha": "^10.0.7",
     "@types/node": "^22.2.0",
-    "@types/vscode": "^1.43.0",
+    "@types/vscode": "^1.75.0",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.4.1",
     "@vscode/test-web": "^0.0.56",
@@ -193,7 +183,7 @@
     "typescript-eslint": "^8.0.1"
   },
   "engines": {
-    "vscode": "^1.43.0"
+    "vscode": "^1.75.0"
   },
   "icon": "images/icon.png",
   "badges": [
