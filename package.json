@@ -188,7 +188,7 @@
     "mocha": "^10.3.0",
     "ovsx": "^0.8.3",
     "rimraf": "^5.0.5",
-    "typescript": "^5.3.3"
+    "typescript": "^5.5.4"
   },
   "engines": {
     "vscode": "^1.43.0"
