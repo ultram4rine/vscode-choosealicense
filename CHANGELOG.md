@@ -7,8 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added new settings, `"useAuthorFromGit"` and `"useGitEmail"` (both `false` by default), that are used to get author from git if it not set in configuration.
+- Added a command to save the year the project was started in the [`ExtensionContext.workspaceState`](https://code.visualstudio.com/api/extension-capabilities/common-capabilities#data-storage). If it set, you will get the year field in the license file as a range, such as `1999-2024`.
+- Quickly set license as default while choosing which license to add to the project.
+
 ### Changed
 
+- Various UI fixes and improvements.
 - Use Node.js v20 in CI.
 - Use `npm` instead of `yarn`.
 - Updated deps.
