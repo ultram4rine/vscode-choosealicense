@@ -162,8 +162,8 @@
   },
   "activationEvents": [],
   "dependencies": {
-    "@octokit/request-error": "^5.1.0",
-    "@octokit/rest": "^20.1.1"
+    "@octokit/request-error": "^6.1.4",
+    "@octokit/rest": "^20.1.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
@@ -176,9 +176,9 @@
     "@vscode/test-web": "^0.0.56",
     "@vscode/vsce": "^2.31.1",
     "c8": "^10.1.2",
-    "esbuild": "^0.23.0",
+    "esbuild": "^0.25.5",
     "eslint": "^9.9.0",
-    "ovsx": "^0.9.2",
+    "ovsx": "^0.10.4",
     "rimraf": "^6.0.1",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.0.1"
