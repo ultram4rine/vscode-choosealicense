@@ -58,11 +58,12 @@ export const replaceYear = (year: string, key: string, text: string) => {
       text = text.replace(/\[year]/g, year);
       break;
 
-    case "wtfpl":
+    case "wtfpl": {
       // Replace second occurrence.
       let t = 0;
       text = text.replace(/2004/g, (match) => (++t === 2 ? year : match));
       break;
+    }
 
     case "bsl-1.0":
     case "cc0-1.0":
