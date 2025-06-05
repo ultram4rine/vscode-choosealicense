@@ -45,9 +45,7 @@ jobs:
         run: npm install
 
       - name: Run tests and make coverage
-        uses: coactions/setup-xvfb@6b00cf1889f4e1d5a48635647013c0508128ee1a
-        with:
-          run: npm run coverage
+        run: xvfb-run npm run coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
