@@ -45,11 +45,7 @@ jobs:
         run: npm install
 
       - name: Run tests and make coverage
-        uses: coactions/setup-xvfb@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          run: npm run coverage
+        run: xvfb-run npm run coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
