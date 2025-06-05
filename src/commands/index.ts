@@ -285,7 +285,7 @@ const addLicense = async (license: License, multiple: boolean) => {
 };
 
 const chooseFolder = async () => {
-  let folders = vscode.workspace.workspaceFolders;
+  const folders = vscode.workspace.workspaceFolders;
   if (folders) {
     let folder: vscode.WorkspaceFolder | undefined;
     if (folders.length === 1) {
