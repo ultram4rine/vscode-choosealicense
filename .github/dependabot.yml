@@ -12,12 +12,7 @@ updates:
     ignore:
       - dependency-name: "@types/vscode"
     groups:
-      octokit:
-        patterns:
-          - "@octokit*"
       deps:
-        applies-to: version-updates
-        patterns:
-          - "*"
-        exclude-patterns:
-          - "@octokit*"
+        dependency-type: "production"
+      dev-deps:
+        dependency-type: "development"
