@@ -7,6 +7,7 @@ import * as os from "os";
 import * as vscode from "vscode";
 
 import { chooseLicense, addDefaultLicense } from "../../commands";
+import { updateConfig } from "../../utils";
 
 describe("Extension Test Suite", () => {
   vscode.window.showInformationMessage("Start all tests.");
@@ -37,13 +38,16 @@ describe("Extension Test Suite", () => {
       });
 
       it("Create default license", async () => {
+        await updateConfig("default", "unlicense");
         await addDefaultLicense();
 
         // Default is Unlicense in this test.
         assert.ok(
           fs
             .readFileSync(os.homedir().concat("/license.md"))
-            .includes("https://unlicense.org")
+            .includes(
+              "This is free and unencumbered software released into the public domain."
+            )
         );
       });
     });
