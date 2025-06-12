@@ -1,6 +1,7 @@
 import * as assert from "assert";
 import * as fs from "fs";
 import * as os from "os";
+import * as path from "path";
 
 // You can import and use all API from the 'vscode' module
 // as well as import your extension to test it
@@ -15,7 +16,7 @@ describe("Extension Test Suite", () => {
   describe("Commands", () => {
     describe("License creation", () => {
       after("Cleanup", () => {
-        fs.unlinkSync(os.homedir().concat("/license.md"));
+        fs.unlinkSync(path.join(os.homedir(), "/license.md"));
       });
 
       it("Create license", async () => {
@@ -31,24 +32,30 @@ describe("Extension Test Suite", () => {
           // First license in the list is AGPL-3.0.
           assert.ok(
             fs
-              .readFileSync(os.homedir().concat("/license.md"))
+              .readFileSync(path.join(os.homedir(), "/license.md"))
               .includes("GNU AFFERO GENERAL PUBLIC LICENSE")
           )
-        );
+        ).catch((err) => {
+          assert.fail(err);
+        });
       });
 
       it("Create default license", async () => {
         await updateConfig("default", "unlicense");
-        await addDefaultLicense();
+        const pr = addDefaultLicense();
 
         // Default is Unlicense in this test.
-        assert.ok(
-          fs
-            .readFileSync(os.homedir().concat("/license.md"))
-            .includes(
-              "This is free and unencumbered software released into the public domain."
-            )
-        );
+        pr.then(() =>
+          assert.ok(
+            fs
+              .readFileSync(path.join(os.homedir(), "/license.md"))
+              .includes(
+                "This is free and unencumbered software released into the public domain."
+              )
+          )
+        ).catch((err) => {
+          assert.fail(err);
+        });
       });
     });
   });
