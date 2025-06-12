@@ -15,11 +15,12 @@ describe("Extension Test Suite", () => {
 
   describe("Commands", () => {
     describe("License creation", () => {
-      after("Cleanup", () => {
+      afterEach("Cleanup", () => {
         fs.unlinkSync(path.join(os.homedir(), "/license.md"));
       });
 
       it("Create license", async () => {
+        await updateConfig("extension", ".md");
         const pr = chooseLicense();
         await vscode.commands.executeCommand(
           "workbench.action.quickOpenSelectNext"
@@ -41,6 +42,7 @@ describe("Extension Test Suite", () => {
       });
 
       it("Create default license", async () => {
+        await updateConfig("extension", ".md");
         await updateConfig("default", "unlicense");
         const pr = addDefaultLicense();
 
