@@ -1,6 +1,9 @@
 import * as vscode from "vscode";
 
-export const updateConfig = async (property: string, value: string) => {
+export const updateConfig = async (
+  property: "default" | "author" | "year" | "extension" | "filename" | "token",
+  value: string
+) => {
   if (vscode.workspace.workspaceFolders) {
     const selected = await vscode.window.showQuickPick(
       [
