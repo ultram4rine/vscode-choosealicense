@@ -2,16 +2,8 @@ import * as vscode from "vscode";
 
 import { RequestError } from "@octokit/request-error";
 
-import {
-  setDefaultLicenseProperty,
-  setAuthorProperty,
-  setYearProperty,
-  setExtensionProperty,
-  setFilenameProperty,
-  setTokenProperty,
-} from "../config";
 import { getLicenses, getLicense } from "../api";
-import { replaceAuthor, replaceYear } from "../utils";
+import { updateConfig, replaceAuthor, replaceYear } from "../utils";
 import { LicenseItem, License } from "../types";
 
 /**
@@ -116,118 +108,67 @@ const showLicenses = async (
   return selected;
 };
 
-export const chooseLicense = vscode.commands.registerCommand(
-  "license.chooseLicense",
-  async () => {
-    try {
-      const selected = await showLicenses({
-        placeHolder: "Choose a license to create.",
-      });
+export const chooseLicense = async () => {
+  try {
+    const selected = await showLicenses({
+      placeHolder: "Choose a license to create.",
+    });
 
-      if (selected && !Array.isArray(selected)) {
-        const key = selected.key;
+    if (selected && !Array.isArray(selected)) {
+      const key = selected.key;
+
+      try {
+        const license = await getLicense(key);
+        await addLicense(license, false);
+      } catch (error) {
+        vscode.window.showErrorMessage((error as RequestError).message);
+      }
+    }
+  } catch (error) {
+    vscode.window.showErrorMessage((error as RequestError).message);
+  }
+};
+
+export const addDefaultLicense = async () => {
+  try {
+    const key: string =
+      vscode.workspace.getConfiguration("license").get("default") ?? "";
+
+    if (key !== "") {
+      const license = await getLicense(key);
+      await addLicense(license, false);
+    } else {
+      vscode.window.showErrorMessage("No default license provided");
+    }
+  } catch (error) {
+    vscode.window.showErrorMessage((error as RequestError).message);
+  }
+};
+
+export const chooseMultipleLicenses = async () => {
+  try {
+    const selected = await showLicenses({
+      placeHolder: "Choose multiple licenses to create.",
+      canPickMany: true,
+    });
+
+    if (selected && Array.isArray(selected)) {
+      const len = selected.length;
+      for (let i = 0; i < len; i++) {
+        const key = selected[i].key;
 
         try {
           const license = await getLicense(key);
-          await addLicense(license, false);
+          await addLicense(license, true);
         } catch (error) {
           vscode.window.showErrorMessage((error as RequestError).message);
         }
       }
-    } catch (error) {
-      vscode.window.showErrorMessage((error as RequestError).message);
     }
+  } catch (error) {
+    vscode.window.showErrorMessage((error as RequestError).message);
   }
-);
-
-export const addDefaultLicense = vscode.commands.registerCommand(
-  "license.addDefaultLicense",
-  async () => {
-    try {
-      const key: string =
-        vscode.workspace.getConfiguration("license").get("default") ?? "";
-
-      if (key !== "") {
-        const license = await getLicense(key);
-        await addLicense(license, false);
-      } else {
-        vscode.window.showErrorMessage("No default license provided");
-      }
-    } catch (error) {
-      vscode.window.showErrorMessage((error as RequestError).message);
-    }
-  }
-);
-
-export const chooseMultipleLicenses = vscode.commands.registerCommand(
-  "license.chooseMultipleLicenses",
-  async () => {
-    try {
-      const selected = await showLicenses({
-        placeHolder: "Choose multiple licenses to create.",
-        canPickMany: true,
-      });
-
-      if (selected && Array.isArray(selected)) {
-        const len = selected.length;
-        for (let i = 0; i < len; i++) {
-          const key = selected[i].key;
-
-          try {
-            const license = await getLicense(key);
-            await addLicense(license, true);
-          } catch (error) {
-            vscode.window.showErrorMessage((error as RequestError).message);
-          }
-        }
-      }
-    } catch (error) {
-      vscode.window.showErrorMessage((error as RequestError).message);
-    }
-  }
-);
-
-export const setDefaultLicense = vscode.commands.registerCommand(
-  "license.setDefaultLicense",
-  async () => {
-    try {
-      const selected = await showLicenses({
-        placeHolder: "Set default license to use.",
-      });
-
-      if (selected && !Array.isArray(selected)) {
-        await setDefaultLicenseProperty(selected.key);
-      }
-    } catch (error) {
-      vscode.window.showErrorMessage((error as RequestError).message);
-    }
-  }
-);
-
-export const setAuthor = vscode.commands.registerCommand(
-  "license.setAuthor",
-  setAuthorProperty
-);
-
-export const setYear = vscode.commands.registerCommand(
-  "license.setYear",
-  setYearProperty
-);
-
-export const setExtension = vscode.commands.registerCommand(
-  "license.setExtension",
-  setExtensionProperty
-);
-
-export const setFilename = vscode.commands.registerCommand(
-  "license.setFilename",
-  setFilenameProperty
-);
-
-export const setToken = vscode.commands.registerCommand(
-  "license.setToken",
-  setTokenProperty
-);
+};
 
 const addLicense = async (license: License, multiple: boolean) => {
   const folder = await chooseFolder();
@@ -296,5 +237,143 @@ const chooseFolder = async () => {
     return folder;
   } else {
     return undefined;
+  }
+};
+
+// Commands that modifies config.
+
+export const setDefaultLicense = async () => {
+  try {
+    const selected = await showLicenses({
+      placeHolder: "Set default license to use.",
+    });
+
+    if (selected && !Array.isArray(selected)) {
+      await updateConfig("default", selected.key);
+    }
+  } catch (error) {
+    vscode.window.showErrorMessage((error as RequestError).message);
+  }
+};
+
+export const setAuthor = async () => {
+  const author: string =
+    vscode.workspace.getConfiguration("license").get("author") ?? "";
+
+  const value = await vscode.window.showInputBox({
+    placeHolder: "Author",
+    prompt: "Set author for licenses",
+    value: author,
+  });
+
+  if (value) {
+    await updateConfig("author", value);
+  }
+};
+
+export const setYear = async () => {
+  const currentYear = new Date().getFullYear().toString();
+  const selected = await vscode.window.showQuickPick(
+    [
+      {
+        label: "Auto",
+        detail: "Set automatic year detection",
+        value: "auto",
+      },
+      {
+        label: "Current",
+        detail: "Set current year",
+        description: currentYear,
+        value: "current",
+      },
+      {
+        label: "Certain",
+        detail: "Set certain year",
+        value: "certain",
+      },
+    ],
+    { placeHolder: "Select year for licenses." }
+  );
+
+  if (selected) {
+    const value = selected.value;
+    switch (value) {
+      case "auto":
+        await updateConfig("year", value);
+        break;
+      case "current":
+        await updateConfig("year", new Date().getFullYear().toString());
+        break;
+      case "certain":
+        {
+          const year = await vscode.window.showInputBox({
+            placeHolder: "Year",
+            prompt: "Set year for licenses",
+            value: currentYear,
+          });
+
+          if (year) {
+            await updateConfig("year", year);
+          }
+        }
+        break;
+      default:
+        vscode.window.showErrorMessage("Invalid year selection");
+        break;
+    }
+  }
+};
+
+export const setExtension = async () => {
+  const selected = await vscode.window.showQuickPick(
+    [
+      {
+        label: "Empty",
+        detail: "Create licenses without extension",
+        value: "",
+      },
+      {
+        label: "Markdown",
+        detail: "Create licenses with .md extension",
+        value: ".md",
+      },
+      {
+        label: "Text",
+        detail: "Create licenses with .txt extension",
+        value: ".txt",
+      },
+    ],
+    { placeHolder: "Set extension for license files." }
+  );
+
+  if (selected) {
+    await updateConfig("extension", selected.value);
+  }
+};
+
+export const setFilename = async () => {
+  const filename: string =
+    vscode.workspace.getConfiguration("license").get("filename") ?? "LICENSE";
+
+  const value = await vscode.window.showInputBox({
+    placeHolder: "Filename",
+    prompt: "Set filename for license files.",
+    value: filename,
+  });
+
+  if (value) {
+    await updateConfig("filename", value);
+  }
+};
+
+export const setToken = async () => {
+  const value = await vscode.window.showInputBox({
+    placeHolder: "Token",
+    prompt: "Set token for GitHub REST API access.",
+    password: true,
+  });
+
+  if (value) {
+    await updateConfig("token", value);
   }
 };

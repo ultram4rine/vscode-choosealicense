@@ -4,7 +4,9 @@ import { Octokit } from "@octokit/rest";
 import { LicenseItem, License } from "../types";
 
 const octokit = new Octokit({
-  auth: workspace.getConfiguration("license").get<string>("token"),
+  auth:
+    workspace.getConfiguration("license").get<string>("token") ??
+    process.env.GITHUB_TOKEN,
 });
 
 export const getLicenses = async (): Promise<LicenseItem[]> => {

@@ -1,3 +1,38 @@
+import * as vscode from "vscode";
+
+export const updateConfig = async (
+  property: "default" | "author" | "year" | "extension" | "filename" | "token",
+  value: string
+) => {
+  if (vscode.workspace.workspaceFolders) {
+    const selected = await vscode.window.showQuickPick(
+      [
+        {
+          label: "User",
+          description: "User Settings",
+          target: vscode.ConfigurationTarget.Global,
+        },
+        {
+          label: "Workspace",
+          description: "Workspace Settings",
+          target: vscode.ConfigurationTarget.Workspace,
+        },
+      ],
+      { placeHolder: "Select the configuration target." }
+    );
+
+    if (selected) {
+      await vscode.workspace
+        .getConfiguration("license")
+        .update(property, value, selected.target);
+    }
+  } else {
+    await vscode.workspace
+      .getConfiguration("license")
+      .update(property, value, vscode.ConfigurationTarget.Global);
+  }
+};
+
 export const replaceAuthor = (author: string, key: string, text: string) => {
   switch (key) {
     case "agpl-3.0":
