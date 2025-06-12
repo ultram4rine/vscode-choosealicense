@@ -2,9 +2,8 @@ import * as vscode from "vscode";
 
 import { RequestError } from "@octokit/request-error";
 
-import { setProp } from "../config";
 import { getLicenses, getLicense } from "../api";
-import { replaceAuthor, replaceYear } from "../utils";
+import { updateConfig, replaceAuthor, replaceYear } from "../utils";
 import { LicenseItem, License } from "../types";
 
 /**
@@ -250,7 +249,7 @@ export const setDefaultLicense = async () => {
     });
 
     if (selected && !Array.isArray(selected)) {
-      await setProp("default", selected.key);
+      await updateConfig("default", selected.key);
     }
   } catch (error) {
     vscode.window.showErrorMessage((error as RequestError).message);
@@ -268,7 +267,7 @@ export const setAuthor = async () => {
   });
 
   if (value) {
-    await setProp("author", value);
+    await updateConfig("author", value);
   }
 };
 
@@ -300,10 +299,10 @@ export const setYear = async () => {
     const value = selected.value;
     switch (value) {
       case "auto":
-        await setProp("year", value);
+        await updateConfig("year", value);
         break;
       case "current":
-        await setProp("year", new Date().getFullYear().toString());
+        await updateConfig("year", new Date().getFullYear().toString());
         break;
       case "certain":
         {
@@ -314,7 +313,7 @@ export const setYear = async () => {
           });
 
           if (year) {
-            await setProp("year", year);
+            await updateConfig("year", year);
           }
         }
         break;
@@ -348,7 +347,7 @@ export const setExtension = async () => {
   );
 
   if (selected) {
-    await setProp("extension", selected.value);
+    await updateConfig("extension", selected.value);
   }
 };
 
@@ -363,7 +362,7 @@ export const setFilename = async () => {
   });
 
   if (value) {
-    await setProp("filename", value);
+    await updateConfig("filename", value);
   }
 };
 
@@ -375,6 +374,6 @@ export const setToken = async () => {
   });
 
   if (value) {
-    await setProp("token", value);
+    await updateConfig("token", value);
   }
 };
