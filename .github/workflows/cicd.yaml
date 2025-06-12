@@ -4,82 +4,95 @@ on:
   push:
     paths-ignore:
       - ".devcontainer/**"
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/workflows/codeql.yml"
       - ".github/dependabot.yml"
+      - ".vscode/**"
       - "images/**"
+      - ".gitpod.Dockerfile"
+      - ".gitpod.yml"
+      - ".ncurc.json"
       - "*.md"
       - "LICENSE"
-      - "ncurc.json"
   pull_request:
     paths-ignore:
       - ".devcontainer/**"
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/workflows/codeql.yml"
       - ".github/dependabot.yml"
+      - ".vscode/**"
       - "images/**"
+      - ".gitpod.Dockerfile"
+      - ".gitpod.yml"
+      - ".ncurc.json"
       - "*.md"
       - "LICENSE"
-      - "ncurc.json"
 
 jobs:
   test-n-build:
     name: Test and build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
       - name: Run tests and make coverage
-        uses: GabrielBB/xvfb-action@v1.6
+        uses: coactions/setup-xvfb@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          run: yarn coverage
+          run: npm run coverage
 
-      - name: Upload coverage
-        uses: codecov/codecov-action@v3
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          fail_ci_if_error: true
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Bundle
-        run: yarn package
+        run: npm run package
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: vsix
           path: vscode-choosealicense-*.vsix
 
   release:
     name: Release
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
     needs: test-n-build
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: vsix
 
       - name: Get the version
         id: get_version
-        run: echo ::set-output name=VERSION::$(jq -r .version package.json)
+        run: echo VERSION=$(jq -r .version package.json) >> $GITHUB_OUTPUT
 
       - name: Publish to Visual Studio Marketplace
-        uses: HaaLeo/publish-vscode-extension@v1
+        uses: HaaLeo/publish-vscode-extension@v2
         with:
           pat: ${{ secrets.VSCE_PAT }}
           extensionFile: vscode-choosealicense-${{ steps.get_version.outputs.VERSION }}.vsix
           registryUrl: https://marketplace.visualstudio.com
 
       - name: Publish to Open VSX Registry
-        uses: HaaLeo/publish-vscode-extension@v1
+        uses: HaaLeo/publish-vscode-extension@v2
         with:
           pat: ${{ secrets.OVSX_PAT }}
           extensionFile: vscode-choosealicense-${{ steps.get_version.outputs.VERSION }}.vsix
@@ -87,13 +100,13 @@ jobs:
 
       - name: Create release body
         id: extract_changes
-        uses: ultram4rine/extract-changes-action@v1
+        uses: ultram4rine/extract-changes-action@v2
         with:
           changelog: CHANGELOG.md
           version: ${{ steps.get_version.outputs.VERSION }}
 
       - name: Create release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           body: ${{ steps.extract_changes.outputs.changes }}
           files: |

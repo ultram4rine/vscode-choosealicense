@@ -1,30 +1,6 @@
 import * as vscode from "vscode";
 
-export const setDefaultLicenseProperty = async (value: string) => {
-  await setProp("default", value);
-};
-
-export const setAuthorProperty = async (value: string) => {
-  await setProp("author", value);
-};
-
-export const setYearProperty = async (value: string) => {
-  await setProp("year", value);
-};
-
-export const setExtensionProperty = async (value: string) => {
-  await setProp("extension", value);
-};
-
-export const setFilenameProperty = async (value: string) => {
-  await setProp("filename", value);
-};
-
-export const setTokenProperty = async (value: string) => {
-  await setProp("token", value);
-};
-
-const setProp = async (property: string, value: string) => {
+export const setProp = async (property: string, value: string) => {
   if (vscode.workspace.workspaceFolders) {
     const selected = await vscode.window.showQuickPick(
       [

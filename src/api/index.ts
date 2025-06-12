@@ -1,7 +1,7 @@
 import { workspace } from "vscode";
 import { Octokit } from "@octokit/rest";
 
-import { Licenses, License } from "../types";
+import { LicenseItem, License } from "../types";
 
 const octokit = new Octokit({
   auth:
@@ -9,7 +9,7 @@ const octokit = new Octokit({
     process.env.GITHUB_TOKEN,
 });
 
-export const getLicenses = async (): Promise<Licenses> => {
+export const getLicenses = async (): Promise<LicenseItem[]> => {
   const resp = await octokit.rest.licenses.getAllCommonlyUsed();
   return resp.data;
 };

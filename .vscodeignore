@@ -3,6 +3,7 @@
 .idea/
 .vscode/
 .vscode-test/
+.vscode-test-web/
 coverage/
 node_modules/
 out/test/
@@ -17,6 +18,9 @@ images/demo.gif
 .codecov.yml
 .eslintrc.json
 .gitignore
+.gitpod.Dockerfile
+.gitpod.yml
 .ncurc.json
 .nycrc.json
+package-lock.json
 tsconfig.json

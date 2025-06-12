@@ -1,7 +1,7 @@
 {
   "name": "vscode-choosealicense",
-  "displayName": "Choose A License",
-  "version": "0.8.0",
+  "displayName": "Choose a License",
+  "version": "0.9.4",
   "description": "Choose a license for your project in VS Code",
   "categories": [
     "Other"
@@ -24,21 +24,28 @@
   },
   "publisher": "ultram4rine",
   "main": "./out/extension.js",
+  "browser": "./out/web/extension.js",
   "scripts": {
-    "clean": "rimraf -rf coverage out *.vsix",
-    "compile": "yarn run lint && yarn run clean && yarn run esbuild",
-    "coverage": "rimraf ./coverage && c8 yarn test",
+    "clean": "rimraf coverage out *.vsix",
+    "compile": "npm run lint && npm run clean && npm run esbuild && npm run esbuild-web",
+    "coverage": "c8 npm test",
     "esbuild": "esbuild ./src/extension.ts --bundle --external:vscode --platform=node --tsconfig=./tsconfig.json --log-level=info --color=true --format=cjs --target=es2017 --minify --outfile=./out/extension.js",
-    "lint": "eslint src --ext ts",
-    "prepackage": "yarn run compile",
-    "package": "vsce package --yarn",
+    "esbuild-web": "esbuild ./src/extension.ts --bundle --external:vscode --tsconfig=./tsconfig.json --log-level=info --color=true --format=cjs --minify --outfile=./out/web/extension.js",
+    "open-in-browser": "vscode-test-web --extensionDevelopmentPath=. .",
+    "lint": "eslint src",
+    "prepackage": "npm run compile",
+    "package": "vsce package",
     "publish:ovsx": "ovsx publish -p $OVSX_PAT",
-    "publish:vsce": "vsce publish --yarn -p $VSCE_PAT -i",
-    "pretest": "yarn run lint && yarn run test-compile",
+    "publish:vsce": "vsce publish -p $VSCE_PAT -i",
+    "pretest": "npm run lint && npm run clean && npm run test-compile",
     "test": "node ./out/test/runTest.js",
-    "test-compile": "yarn run clean && tsc -p ./",
-    "test-watch": "yarn run clean && tsc -watch -p ./",
-    "watch": "yarn run clean && yarn run esbuild --watch"
+    "test-compile": "tsc --lib DOM -p ./"
+  },
+  "capabilities": {
+    "virtualWorkspaces": {
+      "supported": "limited",
+      "description": "In virtual workspaces, creating license is not supported."
+    }
   },
   "contributes": {
     "commands": [
@@ -51,6 +58,11 @@
         "category": "License",
         "command": "license.addDefaultLicense",
         "title": "Add default license"
+      },
+      {
+        "category": "License",
+        "command": "license.chooseMultipleLicenses",
+        "title": "Choose multiple licenses"
       },
       {
         "category": "License",
@@ -127,11 +139,28 @@
           "description": "Token for api access."
         }
       }
+    },
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "license.chooseLicense",
+          "when": "workspaceFolderCount > 0 && !virtualWorkspace"
+        },
+        {
+          "command": "license.addDefaultLicense",
+          "when": "workspaceFolderCount > 0 && !virtualWorkspace"
+        },
+        {
+          "command": "license.chooseMultipleLicenses",
+          "when": "workspaceFolderCount > 0 && !virtualWorkspace"
+        }
+      ]
     }
   },
   "activationEvents": [
     "onCommand:license.chooseLicense",
     "onCommand:license.addDefaultLicense",
+    "onCommand:license.chooseMultipleLicenses",
     "onCommand:license.setDefaultLicense",
     "onCommand:license.setAuthor",
     "onCommand:license.setYear",
@@ -140,26 +169,27 @@
     "onCommand:license.setToken"
   ],
   "dependencies": {
-    "@octokit/request-error": "^3.0.0",
-    "@octokit/rest": "^19.0.3"
+    "@octokit/request-error": "^7.0.0",
+    "@octokit/rest": "^22.0.0"
   },
   "devDependencies": {
-    "@types/glob": "^7.2.0",
-    "@types/mocha": "^9.1.1",
-    "@types/node": "^18.6.3",
+    "@eslint/js": "^9.9.0",
+    "@types/eslint__js": "^8.42.3",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^24.0.1",
     "@types/vscode": "^1.43.0",
-    "@typescript-eslint/eslint-plugin": "^5.32.0",
-    "@typescript-eslint/parser": "^5.31.0",
-    "@vscode/test-electron": "^2.1.5",
-    "c8": "^7.12.0",
-    "esbuild": "^0.14.51",
-    "eslint": "^8.21.0",
-    "glob": "^8.0.3",
-    "mocha": "^10.0.0",
-    "ovsx": "^0.5.1",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.7.4",
-    "vsce": "^2.10.0"
+    "@vscode/test-electron": "^2.4.1",
+    "@vscode/test-web": "^0.0.70",
+    "@vscode/vsce": "^3.5.0",
+    "c8": "^10.1.2",
+    "esbuild": "^0.25.5",
+    "eslint": "^9.9.0",
+    "glob": "^11.0.0",
+    "mocha": "^11.6.0",
+    "ovsx": "^0.10.4",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.34.0"
   },
   "engines": {
     "vscode": "^1.43.0"
@@ -182,14 +212,19 @@
       "href": "https://github.com/ultram4rine/vscode-choosealicense/blob/master/LICENSE"
     },
     {
-      "description": "GitHub Workflow Status",
-      "url": "https://img.shields.io/github/workflow/status/ultram4rine/vscode-choosealicense/CI?logo=github&style=flat-square",
-      "href": "https://github.com/ultram4rine/vscode-choosealicense/actions?query=workflow%3ACI"
+      "description": "CI/CD status",
+      "url": "https://img.shields.io/github/actions/workflow/status/ultram4rine/vscode-choosealicense/cicd.yaml?label=CI%2FCD&logo=github&style=flat-square",
+      "href": "https://github.com/ultram4rine/vscode-choosealicense/actions/workflows/cicd.yaml"
     },
     {
       "description": "Codecov",
       "url": "https://img.shields.io/codecov/c/github/ultram4rine/vscode-choosealicense?logo=codecov&style=flat-square",
       "href": "https://codecov.io/gh/ultram4rine/vscode-choosealicense"
+    },
+    {
+      "description": "Contribute with Gitpod",
+      "url": "https://img.shields.io/badge/Contribute%20with-Gitpod-908a85?style=flat-square&logo=gitpod",
+      "href": "https://gitpod.io/#https://github.com/ultram4rine/vscode-choosealicense"
     }
   ],
   "galleryBanner": {

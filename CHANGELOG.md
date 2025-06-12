@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Use Node.js v20 in CI.
+- Use `npm` instead of `yarn`.
+- Updated deps.
+
+## [0.9.4] - 2023-12-27
+
+### Added
+
+- Added `BSD-4-Clause` uncommon license.
+
+## [0.9.3] - 2023-09-08
+
+### Added
+
+- Added `LGPL-3.0` uncommon license.
+- Added `New Uncommon License` Issue Template.
+
+## [0.9.2] - 2023-01-17
+
+### Changed
+
+- Use `<kbd>` tag in README for keyboard shortcuts.
+- Updated dependencies.
+
+## [0.9.1] - 2022-12-26
+
+### Changed
+
+- Updated dependencies.
+
+### Fixed
+
+- Fixed CI/CD badge.
+
+## [0.9.0] - 2022-09-11
+
+### Added
+
+- Added ability to choose multiple licenses. Files named in form `<filename>-<SPDX_ID><extension>`.
+- Extension can now work in browser (e.g. [vscode.dev](vscode.dev), [github.dev](github.dev)).
+
+### Changed
+
+- Default license now always visible in quick pick menu (by is `always` meant when searching).
+- Make the `a` in the display name lowercase.
+
 ## [0.8.0] - 2022-07-20
 
 ### Added

@@ -3,6 +3,7 @@ import * as vscode from "vscode";
 import {
   chooseLicense,
   addDefaultLicense,
+  chooseMultipleLicenses,
   setDefaultLicense,
   setAuthor,
   setYear,
@@ -14,34 +15,58 @@ import {
 export async function activate({
   subscriptions,
 }: vscode.ExtensionContext): Promise<void> {
-  subscriptions.push(
-    vscode.commands.registerCommand("license.chooseLicense", chooseLicense)
+  const chooseLicenseCommand = vscode.commands.registerCommand(
+    "license.chooseLicense",
+    chooseLicense
   );
-  subscriptions.push(
-    vscode.commands.registerCommand(
-      "license.addDefaultLicense",
-      addDefaultLicense
-    )
+
+  const addDefaultLicenseCommand = vscode.commands.registerCommand(
+    "license.addDefaultLicense",
+    addDefaultLicense
   );
-  subscriptions.push(
-    vscode.commands.registerCommand(
-      "license.setDefaultLicense",
-      setDefaultLicense
-    )
+
+  const chooseMultipleLicensesCommand = vscode.commands.registerCommand(
+    "license.chooseMultipleLicenses",
+    chooseMultipleLicenses
   );
-  subscriptions.push(
-    vscode.commands.registerCommand("license.setAuthor", setAuthor)
+
+  const setDefaultLicenseCommand = vscode.commands.registerCommand(
+    "license.setDefaultLicense",
+    setDefaultLicense
   );
-  subscriptions.push(
-    vscode.commands.registerCommand("license.setYear", setYear)
+
+  const setAuthorCommand = vscode.commands.registerCommand(
+    "license.setAuthor",
+    setAuthor
   );
-  subscriptions.push(
-    vscode.commands.registerCommand("license.setExtension", setExtension)
+
+  const setYearCommand = vscode.commands.registerCommand(
+    "license.setYear",
+    setYear
   );
-  subscriptions.push(
-    vscode.commands.registerCommand("license.setFilename", setFilename)
+
+  const setExtensionCommand = vscode.commands.registerCommand(
+    "license.setExtension",
+    setExtension
   );
-  subscriptions.push(
-    vscode.commands.registerCommand("license.setToken", setToken)
+
+  const setFilenameCommand = vscode.commands.registerCommand(
+    "license.setFilename",
+    setFilename
   );
+
+  const setTokenCommand = vscode.commands.registerCommand(
+    "license.setToken",
+    setToken
+  );
+
+  subscriptions.push(chooseLicenseCommand);
+  subscriptions.push(addDefaultLicenseCommand);
+  subscriptions.push(chooseMultipleLicensesCommand);
+  subscriptions.push(setDefaultLicenseCommand);
+  subscriptions.push(setAuthorCommand);
+  subscriptions.push(setYearCommand);
+  subscriptions.push(setExtensionCommand);
+  subscriptions.push(setFilenameCommand);
+  subscriptions.push(setTokenCommand);
 }
