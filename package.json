@@ -131,7 +131,12 @@
         "license.filename": {
           "type": "string",
           "default": "LICENSE",
-          "description": "License filename."
+          "markdownDescription": "License filename to use unless overridden by `#license.useConventionalFilename#`."
+        },
+        "license.useConventionalFilename": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Use conventional filenames over `#license.filename#`?"
         },
         "license.token": {
           "type": "string",

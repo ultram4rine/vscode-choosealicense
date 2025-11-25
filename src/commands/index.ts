@@ -61,6 +61,15 @@ export const uncommonLicenses: LicenseItem[] = [
   },
 ];
 
+/**
+ * License-filename overrides defined by their general usage conventions.
+ */
+const conventionalFilenames = new Map<string, string>([
+  ["unlicense", "UNLICENSE"], // https://unlicense.org
+  ["gpl-2.0", "COPYING"], // https://www.gnu.org/licenses/gpl-howto.html
+  ["gpl-3.0", "COPYING"],
+]);
+
 interface QuickPickLicenseItem {
   label: string;
   detail?: string | undefined;
@@ -76,17 +85,17 @@ const licenseToQuickPickItem = (
 ): QuickPickLicenseItem => {
   return l.key === defaultKey
     ? {
-        label: l.spdx_id ? l.spdx_id : l.key,
-        detail: l.name,
-        description: "Default",
-        key: l.key,
-        alwaysShow: true,
-      }
+      label: l.spdx_id ? l.spdx_id : l.key,
+      detail: l.name,
+      description: "Default",
+      key: l.key,
+      alwaysShow: true,
+    }
     : {
-        label: l.spdx_id ? l.spdx_id : l.key,
-        detail: l.name,
-        key: l.key,
-      };
+      label: l.spdx_id ? l.spdx_id : l.key,
+      detail: l.name,
+      key: l.key,
+    };
 };
 
 const showLicenses = async (
@@ -253,14 +262,19 @@ const addLicense = async (license: License, multiple: boolean) => {
     const extension: string =
       vscode.workspace.getConfiguration("license").get("extension") ?? "";
 
-    const filename: string =
-      vscode.workspace.getConfiguration("license").get("filename") ?? "LICENSE";
+    const filename: string = (function () {
+      let value: string | undefined = undefined;
+      if (vscode.workspace.getConfiguration("license").get("useConventionalFilename")) {
+        value ??= conventionalFilenames.get(license.key);
+      }
+      value ??= vscode.workspace.getConfiguration("license").get("filename");
+      return value ?? "LICENSE";
+    })();
 
     const content = new TextEncoder().encode(text);
 
     const licensePath = vscode.Uri.file(
-      `${folder.uri.fsPath}/${filename}${
-        multiple ? `-${license.spdx_id?.toUpperCase()}` : ""
+      `${folder.uri.fsPath}/${filename}${multiple ? `-${license.spdx_id?.toUpperCase()}` : ""
       }${extension}`
     );
 
