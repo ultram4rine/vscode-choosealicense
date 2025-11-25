@@ -264,8 +264,9 @@ const addLicense = async (license: License, multiple: boolean) => {
 
     const filename: string = (function () {
       let value: string | undefined = undefined;
-      if (Boolean(vscode.workspace.getConfiguration("license").get("useConventionalFilename")))
+      if (vscode.workspace.getConfiguration("license").get("useConventionalFilename")) {
         value ??= conventionalFilenames.get(license.key);
+      }
       value ??= vscode.workspace.getConfiguration("license").get("filename");
       return value ?? "LICENSE";
     })();
