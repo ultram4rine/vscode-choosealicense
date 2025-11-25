@@ -61,8 +61,11 @@ export const uncommonLicenses: LicenseItem[] = [
   },
 ];
 
+/**
+ * License-filename overrides defined by their general usage conventions.
+ */
 const conventionalFilenames = new Map<string, string>([
-  ["unlicense", "UNLICENSE"],
+  ["unlicense", "UNLICENSE"], // https://unlicense.org
 ]);
 
 interface QuickPickLicenseItem {
