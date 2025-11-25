@@ -66,6 +66,8 @@ export const uncommonLicenses: LicenseItem[] = [
  */
 const conventionalFilenames = new Map<string, string>([
   ["unlicense", "UNLICENSE"], // https://unlicense.org
+  ["gpl-2.0", "COPYING"], // https://www.gnu.org/licenses/gpl-howto.html
+  ["gpl-3.0", "COPYING"],
 ]);
 
 interface QuickPickLicenseItem {
