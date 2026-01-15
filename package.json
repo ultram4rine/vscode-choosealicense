@@ -174,8 +174,8 @@
     "onCommand:license.setToken"
   ],
   "dependencies": {
-    "@octokit/request-error": "^7.0.0",
-    "@octokit/rest": "^22.0.0"
+    "@octokit/request-error": "^7.0.2",
+    "@octokit/rest": "^22.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
